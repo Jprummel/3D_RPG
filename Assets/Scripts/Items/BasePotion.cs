@@ -17,15 +17,6 @@ public class BasePotion : BaseStatItem {
     private PotionTypes _potionType;
     private int _spellEffectID;
 
-    public PotionTypes PotionType
-    {
-        get { return _potionType; }
-        set { _potionType = value; }
-    }
-
-    public int SpellEffectID
-    {
-        get { return _spellEffectID; }
-        set { _spellEffectID = value; }
-    }
+    public PotionTypes PotionType   { get; set; }
+    public int SpellEffectID        { get; set; }
 }

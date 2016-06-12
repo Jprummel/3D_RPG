@@ -15,10 +15,10 @@ public class CreateNewScroll : MonoBehaviour {
 
     private void CreateScroll()
     {
-        _newScroll = new BaseScroll();
-        _newScroll.ItemName = "Scroll";
-        _newScroll.ItemDescription = "A powerful scroll filled with knowledge";
-        _newScroll.ItemID = Random.Range(1, 101);
-        _newScroll.SpellEffectID = Random.Range(500, 1001);
+        _newScroll                  = new BaseScroll();
+        _newScroll.ItemName         = "Scroll";
+        _newScroll.ItemDescription  = "A powerful scroll filled with knowledge";
+        _newScroll.ItemID           = Random.Range(1, 101);
+        _newScroll.SpellEffectID    = Random.Range(500, 1001);
     }
 }

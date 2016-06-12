@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class CreateNewCharacter : MonoBehaviour {
 
@@ -10,14 +11,15 @@ public class CreateNewCharacter : MonoBehaviour {
     private bool    _isRangerClass;
     private bool    _isMageClass;
     private bool    _isNecromancerClass;
+    private string  _playerName = "Enter Name"; //Textbox placeholder
 
     //Preview Models
-    [SerializeField]private GameObject _warriorModel;
+    /*[SerializeField]private GameObject _warriorModel;
     [SerializeField]private GameObject _berserkerModel;
     [SerializeField]private GameObject _rogueModel;
     [SerializeField]private GameObject _rangerModel;
     [SerializeField]private GameObject _mageModel;
-    [SerializeField]private GameObject _necromancerModel;
+    [SerializeField]private GameObject _necromancerModel;*/
 
 	void Start () {
 	    _newPlayer = new BasePlayer();
@@ -25,6 +27,7 @@ public class CreateNewCharacter : MonoBehaviour {
 
     void OnGUI()
     {
+        _playerName = GUILayout.TextArea(_playerName,12);
         if (GUILayout.Toggle(_isWarriorClass, "Warrior"))
         {
             //Set Class
@@ -36,12 +39,12 @@ public class CreateNewCharacter : MonoBehaviour {
             _isNecromancerClass = false;
 
             //Activate Preview Model
-            _warriorModel.SetActive     (true);
+            /*_warriorModel.SetActive     (true);
             _berserkerModel.SetActive   (false);
             _rogueModel.SetActive       (false);
             _rangerModel.SetActive      (false);
             _mageModel.SetActive        (false);
-            _necromancerModel.SetActive (false);
+            _necromancerModel.SetActive (false);*/
         }
         if (GUILayout.Toggle(_isBerserkerClass, "Berserker"))
         {
@@ -54,12 +57,12 @@ public class CreateNewCharacter : MonoBehaviour {
             _isNecromancerClass = false;
 
             //Activate Preview Model
-            _warriorModel.SetActive     (false);
+            /*_warriorModel.SetActive     (false);
             _berserkerModel.SetActive   (true);
             _rogueModel.SetActive       (false);
             _rangerModel.SetActive      (false);
             _mageModel.SetActive        (false);
-            _necromancerModel.SetActive (false);
+            _necromancerModel.SetActive (false);*/
         }
         if (GUILayout.Toggle(_isRogueClass, "Rogue"))
         {
@@ -72,12 +75,12 @@ public class CreateNewCharacter : MonoBehaviour {
             _isNecromancerClass = false;
 
             //Activate Preview Model
-            _warriorModel.SetActive     (false);
+            /*_warriorModel.SetActive     (false);
             _berserkerModel.SetActive   (false);
             _rogueModel.SetActive       (true);
             _rangerModel.SetActive      (false);
             _mageModel.SetActive        (false);
-            _necromancerModel.SetActive (false);
+            _necromancerModel.SetActive (false);*/
         }
         if (GUILayout.Toggle(_isRangerClass, "Ranger"))
         {
@@ -90,12 +93,12 @@ public class CreateNewCharacter : MonoBehaviour {
             _isNecromancerClass = false;
 
             //Activate Preview Model
-            _warriorModel.SetActive     (false);
+            /*_warriorModel.SetActive     (false);
             _berserkerModel.SetActive   (false);
             _rogueModel.SetActive       (false);
             _rangerModel.SetActive      (true);
             _mageModel.SetActive        (false);
-            _necromancerModel.SetActive (false);
+            _necromancerModel.SetActive (false);*/
         }
         if (GUILayout.Toggle(_isMageClass, "Mage"))
         {
@@ -108,12 +111,12 @@ public class CreateNewCharacter : MonoBehaviour {
             _isNecromancerClass = false;
 
             //Activate Preview Model
-            _warriorModel.SetActive     (false);
+            /*_warriorModel.SetActive     (false);
             _berserkerModel.SetActive   (false);
             _rogueModel.SetActive       (false);
             _rangerModel.SetActive      (false);
             _mageModel.SetActive        (true);
-            _necromancerModel.SetActive (false);
+            _necromancerModel.SetActive (false);*/
         }
         if (GUILayout.Toggle(_isNecromancerClass, "Necromancer"))
         {
@@ -124,14 +127,14 @@ public class CreateNewCharacter : MonoBehaviour {
             _isRangerClass      = false;
             _isMageClass        = false;
             _isNecromancerClass = true;
-
+            
             //Activate Preview Model
-            _warriorModel.SetActive     (false);
+            /*_warriorModel.SetActive     (false);
             _berserkerModel.SetActive   (false);
             _rogueModel.SetActive       (false);
             _rangerModel.SetActive      (false);
             _mageModel.SetActive        (false);
-            _necromancerModel.SetActive (true);
+            _necromancerModel.SetActive (true);*/
         }
 
         if (GUILayout.Button("Create"))
@@ -154,21 +157,54 @@ public class CreateNewCharacter : MonoBehaviour {
             }else if (_isNecromancerClass)
             {
                 _newPlayer.PlayerClass = new BaseNecromancerClass();
-            }            
-            
-            _newPlayer.PlayerLevel = 1;
-            _newPlayer.Strength = _newPlayer.PlayerClass.Strength;
-            _newPlayer.Stamina = _newPlayer.PlayerClass.Stamina;
-            _newPlayer.Endurance = _newPlayer.PlayerClass.Endurance;
-            _newPlayer.Intellect = _newPlayer.PlayerClass.Intellect;
+            }
 
-            Debug.Log("Player Class : " + _newPlayer.PlayerClass.CharacterClassName);
-            Debug.Log("Class Description : " + _newPlayer.PlayerClass.CharacterClassDescription);
-            Debug.Log("Player Level : " + _newPlayer.PlayerLevel);
-            Debug.Log("Player Strength : " + _newPlayer.Strength);
-            Debug.Log("Player Stamina : " + _newPlayer.Stamina);
-            Debug.Log("Player Endurance : " + _newPlayer.Endurance);
-            Debug.Log("Player Intellect : " + _newPlayer.Intellect);            
+            CreateNewPlayer();
+            StoreNewPlayerInfo();
+            SaveInformation.SaveAllInformation();           
         }
+        if (GUILayout.Button("Load"))
+        {
+            SceneManager.LoadScene("Test");
+        }
+    }
+
+    private void StoreNewPlayerInfo()
+    {
+        GameInformation.PlayerName  = _newPlayer.PlayerName;
+        GameInformation.PlayerLevel = _newPlayer.PlayerLevel;
+        GameInformation.PlayerClass = _newPlayer.PlayerClass;
+        GameInformation.Strength    = _newPlayer.Strength;
+        GameInformation.Stamina     = _newPlayer.Stamina;
+        GameInformation.Endurance   = _newPlayer.Endurance;
+        GameInformation.Intellect   = _newPlayer.Intellect;
+        GameInformation.Agility     = _newPlayer.Agility;
+        GameInformation.Resistance  = _newPlayer.Resistance;
+        GameInformation.Gold        = _newPlayer.Gold;
+    }
+
+    void CreateNewPlayer()
+    {
+        _newPlayer.PlayerLevel = 1;
+        _newPlayer.Strength = _newPlayer.PlayerClass.Strength;
+        _newPlayer.Stamina = _newPlayer.PlayerClass.Stamina;
+        _newPlayer.Endurance = _newPlayer.PlayerClass.Endurance;
+        _newPlayer.Intellect = _newPlayer.PlayerClass.Intellect;
+        _newPlayer.Agility = _newPlayer.PlayerClass.Agility;
+        _newPlayer.Resistance = _newPlayer.PlayerClass.Resistance;
+        _newPlayer.Gold = 100;
+        _newPlayer.PlayerName = _playerName;
+
+        Debug.Log("Player Name : " + _newPlayer.PlayerName);
+        Debug.Log("Player Class : " + _newPlayer.PlayerClass.CharacterClassName);
+        Debug.Log("Class Description : " + _newPlayer.PlayerClass.CharacterClassDescription);
+        Debug.Log("Player Level : " + _newPlayer.PlayerLevel);
+        Debug.Log("Player Strength : " + _newPlayer.Strength);
+        Debug.Log("Player Stamina : " + _newPlayer.Stamina);
+        Debug.Log("Player Endurance : " + _newPlayer.Endurance);
+        Debug.Log("Player Intellect : " + _newPlayer.Intellect);
+        Debug.Log("Player Agility : " + _newPlayer.Agility);
+        Debug.Log("Player Resistance : " + _newPlayer.Resistance);
+        Debug.Log("Gold : " + _newPlayer.Gold);
     }
 }

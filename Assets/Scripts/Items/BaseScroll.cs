@@ -5,9 +5,5 @@ public class BaseScroll : BaseItem {
 
     private int _spellEffectID;
 
-    public int SpellEffectID
-    {
-        get { return _spellEffectID; }
-        set { _spellEffectID = value; }
-    }
+    public int SpellEffectID { get; set; }
 }

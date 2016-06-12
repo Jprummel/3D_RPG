@@ -16,10 +16,10 @@ public class CreateNewPotion : MonoBehaviour {
 
     private void CreatePotion()
     {
-        _newPotion = new BasePotion();
-        _newPotion.ItemName = "Potion";
-        _newPotion.ItemDescription = "This is a potion";
-        _newPotion.ItemID = Random.Range(1, 101);
+        _newPotion                  = new BasePotion();
+        _newPotion.ItemName         = "Potion";
+        _newPotion.ItemDescription  = "This is a potion";
+        _newPotion.ItemID           = Random.Range(1, 101);
         ChoosePotionType();
     }
 

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
 public class BaseEquipment : BaseStatItem {
 
 	public enum EquipmentTypes{
@@ -14,18 +15,9 @@ public class BaseEquipment : BaseStatItem {
 		RING,	
 	}
 
-	private EquipmentTypes _equipmentType;
-    private int _spellEffectID;
+	private EquipmentTypes  _equipmentType;
+    private int             _spellEffectID;
 
-	public EquipmentTypes EquipmentType
-    {
-        get { return _equipmentType; }
-        set { _equipmentType = value; }
-	}
-
-    public int SpellEffectID
-    {
-        get { return _spellEffectID; }
-        set { _spellEffectID = value; }
-    }
+	public EquipmentTypes EquipmentType { get; set; }
+    public int SpellEffectID            { get; set; }
 }

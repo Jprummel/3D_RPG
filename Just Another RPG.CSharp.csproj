@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Assets\Art\CharacterModels\Berserker\ShowAnimation.cs" />
     <Compile Include="Assets\Scripts\BasePlayer\BasePlayer.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraControl.cs" />
     <Compile Include="Assets\Scripts\Character Classes\BaseBerserkerClass.cs" />
     <Compile Include="Assets\Scripts\Character Classes\BaseCharacterClass.cs" />
     <Compile Include="Assets\Scripts\Character Classes\BaseMageClass.cs" />
@@ -72,6 +73,15 @@
     <Compile Include="Assets\Scripts\Character Classes\BaseRogueClass.cs" />
     <Compile Include="Assets\Scripts\Character Classes\BaseWarriorClass.cs" />
     <Compile Include="Assets\Scripts\CreateNewCharacter\CreateNewCharacter.cs" />
+    <Compile Include="Assets\Scripts\CreatePlayerGUI\CreatePlayerGUI.cs" />
+    <Compile Include="Assets\Scripts\CreatePlayerGUI\DisplayCreatePlayerFunctions.cs" />
+    <Compile Include="Assets\Scripts\CreatePlayerGUI\StatAllocationModule\StatAllocationModule.cs" />
+    <Compile Include="Assets\Scripts\Experience\IncreaseExperience.cs" />
+    <Compile Include="Assets\Scripts\Experience\LevelUp.cs" />
+    <Compile Include="Assets\Scripts\GameInformation\GameInformation.cs" />
+    <Compile Include="Assets\Scripts\Input\CameraInput.cs" />
+    <Compile Include="Assets\Scripts\Input\InputAxes.cs" />
+    <Compile Include="Assets\Scripts\Input\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Items\BaseEquipment.cs" />
     <Compile Include="Assets\Scripts\Items\BaseItem.cs" />
     <Compile Include="Assets\Scripts\Items\BasePotion.cs" />
@@ -82,8 +92,14 @@
     <Compile Include="Assets\Scripts\Items\CreateNewPotion.cs" />
     <Compile Include="Assets\Scripts\Items\CreateNewScroll.cs" />
     <Compile Include="Assets\Scripts\Items\CreateNewWeapon.cs" />
-    <Compile Include="Assets\Scripts\SaveLoadGame.cs" />
+    <Compile Include="Assets\Scripts\PlayerMovement\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\PlayerMovement\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\SavingAndLoading\LoadInformation.cs" />
+    <Compile Include="Assets\Scripts\SavingAndLoading\PPSerialization.cs" />
+    <Compile Include="Assets\Scripts\SavingAndLoading\SaveInformation.cs" />
+    <Compile Include="Assets\Scripts\SavingAndLoading\SaveLoadGame.cs" />
     <Compile Include="Assets\Scripts\TestGUI.cs" />
+    <Compile Include="Assets\Scripts\TestScript.cs" />
     <Compile Include="Assets\Scripts\TurnBasedCombat\TurnBasedCombatStateMachine.cs" />
   </ItemGroup>
   <ItemGroup>

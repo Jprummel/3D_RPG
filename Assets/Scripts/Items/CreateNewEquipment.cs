@@ -24,12 +24,12 @@ public class CreateNewEquipment : MonoBehaviour
     private void CreateEquipment()
     {
         _newEquipment = new BaseEquipment();
-        _newEquipment.ItemName = _itemNames[Random.Range(0, _itemNames.Length)] + "Item";
-        _newEquipment.ItemID = Random.Range(1, 101);
+        _newEquipment.ItemName  = _itemNames[Random.Range(0, _itemNames.Length)] + "Item";
+        _newEquipment.ItemID    = Random.Range(1, 101);
         ChooseItemType();
         _newEquipment.ItemDescription = _itemDescription[Random.Range(0, _itemDescription.Length)];
-        _newEquipment.Strength = Random.Range(1, 11);
-        _newEquipment.Stamina = Random.Range(1, 11);
+        _newEquipment.Strength  = Random.Range(1, 11);
+        _newEquipment.Stamina   = Random.Range(1, 11);
         _newEquipment.Endurance = Random.Range(1, 11);
         _newEquipment.Intellect = Random.Range(1, 11);
     }

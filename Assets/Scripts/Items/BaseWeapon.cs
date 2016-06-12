@@ -17,16 +17,7 @@ public class BaseWeapon : BaseStatItem {
     private WeaponTypes _weaponType;
     private int _spellEffectID;
 
-    public WeaponTypes WeaponType
-    {
-        get { return _weaponType; }
-        set { _weaponType = value; }
-    }
-
-    public int SpellEffectID
-    {
-        get { return _spellEffectID; }
-        set { _spellEffectID = value; }
-    }
+    public WeaponTypes WeaponType   { get; set; }
+    public int SpellEffectID        { get; set; }
 
 }

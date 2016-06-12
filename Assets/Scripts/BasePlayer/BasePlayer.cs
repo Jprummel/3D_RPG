@@ -3,47 +3,34 @@ using System.Collections;
 
 public class BasePlayer{
 
+    //Player data/info
     private string              _playerName;
     private int                 _playerLevel;
     private BaseCharacterClass  _playerClass;
-    private int _strength;
-    private int _stamina;
-    private int _endurance;
-    private int _intellect;
+    //Stats
+    private int _strength;  //physical dmg
+    private int _stamina;   //Health modifier
+    private int _endurance; //Energy modifier
+    private int _intellect; //Magic dmg modifier
+    private int _agility;   //haste & crit modifier
+    private int _resistance;//all dmg reduction
+    //Experience & currency
+    private int _currentXP;
+    private int _requiredXP;
+    private int _statPointsToAllocate;
+    private int _gold;
 
-    public string PlayerName
-    {
-        get { return _playerName; }
-        set { _playerName = value; }
-    }
-    public int PlayerLevel
-    {
-        get { return _playerLevel; }
-        set { _playerLevel = value; }
-    }
-    public BaseCharacterClass PlayerClass
-    {
-        get { return _playerClass; }
-        set { _playerClass = value; }
-    }
-    public int Strength
-    {
-        get { return _strength; }
-        set { _strength = value; }
-    }
-    public int Stamina
-    {
-        get { return _stamina; }
-        set { _stamina = value; }
-    }
-    public int Endurance
-    {
-        get { return _endurance; }
-        set { _endurance = value; }
-    }
-    public int Intellect
-    {
-        get { return _intellect; }
-        set { _intellect = value; }
-    }
+    public string   PlayerName              { get; set; }
+    public int      PlayerLevel             { get; set; }
+    public BaseCharacterClass PlayerClass   { get; set; }
+    public int Strength                     { get; set; }
+    public int Stamina                      { get; set; }
+    public int Endurance                    { get; set; }
+    public int Intellect                    { get; set; }
+    public int Agility                      { get; set; }
+    public int Resistance                   { get; set; }
+    public int CurrentXP                    { get; set; }
+    public int RequiredXP                   { get; set; }
+    public int StatPointsToAllocate         { get; set; }
+    public int Gold                         { get; set; }
 }

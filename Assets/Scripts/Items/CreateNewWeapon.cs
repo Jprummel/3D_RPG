@@ -4,7 +4,6 @@ using System.Collections;
 public class CreateNewWeapon : MonoBehaviour {
 
     private BaseWeapon _newWeapon;
-    //private string[] weaponNames = new string[6] { "Sword of a thousand truths" };
 
     void Start()
     {

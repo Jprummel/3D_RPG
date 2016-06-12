@@ -3,6 +3,8 @@ using System.Collections;
 
 public class TurnBasedCombatStateMachine : MonoBehaviour {
 
+    private bool _hasAddedXP;
+
     public enum BattleStates
     {
         START,
@@ -17,8 +19,9 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 
 	void Start () {
         currentState = BattleStates.START;
+        _hasAddedXP = false;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
@@ -30,13 +33,21 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                  //Setup Battle Function
                  break;
             case (BattleStates.PLAYERCHOICE):
-                 break;
+                
+                break;
             case (BattleStates.ENEMYCHOICE):
-                 break;
+                
+                break;
             case (BattleStates.LOSE):
-                 break;
+                
+                break;
             case (BattleStates.WIN):
-                 break;
+                if (!_hasAddedXP)
+                {
+                    IncreaseExperience.AddExperience();
+                    _hasAddedXP = true;
+                }
+                break;
         }
 	}
 
