@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour {
 
     //Scripts
-    private CameraControl _cam;
+    private CameraController _cam;
     private CharacterController _cc;
     
     //Vectors
@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour {
 	void Start () {
         _cc = GetComponent<CharacterController>();
         _speed = _defaultSpeed;
-        _cam = Camera.main.GetComponent<CameraControl>();
+        _cam = Camera.main.GetComponent<CameraController>();
 	}
 	
 	// Update is called once per frame
@@ -58,8 +58,9 @@ public class PlayerMovement : MonoBehaviour {
     void Movement()
     {
         //_newForward = Vector3.Normalize(new Vector3(_moveDirection.x, 0, _moveDirection.z) * _rotateSpeed * Time.deltaTime);
-        transform.forward = _cam.CameraForward;
+        //transform.forward = _cam.CameraForward;
         _cc.Move(transform.forward * _moveDirection.z * _speed * Time.deltaTime);
+        _cc.Move(transform.right * _moveDirection.x * _speed * Time.deltaTime);
         //_cc.Move(_newForward * _speed * Time.deltaTime);
     }
 

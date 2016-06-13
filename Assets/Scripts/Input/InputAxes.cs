@@ -10,4 +10,5 @@ public class InputAxes : MonoBehaviour {
     public const string JUMP            = "Jump";
     public const string XMOUSE          = "XMouse";
     public const string YMOUSE          = "YMouse";
+    public const string MOUSESCROLL     = "MouseScroll";
 }

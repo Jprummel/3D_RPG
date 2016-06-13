@@ -8,6 +8,8 @@ public class GameInformation : MonoBehaviour {
         DontDestroyOnLoad(transform.gameObject);
     }
 
+    public static bool IsMale                       { get; set; }
+    public static string PlayerBio                  { get; set; }
     public static BaseEquipment EquipmentOne        { get; set; }
     public static string PlayerName                 { get; set; }
     public static BaseCharacterClass PlayerClass    { get; set; }

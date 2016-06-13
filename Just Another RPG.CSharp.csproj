@@ -64,7 +64,7 @@
   <ItemGroup>
     <Compile Include="Assets\Art\CharacterModels\Berserker\ShowAnimation.cs" />
     <Compile Include="Assets\Scripts\BasePlayer\BasePlayer.cs" />
-    <Compile Include="Assets\Scripts\Camera\CameraControl.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
     <Compile Include="Assets\Scripts\Character Classes\BaseBerserkerClass.cs" />
     <Compile Include="Assets\Scripts\Character Classes\BaseCharacterClass.cs" />
     <Compile Include="Assets\Scripts\Character Classes\BaseMageClass.cs" />

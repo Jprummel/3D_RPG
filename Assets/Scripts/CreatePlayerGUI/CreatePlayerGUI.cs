@@ -15,7 +15,7 @@ public class CreatePlayerGUI : MonoBehaviour {
 
 	void Start () 
     {
-        currentState = CreateAPlayerStates.STATALLOCATION;
+        currentState = CreateAPlayerStates.CLASSSELECTION;
 	}
 	
 	void Update () 
@@ -33,7 +33,7 @@ public class CreatePlayerGUI : MonoBehaviour {
 
     void OnGUI()
     {
-        //_displayFunctions.DisplayMainItems();
+        _displayFunctions.DisplayMainItems();
         if (currentState == CreateAPlayerStates.CLASSSELECTION)
         {
             _displayFunctions.DisplayClassSelections();
