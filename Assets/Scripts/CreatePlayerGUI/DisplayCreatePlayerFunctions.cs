@@ -6,10 +6,10 @@ public class DisplayCreatePlayerFunctions{
     private StatAllocationModule statAllocationModule = new StatAllocationModule();
 
     private int         _classSelection;
-    private string[]    _classSelectionNames = new string[] {"Warrior", "Berserker", "Rogue","Ranger","Mage","Necromancer"};
-    private string      _playerFirstName = "Enter first name";   //player first name
-    private string      _playerLastName = "Enter last name";    //player last name
-    private string      _playerBio = "Enter player bio";         //bio
+    private string[]    _classSelectionNames    = new string[] {"Warrior", "Berserker", "Rogue","Ranger","Mage","Necromancer"};
+    private string      _playerFirstName        = "Enter first name";   //player first name
+    private string      _playerLastName         = "Enter last name";    //player last name
+    private string      _playerBio              = "Enter player bio";   //bio
     //Gender
     private int _genderSelection;
     private string[] _genderTypes = new string[2] { "Male", "Female" };

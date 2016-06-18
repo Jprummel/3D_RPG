@@ -40,11 +40,6 @@ public class PlayerMovement : MonoBehaviour {
         _rotateDirection = rotateDirection;
         _isJumping = jump;
 
-        if (_isJumping)
-        {
-            Debug.Log("Jumping");
-        }
-
         if (sprint)
         {
             _speed = _defaultSpeed * 2;
@@ -73,7 +68,8 @@ public class PlayerMovement : MonoBehaviour {
     {
         if (_cc.isGrounded && _isJumping)
         {
-            _cc.Move(Vector3.up * _speed * Time.deltaTime);
+            Debug.Log("Jumperino");
+            _cc.Move(Vector3.up * 200);
         }
     }
 }

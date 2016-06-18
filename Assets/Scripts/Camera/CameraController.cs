@@ -21,9 +21,12 @@ public class CameraController : MonoBehaviour {
     private float _distance = 4;                    //starting distance away from player
     private float _desiredDistance;                 //used for calculations
     private float _correctedDistance;               //used for calculations
+    private float _currentDistance;
     //Input Checks
     private bool _leftClick;
     private bool _isMoving;
+    //
+    [SerializeField]private float _cameraTargetHeight;
     
 
 
@@ -32,6 +35,10 @@ public class CameraController : MonoBehaviour {
         Vector3 angles = transform.eulerAngles;
         _x = angles.x;
         _y = angles.y;
+
+        _currentDistance = _distance;
+        _desiredDistance = _distance;
+        _correctedDistance = _distance;
 	}
 
     void LateUpdate()
@@ -46,12 +53,25 @@ public class CameraController : MonoBehaviour {
         _correctedDistance = _desiredDistance;
         Vector3 position = _cameraTarget.position - (rotation * Vector3.forward * _desiredDistance);
         
+        
+
+        RaycastHit collisionHit;
+        Vector3 cameraTargetPosition = new Vector3(_cameraTarget.position.x,_cameraTarget.position.y + _cameraTargetHeight, _cameraTarget.position.z);
+        bool isCorrected = false;
+        if (Physics.Linecast(cameraTargetPosition,position, out collisionHit))
+        {
+            position = collisionHit.point;
+            _correctedDistance = Vector3.Distance(cameraTargetPosition, position);
+            isCorrected = true;
+        }
+
+        _currentDistance = !isCorrected || _correctedDistance > _currentDistance ? Mathf.Lerp(_currentDistance, _correctedDistance, Time.deltaTime * _zoomRate) : _correctedDistance;
+
+        position = _cameraTarget.position -(rotation * Vector3.forward * _currentDistance + new Vector3(0,-_cameraTargetHeight,0));
+
         transform.rotation = rotation;
         transform.position = position;
     }
-
-
-
 
     private static float ClampAngle(float angle, float min, float max)
     {

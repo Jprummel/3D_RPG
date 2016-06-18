@@ -3,13 +3,13 @@ using System.Collections;
 
 public class StatAllocationModule{
 
-    private string[] _statNames         = new string[6]{"Strength","Stamina","Endurance","Intellect","Agility","Resistance"};
-    private string[] _statDescriptions  = new string[6] { "Physical damage modifier", "Energy modifier", "Health modifier", "Magical damage modifier", "Haste and critical hit modifier", "All damage reduction" };
-    private bool[] _statSelections      = new bool[6];
-    public int[] pointsToAllocate     = new int[6];   //Starting stat values for the chosen class, 
-    private int[] _baseStatPoints       = new int[6];     //Starting stat values for the chosen class
+    private string  [] _statNames           = new string[6]{"Strength","Stamina","Endurance","Intellect","Agility","Resistance"};
+    private string  [] _statDescriptions    = new string[6] { "Physical damage modifier", "Energy modifier", "Health modifier", "Magical damage modifier", "Haste and critical hit modifier", "All damage reduction" };
+    private bool    [] _statSelections      = new bool[6];
+    public int      [] pointsToAllocate     = new int[6];   //Starting stat values for the chosen class, 
+    private int     [] _baseStatPoints      = new int[6];     //Starting stat values for the chosen class
 
-    public int _availablePoints = 5;
+    public int  _availablePoints = 5;
     public bool _didRunOnce = false;
 
 

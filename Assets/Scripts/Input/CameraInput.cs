@@ -35,7 +35,7 @@ public class CameraInput : MonoBehaviour {
         {
             _isMoving = false;
         }
-        Debug.Log(_mouseScroll);
+
         _camControl.CheckIfPlayerMoves(_isMoving);
         _camControl.GetMousePositionInput(_mouseX, -_mouseY, _leftClick); //Rotate Camera
 
