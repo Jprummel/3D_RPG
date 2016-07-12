@@ -4,22 +4,27 @@ using System.Collections;
 public class TurnBasedCombatStateMachine : MonoBehaviour {
 
     private bool _hasAddedXP;
+    private BattleStateStart _battleStateStartScript = new BattleStateStart();
+    private BattleCalculations _battleCalcScript = new BattleCalculations(); 
+    public static BaseAbility playerUsedAbility;
 
     public enum BattleStates
     {
         START,
         PLAYERCHOICE,
+        CALCDAMAGE,
+        ADDSTATUSEFFECTS,
         //PlayerAnimate
         ENEMYCHOICE,
         LOSE,
         WIN
     }
 
-    private BattleStates currentState;
+    public static BattleStates currentState;
 
 	void Start () {
-        currentState = BattleStates.START;
         _hasAddedXP = false;
+        currentState = BattleStates.START;        
 	}
 
 	// Update is called once per frame
@@ -30,13 +35,21 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
         switch (currentState)
         {
             case (BattleStates.START):
-                 //Setup Battle Function
-                 break;
-            case (BattleStates.PLAYERCHOICE):
-                
+                //Setup Battle Function
+                //Create enemy
+                _battleStateStartScript.PrepareBattle();
                 break;
+            case (BattleStates.PLAYERCHOICE):       //Player chooses his/her abillity
+               
+                break;
+            
             case (BattleStates.ENEMYCHOICE):
-                
+                //Coded AI goes here
+                break;
+            case (BattleStates.CALCDAMAGE):         //Calculate damage done by player look for existing status effects and add that damage
+                 _battleCalcScript.CalculateUsedPlayerAbilityDamage(playerUsedAbility);
+                break;
+            case (BattleStates.ADDSTATUSEFFECTS):   //try to add a status effect if it exists
                 break;
             case (BattleStates.LOSE):
                 

@@ -9,10 +9,10 @@ public class LoadInformation{
         GameInformation.PlayerLevel = PlayerPrefs.GetInt("PLAYERLEVEL");
         GameInformation.Strength = PlayerPrefs.GetInt("STRENGTH");
         GameInformation.Stamina = PlayerPrefs.GetInt("STAMINA");
-        GameInformation.Endurance = PlayerPrefs.GetInt("ENDURANCE");
+        GameInformation.Spirit = PlayerPrefs.GetInt("Spirit");
         GameInformation.Intellect = PlayerPrefs.GetInt("INTELLECT");
-        GameInformation.Agility = PlayerPrefs.GetInt("AGILITY");
-        GameInformation.Resistance = PlayerPrefs.GetInt("RESISTANCE");
+        GameInformation.Overpower = PlayerPrefs.GetInt("Overpower");
+        GameInformation.Luck = PlayerPrefs.GetInt("Luck");
         GameInformation.Gold = PlayerPrefs.GetInt("GOLD");
 
         if (PlayerPrefs.GetString("EQUIPMENTITEM1") != null)

@@ -6,12 +6,10 @@ public class BaseRangerClass : BaseCharacterClass {
     public BaseRangerClass()
     {
         CharacterClassName          = "Ranger";
-        CharacterClassDescription   = "A forest dweller who is very versatile with weapons";
-        Strength    = 12;
-        Stamina     = 12;
-        Endurance   = 11;
-        Intellect   = 12;
-        Agility     = 14;
-        Resistance  = 11;
+        CharacterClassDescription   = "Rangers are versatile with weapons but most prefer to have both a bow and a shortsword. What they lack in the defensive compartment they make up for in the offensive one";
+        MainStat        = MainStatBonuses.STRENGTH;
+        SecondMainStat  = SecondStatBonuses.INTELLECT;
+        BonusStat       = BonusStatBonuses.MASTERY;
+        CharacterClass  = CharacterClasses.RANGER;
     }
 }

@@ -9,10 +9,10 @@ public class SaveInformation{
         PlayerPrefs.SetString("PLAYERNAME", GameInformation.PlayerName);
         PlayerPrefs.SetInt("STRENGTH", GameInformation.Strength);
         PlayerPrefs.SetInt("STAMINA", GameInformation.Stamina);
-        PlayerPrefs.SetInt("ENDURANCE", GameInformation.Endurance);
+        PlayerPrefs.SetInt("Spirit", GameInformation.Spirit);
         PlayerPrefs.SetInt("INTELLECT", GameInformation.Intellect);
-        PlayerPrefs.SetInt("AGILITY", GameInformation.Agility);
-        PlayerPrefs.SetInt("RESISTANCE", GameInformation.Resistance);
+        PlayerPrefs.SetInt("Overpower", GameInformation.Overpower);
+        PlayerPrefs.SetInt("Luck", GameInformation.Luck);
         PlayerPrefs.SetInt("GOLD", GameInformation.Gold);
 
 

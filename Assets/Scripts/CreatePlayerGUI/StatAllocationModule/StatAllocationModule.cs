@@ -3,11 +3,11 @@ using System.Collections;
 
 public class StatAllocationModule{
 
-    private string  [] _statNames           = new string[6]{"Strength","Stamina","Endurance","Intellect","Agility","Resistance"};
-    private string  [] _statDescriptions    = new string[6] { "Physical damage modifier", "Energy modifier", "Health modifier", "Magical damage modifier", "Haste and critical hit modifier", "All damage reduction" };
-    private bool    [] _statSelections      = new bool[6];
-    public int      [] pointsToAllocate     = new int[6];   //Starting stat values for the chosen class, 
-    private int     [] _baseStatPoints      = new int[6];     //Starting stat values for the chosen class
+    private string  [] _statNames           = new string[8]{"Strength","Stamina","Spirit","Intellect","Overpower","Luck","Mastery","Charisma"};
+    private string  [] _statDescriptions    = new string[8] { "Physical damage modifier", "Health modifier", "Energy Source modifier", "Magical damage modifier", "Critical strike chance", "Extra/better loot chance", "Chance for bonus damage","How people see you, increases sell prices and decreases buy prices" };
+    private bool    [] _statSelections      = new bool[8];
+    public int      [] pointsToAllocate     = new int[8];       //Points to put in stats chosen by the player 
+    private int     [] _baseStatPoints      = new int[8];       //Starting stat values for the chosen class
 
     public int  _availablePoints = 5;
     public bool _didRunOnce = false;
@@ -63,17 +63,21 @@ public class StatAllocationModule{
     void RetrieveStatBaseStatPoints()
     {
         BaseCharacterClass cClass = GameInformation.PlayerClass;
-        pointsToAllocate[0]    = cClass.Strength;
+        pointsToAllocate[0]     = cClass.Strength;
         _baseStatPoints[0]      = cClass.Strength;
-        pointsToAllocate[1]    = cClass.Stamina;
+        pointsToAllocate[1]     = cClass.Stamina;
         _baseStatPoints[1]      = cClass.Stamina;
-        pointsToAllocate[2]    = cClass.Endurance;
-        _baseStatPoints[2]      = cClass.Endurance;
-        pointsToAllocate[3]    = cClass.Intellect;
+        pointsToAllocate[2]     = cClass.Spirit;
+        _baseStatPoints[2]      = cClass.Spirit;
+        pointsToAllocate[3]     = cClass.Intellect;
         _baseStatPoints[3]      = cClass.Intellect;
-        pointsToAllocate[4]    = cClass.Agility;
-        _baseStatPoints[4]      = cClass.Agility;
-        pointsToAllocate[5]    = cClass.Resistance;
-        _baseStatPoints[5]      = cClass.Resistance;
+        pointsToAllocate[4]     = cClass.Overpower;
+        _baseStatPoints[4]      = cClass.Overpower;
+        pointsToAllocate[5]     = cClass.Luck;
+        _baseStatPoints[5]      = cClass.Luck;
+        pointsToAllocate[6]     = cClass.Mastery;
+        _baseStatPoints[6]      = cClass.Mastery;
+        pointsToAllocate[7]     = cClass.Charisma;
+        _baseStatPoints[7]      = cClass.Charisma;
     }
 }

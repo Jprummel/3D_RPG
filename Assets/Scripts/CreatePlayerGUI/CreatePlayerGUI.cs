@@ -5,6 +5,7 @@ public class CreatePlayerGUI : MonoBehaviour {
 
     public enum CreateAPlayerStates
     {
+        RACESELECTION,  //Display all the playable race's
         CLASSSELECTION, //Display all class types
         STATALLOCATION, //Allocate stats where the player wants too 
         FINALSETUP      //Add name and misc items & gender
@@ -15,13 +16,15 @@ public class CreatePlayerGUI : MonoBehaviour {
 
 	void Start () 
     {
-        currentState = CreateAPlayerStates.CLASSSELECTION;
+        currentState = CreateAPlayerStates.RACESELECTION;
 	}
 	
 	void Update () 
     {
         switch (currentState)
         {
+            case(CreateAPlayerStates.RACESELECTION):
+                break;
             case(CreateAPlayerStates.CLASSSELECTION):
                 break;
             case (CreateAPlayerStates.STATALLOCATION):
@@ -34,6 +37,11 @@ public class CreatePlayerGUI : MonoBehaviour {
     void OnGUI()
     {
         _displayFunctions.DisplayMainItems();
+
+        if (currentState == CreateAPlayerStates.RACESELECTION)
+        {
+            _displayFunctions.DisplayRaceSelections();
+        }
         if (currentState == CreateAPlayerStates.CLASSSELECTION)
         {
             _displayFunctions.DisplayClassSelections();

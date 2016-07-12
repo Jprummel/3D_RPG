@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BaseWeapon : BaseStatItem {
+public class BaseWeapon : BaseItem {
 
     public enum WeaponTypes
     {
@@ -11,7 +11,7 @@ public class BaseWeapon : BaseStatItem {
         BOW,
         AXE,
         SPEAR,
-        SHIELD
+        OFFHAND
     }
 
     private WeaponTypes _weaponType;

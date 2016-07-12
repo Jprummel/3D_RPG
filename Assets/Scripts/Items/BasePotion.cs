@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BasePotion : BaseStatItem {
+public class BasePotion : BaseItem {
 
     public enum PotionTypes
     {
@@ -9,9 +9,14 @@ public class BasePotion : BaseStatItem {
         ENERGY,
         STRENGTH,
         INTELLECT,
-        ENDURANCE,
+        SPIRIT,
         STAMINA,
-        SPEED
+        SPEED,
+        OVERPOWER,
+        MASTERY,
+        LUCK,
+        CHARISMA,
+        EXTRAGOLD
     }
 
     private PotionTypes _potionType;

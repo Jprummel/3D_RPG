@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataroot xmlns:od="urn:schemas-microsoft-com:officedata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="ItemDatabase.xsd" generated="2016-06-27T08:26:44">
+<Items>
+<ItemID>28</ItemID>
+<ItemType>EQUIPMENT</ItemType>
+<ItemName>Cloth Boots</ItemName>
+</Items>
+<Items>
+<ItemID>26</ItemID>
+<ItemType>EQUIPMENT</ItemType>
+<ItemName>Cloth Gloves</ItemName>
+</Items>
+<Items>
+<ItemID>23</ItemID>
+<ItemType>EQUIPMENT</ItemType>
+<ItemName>Cloth Mask</ItemName>
+</Items>
+<Items>
+<ItemID>27</ItemID>
+<ItemType>EQUIPMENT</ItemType>
+<ItemName>Cloth Pants</ItemName>
+</Items>
+<Items>
+<ItemID>24</ItemID>
+<ItemType>EQUIPMENT</ItemType>
+<ItemName>Cloth Robe</ItemName>
+</Items>
+<Items>
+<ItemID>25</ItemID>
+<ItemType>EQUIPMENT</ItemType>
+<ItemName>Cloth Shoulder Stuffing</ItemName>
+</Items>
+<Items>
+<ItemID>3</ItemID>
+<ItemType>WEAPON</ItemType>
+<ItemName>Copper Axe</ItemName>
+</Items>
+<Items>
+<ItemID>16</ItemID>
+<ItemType>EQUIPMENT</ItemType>
+<ItemName>Copper Boots</ItemName>
+</Items>
+<Items>
+<ItemID>12</ItemID>
+<ItemType>EQUIPMENT</ItemType>
+<ItemName>Copper Breastplate</ItemName>
+</Items>
+<Items>
+<ItemID>2</ItemID>
+<ItemType>WEAPON</ItemType>
+<ItemName>Copper Dagger</ItemName>
+</Items>
+<Items>
+<ItemID>14</ItemID>
+<ItemType>EQUIPMENT</ItemType>
+<ItemName>Copper Gloves</ItemName>
+</Items>
+<Items>
+<ItemID>9</ItemID>
+<ItemType>WEAPON</ItemType>
+<ItemName>Copper Greataxe</ItemName>
+</Items>
+<Items>
+<ItemID>7</ItemID>
+<ItemType>WEAPON</ItemType>
+<ItemName>Copper Greatsword</ItemName>
+</Items>
+<Items>
+<ItemID>11</ItemID>
+<ItemType>EQUIPMENT</ItemType>
+<ItemName>Copper Helmet</ItemName>
+</Items>
+<Items>
+<ItemID>10</ItemID>
+<ItemType>WEAPON</ItemType>
+<ItemName>Copper Knuckles</ItemName>
+</Items>
+<Items>
+<ItemID>15</ItemID>
+<ItemType>EQUIPMENT</ItemType>
+<ItemName>Copper Legplates</ItemName>
+</Items>
+<Items>
+<ItemID>1</ItemID>
+<ItemType>WEAPON</ItemType>
+<ItemName>Copper Shortsword</ItemName>
+</Items>
+<Items>
+<ItemID>13</ItemID>
+<ItemType>EQUIPMENT</ItemType>
+<ItemName>Copper Shoulderguards</ItemName>
+</Items>
+<Items>
+<ItemID>8</ItemID>
+<ItemType>WEAPON</ItemType>
+<ItemName>Copper Spear</ItemName>
+</Items>
+<Items>
+<ItemID>6</ItemID>
+<ItemType>WEAPON</ItemType>
+<ItemName>Longbow</ItemName>
+</Items>
+<Items>
+<ItemID>22</ItemID>
+<ItemType>EQUIPMENT</ItemType>
+<ItemName>Scrap Leather Boots</ItemName>
+</Items>
+<Items>
+<ItemID>18</ItemID>
+<ItemType>EQUIPMENT</ItemType>
+<ItemName>Scrap Leather Breastplate</ItemName>
+</Items>
+<Items>
+<ItemID>20</ItemID>
+<ItemType>EQUIPMENT</ItemType>
+<ItemName>Scrap Leather Gloves</ItemName>
+</Items>
+<Items>
+<ItemID>17</ItemID>
+<ItemType>EQUIPMENT</ItemType>
+<ItemName>Scrap Leather Helmet</ItemName>
+</Items>
+<Items>
+<ItemID>21</ItemID>
+<ItemType>EQUIPMENT</ItemType>
+<ItemName>Scrap Leather Leggings</ItemName>
+</Items>
+<Items>
+<ItemID>19</ItemID>
+<ItemType>EQUIPMENT</ItemType>
+<ItemName>Scrap Leather Shoulderpads</ItemName>
+</Items>
+<Items>
+<ItemID>5</ItemID>
+<ItemType>WEAPON</ItemType>
+<ItemName>Shortbow</ItemName>
+</Items>
+<Items>
+<ItemID>4</ItemID>
+<ItemType>WEAPON</ItemType>
+<ItemName>Wooden Staff</ItemName>
+</Items>
+</dataroot>

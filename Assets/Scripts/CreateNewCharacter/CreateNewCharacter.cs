@@ -176,10 +176,10 @@ public class CreateNewCharacter : MonoBehaviour {
         GameInformation.PlayerClass = _newPlayer.PlayerClass;
         GameInformation.Strength    = _newPlayer.Strength;
         GameInformation.Stamina     = _newPlayer.Stamina;
-        GameInformation.Endurance   = _newPlayer.Endurance;
+        GameInformation.Spirit   = _newPlayer.Spirit;
         GameInformation.Intellect   = _newPlayer.Intellect;
-        GameInformation.Agility     = _newPlayer.Agility;
-        GameInformation.Resistance  = _newPlayer.Resistance;
+        GameInformation.Overpower     = _newPlayer.Overpower;
+        GameInformation.Luck  = _newPlayer.Luck;
         GameInformation.Gold        = _newPlayer.Gold;
     }
 
@@ -188,10 +188,10 @@ public class CreateNewCharacter : MonoBehaviour {
         _newPlayer.PlayerLevel = 1;
         _newPlayer.Strength = _newPlayer.PlayerClass.Strength;
         _newPlayer.Stamina = _newPlayer.PlayerClass.Stamina;
-        _newPlayer.Endurance = _newPlayer.PlayerClass.Endurance;
+        _newPlayer.Spirit = _newPlayer.PlayerClass.Spirit;
         _newPlayer.Intellect = _newPlayer.PlayerClass.Intellect;
-        _newPlayer.Agility = _newPlayer.PlayerClass.Agility;
-        _newPlayer.Resistance = _newPlayer.PlayerClass.Resistance;
+        _newPlayer.Overpower = _newPlayer.PlayerClass.Overpower;
+        _newPlayer.Luck = _newPlayer.PlayerClass.Luck;
         _newPlayer.Gold = 100;
         _newPlayer.PlayerName = _playerName;
 
@@ -201,10 +201,10 @@ public class CreateNewCharacter : MonoBehaviour {
         Debug.Log("Player Level : " + _newPlayer.PlayerLevel);
         Debug.Log("Player Strength : " + _newPlayer.Strength);
         Debug.Log("Player Stamina : " + _newPlayer.Stamina);
-        Debug.Log("Player Endurance : " + _newPlayer.Endurance);
+        Debug.Log("Player Spirit : " + _newPlayer.Spirit);
         Debug.Log("Player Intellect : " + _newPlayer.Intellect);
-        Debug.Log("Player Agility : " + _newPlayer.Agility);
-        Debug.Log("Player Resistance : " + _newPlayer.Resistance);
+        Debug.Log("Player Overpower : " + _newPlayer.Overpower);
+        Debug.Log("Player Luck : " + _newPlayer.Luck);
         Debug.Log("Gold : " + _newPlayer.Gold);
     }
 }

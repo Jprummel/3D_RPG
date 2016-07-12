@@ -3,26 +3,17 @@ using System.Collections;
 
 public class TestGUI : MonoBehaviour {
 
-    private BaseCharacterClass class1 = new BaseMageClass();
-    private BaseCharacterClass class2 = new BaseWarriorClass();
+    private BaseCharacterRace class1;
+    private BaseCharacterClass class2;
 
 	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-    void OnGUI()
+    void Start()
     {
-        GUILayout.Label(class1.CharacterClassName);
-        GUILayout.Label(class1.CharacterClassDescription);
-        GUILayout.Label(class1.Intellect.ToString());
-        GUILayout.Label(class2.CharacterClassName);
-        GUILayout.Label(class2.CharacterClassDescription);
-        GUILayout.Label(class1.Strength.ToString());
+        class2 = new BaseWarriorClass();
+        Debug.Log(class2.CharacterClassName);
+        Debug.Log(class2.CharacterClassDescription);
+        Debug.Log(class2.MainStat);
+        Debug.Log(class2.SecondMainStat);
+        Debug.Log(class2.BonusStat);
     }
 }

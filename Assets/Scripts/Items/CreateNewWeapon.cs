@@ -14,7 +14,7 @@ public class CreateNewWeapon : MonoBehaviour {
         Debug.Log(_newWeapon.WeaponType.ToString());
         Debug.Log(_newWeapon.Stamina.ToString() + "Stamina");
         Debug.Log(_newWeapon.Strength.ToString() + "Strength");
-        Debug.Log(_newWeapon.Endurance.ToString() + "Endurance");
+        Debug.Log(_newWeapon.Spirit.ToString() + "Spirit");
         Debug.Log(_newWeapon.Intellect.ToString() + "Intellect");
     }
 
@@ -31,7 +31,7 @@ public class CreateNewWeapon : MonoBehaviour {
         //stats
         _newWeapon.Strength  = Random.Range(1, 11);
         _newWeapon.Stamina   = Random.Range(1, 11);
-        _newWeapon.Endurance = Random.Range(1, 11);
+        _newWeapon.Spirit = Random.Range(1, 11);
         _newWeapon.Intellect = Random.Range(1, 11);
         //choose type
         ChooseWeaponType();
@@ -41,30 +41,7 @@ public class CreateNewWeapon : MonoBehaviour {
 
     private void ChooseWeaponType()
     {
-        int randomTemp = Random.Range(1, 8);
-        switch (randomTemp)
-        {
-            case 1:
-                _newWeapon.WeaponType = BaseWeapon.WeaponTypes.SWORD;
-                break;
-            case 2:
-                _newWeapon.WeaponType = BaseWeapon.WeaponTypes.STAFF;
-                break;
-            case 3:
-                _newWeapon.WeaponType = BaseWeapon.WeaponTypes.SPEAR;
-                break;
-            case 4:
-                _newWeapon.WeaponType = BaseWeapon.WeaponTypes.SHIELD;
-                break;
-            case 5:
-                _newWeapon.WeaponType = BaseWeapon.WeaponTypes.DAGGER;
-                break;
-            case 6:
-                _newWeapon.WeaponType = BaseWeapon.WeaponTypes.AXE;
-                break;
-            case 7:
-                _newWeapon.WeaponType = BaseWeapon.WeaponTypes.BOW;
-                break;
-        }        
+        System.Array weapons = System.Enum.GetValues(typeof(BaseWeapon.WeaponTypes));
+        _newWeapon.WeaponType = (BaseWeapon.WeaponTypes)weapons.GetValue(Random.Range(0, weapons.Length));
     }
 }
