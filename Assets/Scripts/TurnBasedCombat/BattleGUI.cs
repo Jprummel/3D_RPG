@@ -11,7 +11,8 @@ public class BattleGUI : MonoBehaviour {
     void Start()
     {
         _playerName = GameInformation.PlayerName;
-        _playerLevel = GameInformation.PlayerLevel;        
+        _playerLevel = GameInformation.PlayerLevel;
+        Debug.Log(GameInformation.playerMoveTwo.AbilityStatusEffect.StatusEffectName);
     }
 
     void OnGUI()
@@ -21,17 +22,7 @@ public class BattleGUI : MonoBehaviour {
         {
             DisplayPlayersChoice();
         }
-        //for loop to display several abilities
-        //Creates an action type bar
-        /*for (int i = 0; i < GameInformation.PlayersAbilities.Count; i++)
-        {
-            if (GUI.Button(new Rect(0, 0, 0, 0), GameInformation.PlayersAbilities[i].AbilityName))
-            {
-
-            }
-        }*/
-        //TurnBasedCombatStateMachine.currentState == TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE;
-        //we need to show enemy info
+        //we need to show enemy health and other enemy info
         //we need to show player info
     }
 
@@ -39,15 +30,15 @@ public class BattleGUI : MonoBehaviour {
     {
         if (GUI.Button(new Rect(Screen.width - 250, Screen.height - 50, 100, 30), GameInformation.playerMoveOne.AbilityName))
         {
-            //calculate damage to enemy
+            //calculate players damage to enemy
             TurnBasedCombatStateMachine.playerUsedAbility = GameInformation.playerMoveOne;
-            TurnBasedCombatStateMachine.currentState = TurnBasedCombatStateMachine.BattleStates.CALCDAMAGE;
+            TurnBasedCombatStateMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ADDSTATUSEFFECTS;
         }
         if (GUI.Button(new Rect(Screen.width - 100, Screen.height - 50, 100, 30), GameInformation.playerMoveTwo.AbilityName))
         {
-            //calculate damage to enemy
+            //calculate players damage to enemy
             TurnBasedCombatStateMachine.playerUsedAbility = GameInformation.playerMoveTwo;
-            TurnBasedCombatStateMachine.currentState = TurnBasedCombatStateMachine.BattleStates.CALCDAMAGE;
+            TurnBasedCombatStateMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ADDSTATUSEFFECTS;
         }
     }
 }

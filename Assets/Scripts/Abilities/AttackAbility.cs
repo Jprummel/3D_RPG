@@ -8,5 +8,7 @@ public class AttackAbility : BaseAbility {
         AbilityID           = 1;
         AbilityPower        = 10;
         AbilityCost         = 5;
+        AbilityCritChance   = 5;// 5% Crit chance
+        AbilityCritModifier = 2;
     }
 }

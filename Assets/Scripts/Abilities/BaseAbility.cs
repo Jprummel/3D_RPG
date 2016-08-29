@@ -1,11 +1,17 @@
-﻿[System.Serializable]
+﻿using System.Collections.Generic;
+[System.Serializable]
+
 public class BaseAbility {
 
-    private string  _abilityName;
-    private string  _abilityDescription;
-    private int     _abilityID;
-    private int     _abilityPower;
-    private int     _abilityCost;
+    private string                  _abilityName;
+    private string                  _abilityDescription;
+    private int                     _abilityID;
+    private int                     _abilityPower;                                          //Damage done by ability
+    private int                     _abilityCost;                                           //Cost to use ability
+    private BaseStatusEffect        _abilityStatusEffect;                                   // Allows each ability to have 1 status effect
+    private List<BaseStatusEffect>  _abilityStatusEffects = new List<BaseStatusEffect>();   //Allows each ability to have multiple status effects
+    private int _abilityCritChance;
+    private float _abilityCritModifier;
 
     public string AbilityName
     {
@@ -37,4 +43,27 @@ public class BaseAbility {
         set { _abilityCost = value; }
     }
 
+    public BaseStatusEffect AbilityStatusEffect
+    {
+        get { return _abilityStatusEffect; }
+        set { _abilityStatusEffect = value;}
+    }
+
+    public List<BaseStatusEffect> AbilityStatusEffects
+    {
+        get { return _abilityStatusEffects; }
+        set { _abilityStatusEffects = value;}
+    }
+
+    public int AbilityCritChance
+    {
+        get { return _abilityCritChance;    }
+        set { _abilityCritChance = value;   }
+    }
+
+    public float AbilityCritModifier
+    {
+        get { return _abilityCritModifier;  }
+        set { _abilityCritModifier = value; }
+    }
 }

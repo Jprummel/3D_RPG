@@ -18,11 +18,11 @@ public class BasePlayer{
     private int _mastery;       //Chance for bonus damage
     private int _charisma;      //Lower buy prices , increase sell prices, bonus rep , influence on how people see you
     //Experience & currency
+    private int _gold;
     private int _currentXP;
     private int _requiredXP;
     private int _statPointsToAllocate;
-    private int _gold;
-
+    
     public string   PlayerName              { get; set; }
     public int      PlayerLevel             { get; set; }
     public BaseCharacterClass PlayerClass   { get; set; }

@@ -7,6 +7,7 @@ public class GameInformation : MonoBehaviour {
     void Awake()
     {
         DontDestroyOnLoad(transform.gameObject);
+        AddAbilities();
     }
 
     public static List<BaseAbility>     PlayersAbilities;
@@ -35,5 +36,11 @@ public class GameInformation : MonoBehaviour {
     public static BaseAbility playerMoveTwo = new SwordSlash();
 
     public static int                   PlayerHealth    { get; set; }
-    public static int                   PlayerEnergy    { get; set; }   
+    public static int                   PlayerEnergy    { get; set; }
+
+    void AddAbilities()
+    {
+        PlayersAbilities.Add(new AttackAbility());
+        PlayersAbilities.Add(new SwordSlash());
+    }
 }

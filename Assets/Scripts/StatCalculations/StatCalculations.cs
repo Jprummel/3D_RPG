@@ -101,12 +101,12 @@ public class StatCalculations
 
     public int CalculateHealth(int statValue)
     {
-        return statValue * 100;  //calculate health based on total stamina stat times 100
+        return statValue * 100; //Calculate health based on total Stamina stat times 100
     }
 
     public int CalculateEnergy(int statValue)
     {
-        return statValue * 50;
+        return statValue * 50;  //Calculate energy based on total Spirit times 50
     }
 
     public float FindAndCalculatePlayerMainStatModifier()

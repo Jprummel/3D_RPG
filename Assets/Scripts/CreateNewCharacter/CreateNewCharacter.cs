@@ -176,35 +176,35 @@ public class CreateNewCharacter : MonoBehaviour {
         GameInformation.PlayerClass = _newPlayer.PlayerClass;
         GameInformation.Strength    = _newPlayer.Strength;
         GameInformation.Stamina     = _newPlayer.Stamina;
-        GameInformation.Spirit   = _newPlayer.Spirit;
+        GameInformation.Spirit      = _newPlayer.Spirit;
         GameInformation.Intellect   = _newPlayer.Intellect;
-        GameInformation.Overpower     = _newPlayer.Overpower;
-        GameInformation.Luck  = _newPlayer.Luck;
+        GameInformation.Overpower   = _newPlayer.Overpower;
+        GameInformation.Luck        = _newPlayer.Luck;
         GameInformation.Gold        = _newPlayer.Gold;
     }
 
     void CreateNewPlayer()
     {
-        _newPlayer.PlayerLevel = 1;
-        _newPlayer.Strength = _newPlayer.PlayerClass.Strength;
-        _newPlayer.Stamina = _newPlayer.PlayerClass.Stamina;
-        _newPlayer.Spirit = _newPlayer.PlayerClass.Spirit;
-        _newPlayer.Intellect = _newPlayer.PlayerClass.Intellect;
-        _newPlayer.Overpower = _newPlayer.PlayerClass.Overpower;
-        _newPlayer.Luck = _newPlayer.PlayerClass.Luck;
-        _newPlayer.Gold = 100;
-        _newPlayer.PlayerName = _playerName;
+        _newPlayer.PlayerLevel  = 1;
+        _newPlayer.Strength     = _newPlayer.PlayerClass.Strength;
+        _newPlayer.Stamina      = _newPlayer.PlayerClass.Stamina;
+        _newPlayer.Spirit       = _newPlayer.PlayerClass.Spirit;
+        _newPlayer.Intellect    = _newPlayer.PlayerClass.Intellect;
+        _newPlayer.Overpower    = _newPlayer.PlayerClass.Overpower;
+        _newPlayer.Luck         = _newPlayer.PlayerClass.Luck;
+        _newPlayer.Gold         = 100;
+        _newPlayer.PlayerName   = _playerName;
 
-        Debug.Log("Player Name : " + _newPlayer.PlayerName);
-        Debug.Log("Player Class : " + _newPlayer.PlayerClass.CharacterClassName);
-        Debug.Log("Class Description : " + _newPlayer.PlayerClass.CharacterClassDescription);
-        Debug.Log("Player Level : " + _newPlayer.PlayerLevel);
-        Debug.Log("Player Strength : " + _newPlayer.Strength);
-        Debug.Log("Player Stamina : " + _newPlayer.Stamina);
-        Debug.Log("Player Spirit : " + _newPlayer.Spirit);
-        Debug.Log("Player Intellect : " + _newPlayer.Intellect);
-        Debug.Log("Player Overpower : " + _newPlayer.Overpower);
-        Debug.Log("Player Luck : " + _newPlayer.Luck);
-        Debug.Log("Gold : " + _newPlayer.Gold);
+        Debug.Log("Player Name : "          + _newPlayer.PlayerName);
+        Debug.Log("Player Class : "         + _newPlayer.PlayerClass.CharacterClassName);
+        Debug.Log("Class Description : "    + _newPlayer.PlayerClass.CharacterClassDescription);
+        Debug.Log("Player Level : "         + _newPlayer.PlayerLevel);
+        Debug.Log("Player Strength : "      + _newPlayer.Strength);
+        Debug.Log("Player Stamina : "       + _newPlayer.Stamina);
+        Debug.Log("Player Spirit : "        + _newPlayer.Spirit);
+        Debug.Log("Player Intellect : "     + _newPlayer.Intellect);
+        Debug.Log("Player Overpower : "     + _newPlayer.Overpower);
+        Debug.Log("Player Luck : "          + _newPlayer.Luck);
+        Debug.Log("Gold : "                 + _newPlayer.Gold);
     }
 }
