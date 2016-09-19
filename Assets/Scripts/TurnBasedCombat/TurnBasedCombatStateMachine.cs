@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class TurnBasedCombatStateMachine : MonoBehaviour {
 
@@ -39,7 +40,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        Debug.Log(currentState);
+        //Debug.Log(currentState);
 
         switch (currentState)
         {
@@ -54,8 +55,6 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
             
             case (BattleStates.ENEMYCHOICE):
                 //Coded AI goes here
-                //enemyDidCompleteTurn = true;
-                //CheckWhoGoesNext();
                 currentUser = BattleStates.ENEMYCHOICE;
                 _battleStateEnemyChoiceScript.EnemyCompleteTurn();
                 break;
@@ -79,43 +78,34 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                 totalTurnCount += 1;
                 playerDidCompleteTurn = false;
                 enemyDidCompleteTurn = false;
-                Debug.Log(totalTurnCount + "turn count");
+                if (GameInformation.PlayerHealth <= 0)
+                {
+                    GameInformation.PlayerHealth = 0;
+                    currentState = BattleStates.LOSE;
+                }else if(EnemyInformation.EnemyHealth <=0 )
+                {
+                    EnemyInformation.EnemyHealth = 0;
+                    currentState = BattleStates.WIN;
+                }
+                else
+                {
+                    _battleStateStartScript.ChooseWhoGoesFirst();
+                }
                 break;
             case (BattleStates.LOSE):
-                
+                Debug.Log("You Lost");
                 break;
             case (BattleStates.WIN):
                 if (!_hasAddedXP)
                 {
                     IncreaseExperience.AddExperience();
                     _hasAddedXP = true;
+                    SceneManager.LoadScene(GameInformation.PlayerMapScene);
+
                 }
                 break;
         }
 	}
-
-    void OnGUI()
-    {
-        if (GUILayout.Button("NEXT STATE"))
-        {
-            if (currentState == BattleStates.START)
-            {
-                currentState = BattleStates.PLAYERCHOICE;
-            }else if (currentState == BattleStates.PLAYERCHOICE)
-            {
-                currentState = BattleStates.ENEMYCHOICE;
-            }else if (currentState == BattleStates.ENEMYCHOICE)
-            {
-                currentState = BattleStates.LOSE;
-            }else if (currentState == BattleStates.LOSE)
-            {
-                currentState = BattleStates.WIN;
-            }else if (currentState == BattleStates.WIN)
-            {
-                currentState = BattleStates.START;
-            }
-        }
-    }
 
     private void CheckWhoGoesNext()
     {

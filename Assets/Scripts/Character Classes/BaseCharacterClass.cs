@@ -1,38 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+[System.Serializable]
 public class BaseCharacterClass{
 
     private string _characterClassName;
     private string _characterClassDescription;
     //Stats
-    private int _strength   = 10;      //Physical damage modifier
-    private int _stamina    = 12;       //Health modifier
-    private int _spirit     = 12;        //Resource (Mana,Rage etc) Modifier
-    private int _intellect  = 9;     //Spell damage modifier
-    private int _armor;         //Damage reduction
-    private int _overpower  = 10;     //Critical strike chance
-    private int _luck       = 10;          //Extra/better loot chance
-    private int _mastery    = 9;       //Chance for bonus damage
-    private int _charisma   = 10;      //Lower buy prices , increase sell prices, bonus rep , influence on how people see you
+    private int _strength   = 10;   //Physical damage modifier
+    private int _stamina    = 12;   //Health modifier
+    private int _spirit     = 12;   //Resource (Mana,Rage etc) Modifier
+    private int _intellect  = 9;    //Spell damage modifier
+    private int _armor;             //Damage reduction
+    private int _overpower  = 10;   //Critical strike chance
+    private int _luck       = 10;   //Extra/better loot chance
+    private int _mastery    = 9;    //Chance for bonus damage
+    private int _charisma   = 10;   //Lower buy prices , increase sell prices, bonus rep , influence on how people see you
 
     public enum CharacterClasses
     {
         WARRIOR,
         BERSERKER,
         ROGUE,
-        RANGER,
         MAGE,
-        NECROMANCER,
         CARDMASTER,
-        DRUID,
         MIME,
-        SHADOWKNIGHT,
-        ALCHEMIST,
         PALADIN,
         SHAMAN,
-        MONK
     }
 
     public enum MainStatBonuses
@@ -63,7 +57,8 @@ public class BaseCharacterClass{
     public MainStatBonuses      MainStat        { get; set; }
     public SecondStatBonuses    SecondMainStat  { get; set; }
     public BonusStatBonuses     BonusStat       { get; set; }
-    public List<BaseAbility>    PlayersAbilities = new List<BaseAbility>();
+    public List<BaseAbility>    PlayersSkills   = new List<BaseAbility>();
+    public List<BaseAbility>    PlayerMagic     = new List<BaseAbility>();
 
     public string CharacterClassName
     {

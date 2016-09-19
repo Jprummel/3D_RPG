@@ -12,6 +12,17 @@ public class BaseAbility {
     private List<BaseStatusEffect>  _abilityStatusEffects = new List<BaseStatusEffect>();   //Allows each ability to have multiple status effects
     private int _abilityCritChance;
     private float _abilityCritModifier;
+    private int _abilityHitChance;
+    private int _abilityDamageToSelf;
+
+    public enum AbilityTypes
+    {
+        PHYSICAL,
+        MAGICAL,
+        HYBRID
+    }
+
+    public AbilityTypes AbilityType { get; set; }
 
     public string AbilityName
     {
@@ -30,6 +41,9 @@ public class BaseAbility {
         get { return _abilityID; }
         set { _abilityID = value; }
     }
+
+    public int AbilityBaseDamage { get; set; }
+    public float AbilityDamageStatModifier { get; set; }
 
     public int AbilityPower
     {
@@ -65,5 +79,17 @@ public class BaseAbility {
     {
         get { return _abilityCritModifier;  }
         set { _abilityCritModifier = value; }
+    }
+
+    public int AbilityHitChance
+    {
+        get { return _abilityHitChance;    }
+        set { _abilityHitChance = value;   }
+    }
+
+    public int AbilityDamageToSelf
+    {
+        get { return _abilityDamageToSelf;  }
+        set { _abilityDamageToSelf = value; }
     }
 }

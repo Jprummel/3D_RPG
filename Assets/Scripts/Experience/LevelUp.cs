@@ -4,9 +4,11 @@ using System.Collections;
 public class LevelUp {
 
     private int _maxPlayerLevel = 50;
+    private LevelUpStatPointAllocation _statPoints;
 
     public void LevelUpCharacter()
     {
+        
         //Check to see if current xp is greater then required
         if (GameInformation.CurrentXP > GameInformation.RequiredXP)
         {
@@ -26,6 +28,7 @@ public class LevelUp {
             GameInformation.PlayerLevel = _maxPlayerLevel;
         }
         //Give player stat points
+        GameInformation.StatPoints += 3;
         //randomly give items
         //give them a skill/move
         //give money

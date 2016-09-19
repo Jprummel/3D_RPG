@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour {
     
     //Bool
     private bool _isJumping;
-
+    public  bool isMoving;
 	// Use this for initialization
 	void Start () {
         _cc = GetComponent<CharacterController>();
@@ -52,11 +52,16 @@ public class PlayerMovement : MonoBehaviour {
 
     void Movement()
     {
-        //_newForward = Vector3.Normalize(new Vector3(_moveDirection.x, 0, _moveDirection.z) * _rotateSpeed * Time.deltaTime);
-        //transform.forward = _cam.CameraForward;
         _cc.Move(transform.forward * _moveDirection.z * _speed * Time.deltaTime);
         _cc.Move(transform.right * _moveDirection.x * _speed * Time.deltaTime);
-        //_cc.Move(_newForward * _speed * Time.deltaTime);
+        if (_moveDirection.z != 0 || _moveDirection.x != 0)
+        {
+            isMoving = true;
+        }
+        else 
+        { 
+            isMoving = false; 
+        }
     }
 
     void Rotate()

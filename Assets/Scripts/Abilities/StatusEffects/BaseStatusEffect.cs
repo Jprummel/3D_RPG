@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+[System.Serializable]
 public class BaseStatusEffect{
 
     private string  _statusEffectName;

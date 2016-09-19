@@ -11,4 +11,5 @@ public class InputAxes : MonoBehaviour {
     public const string XMOUSE          = "XMouse";
     public const string YMOUSE          = "YMouse";
     public const string MOUSESCROLL     = "MouseScroll";
+    public const string PAUSE           = "Pause";
 }

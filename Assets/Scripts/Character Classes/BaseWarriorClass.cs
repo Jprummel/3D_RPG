@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+[System.Serializable]
 public class BaseWarriorClass : BaseCharacterClass {
 
     public BaseWarriorClass()
@@ -11,7 +11,7 @@ public class BaseWarriorClass : BaseCharacterClass {
         SecondMainStat  = SecondStatBonuses.STRENGTH;
         BonusStat       = BonusStatBonuses.LUCK;
         CharacterClass  = CharacterClasses.WARRIOR;
-        PlayersAbilities.Add(new AttackAbility());
-        PlayersAbilities.Add(new SwordSlash());
+        //PlayersAbilities.Add(new AttackAbility());
+        //PlayersAbilities.Add(new SwordSlash());
     }
 }

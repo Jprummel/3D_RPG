@@ -5,26 +5,34 @@ public class BattleStateAddStatusEffects{
 
     public void CheckAbilityForStatusEffects(BaseAbility usedAbility) // checks the status effects on the ability passed along
     {
-        switch (usedAbility.AbilityStatusEffect.StatusEffectName)
+        if (usedAbility.AbilityStatusEffect != null)
         {
-            case("Burn"):
-                if (TryToApplyStatusEffect(usedAbility))
-                {
-                    Debug.Log("RETURNED TRUE, APPLIED EFFECT");
-                    TurnBasedCombatStateMachine._statusEffectBaseDamage = usedAbility.AbilityStatusEffect.StatusEffectPower;
-                    Debug.Log(TurnBasedCombatStateMachine._statusEffectBaseDamage);
-                }
-                else
-                {
-                    TurnBasedCombatStateMachine._statusEffectBaseDamage = 0;
-                }
+            switch (usedAbility.AbilityStatusEffect.StatusEffectName)
+            {
+                case ("Burn"):
+                    if (TryToApplyStatusEffect(usedAbility))
+                    {
+                        Debug.Log("RETURNED TRUE, APPLIED EFFECT");
+                        TurnBasedCombatStateMachine._statusEffectBaseDamage = usedAbility.AbilityStatusEffect.StatusEffectPower;
+                        Debug.Log(TurnBasedCombatStateMachine._statusEffectBaseDamage);
+                    }
+                    else
+                    {
+                        TurnBasedCombatStateMachine._statusEffectBaseDamage = 0;
+                    }
 
-                TurnBasedCombatStateMachine.currentState = TurnBasedCombatStateMachine.BattleStates.CALCDAMAGE;
-                break;
+                    TurnBasedCombatStateMachine.currentState = TurnBasedCombatStateMachine.BattleStates.CALCDAMAGE;
+                    break;
 
-            default:
-                Debug.LogError("Error in status effects");
-                break;
+                default:
+                    Debug.LogError("Error in status effects");
+                    break;
+            }
+        }
+        else
+        {
+            Debug.Log("No status effect on this ability");
+            TurnBasedCombatStateMachine.currentState = TurnBasedCombatStateMachine.BattleStates.CALCDAMAGE;
         }
     }
 

@@ -3,8 +3,8 @@ using System.Collections;
 
 public class EnemyAbilityChoice : MonoBehaviour {
 
-    private int     _totalPlayerHealth;
-    private int   _playerHealthPercentage;
+    private float     _totalPlayerHealth;
+    private float   _playerHealthPercentage;
     private BaseAbility _chosenAbility;
 
 

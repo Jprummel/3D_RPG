@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+[System.Serializable]
 public class BaseBerserkerClass : BaseCharacterClass {
 
 	public BaseBerserkerClass()
@@ -10,5 +10,11 @@ public class BaseBerserkerClass : BaseCharacterClass {
         MainStat        = MainStatBonuses.STRENGTH;
         SecondMainStat  = SecondStatBonuses.SPIRIT;
         BonusStat       = BonusStatBonuses.MASTERY;
+        CharacterClass  = CharacterClasses.BERSERKER;
+
+        PlayersSkills.Add(new AttackAbility());
+        PlayersSkills.Add(new SwordSlash());
+        PlayersSkills.Add(new Cripple());
+        PlayersSkills.Add(new Rampage());
     }
 }

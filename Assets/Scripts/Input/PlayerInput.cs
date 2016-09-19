@@ -2,19 +2,20 @@
 using System.Collections;
 
 public class PlayerInput : MonoBehaviour {
-
-    private PlayerMovement  _playerMovement;
-    private Vector3         _moveDirection;
-    private Vector3         _rotateDirection;
-    private float           _moveHorizontal;
-    private float           _moveVertical;
-    private float           _rotation;
-    private bool            _sprint;
-    private bool            _jump;
+                    private PlayerMovement  _playerMovement;
+                    private PauseGame       _pauseGame;    
+                    private Vector3         _moveDirection;
+                    private Vector3         _rotateDirection;
+                    private float           _moveHorizontal;
+                    private float           _moveVertical;
+                    private float           _rotation;
+                    private bool            _sprint;
+                    private bool            _jump;
 
     void Start()
     {
         _playerMovement = GetComponent<PlayerMovement>();
+        _pauseGame = GetComponent<PauseGame>();
     }
 
     void Update()
@@ -34,5 +35,11 @@ public class PlayerInput : MonoBehaviour {
         _moveDirection      = new Vector3(_moveHorizontal, 0, _moveVertical);
         
         _playerMovement.Input(_moveDirection,_rotateDirection,_sprint,_jump);
+
+        if (Input.GetButtonDown(InputAxes.PAUSE))
+        {
+            _pauseGame.PauseToggle();
+        }
+
     }
 }

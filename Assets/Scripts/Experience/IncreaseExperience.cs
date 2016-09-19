@@ -8,7 +8,7 @@ public static class IncreaseExperience {
 
     public static void AddExperience()
     {
-        _xpToGive = GameInformation.PlayerLevel * 100;
+        _xpToGive = EnemyInformation.EnemyLevel * 100;
         GameInformation.CurrentXP += _xpToGive;
         CheckForLevelUp();
         Debug.Log(_xpToGive);
@@ -20,6 +20,7 @@ public static class IncreaseExperience {
         {
             //Levels up character
             _levelUp.LevelUpCharacter();
+            Debug.Log("Level Up! " + GameInformation.PlayerName + " is now level " + GameInformation.PlayerLevel);
             // Debug.Log(GameInformation.PlayerLevel);
         }
     }

@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+[System.Serializable]
 public class GameInformation : MonoBehaviour {
 
     void Awake()
     {
         DontDestroyOnLoad(transform.gameObject);
-        AddAbilities();
     }
 
-    public static List<BaseAbility>     PlayersAbilities;
+    public static List<BaseAbility>     PlayersSkills;
+    public static List<BaseAbility>     PlayersMagic;
 
     public static bool                  IsMale          { get; set; }
     public static string                PlayerBio       { get; set; }
@@ -28,19 +28,16 @@ public class GameInformation : MonoBehaviour {
     public static int                   Armor           { get; set; }
     public static int                   Mastery         { get; set; }
     public static int                   Charisma        { get; set; }
-    public static int                   CurrentXP       { get; set; }
-    public static int                   RequiredXP      { get; set; }
+    public static float                 CurrentXP       { get; set; }
+    public static float                 RequiredXP      { get; set; }
+    public static int                   StatPoints      { get; set; }
     public static int                   Gold            { get; set; }
 
-    public static BaseAbility playerMoveOne = new AttackAbility();
-    public static BaseAbility playerMoveTwo = new SwordSlash();
+    public static float                 PlayerMaxHealth { get; set; }
+    public static float                 PlayerHealth    { get; set; }
+    public static float                 PlayerMaxEnergy { get; set; }
+    public static float                 PlayerEnergy    { get; set; }
 
-    public static int                   PlayerHealth    { get; set; }
-    public static int                   PlayerEnergy    { get; set; }
-
-    void AddAbilities()
-    {
-        PlayersAbilities.Add(new AttackAbility());
-        PlayersAbilities.Add(new SwordSlash());
-    }
+    public static string                PlayerMapScene  { get; set; }
+    public static Vector3               PlayerMapPos    { get; set; }
 }

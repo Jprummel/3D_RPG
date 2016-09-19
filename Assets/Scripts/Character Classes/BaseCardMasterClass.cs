@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+[System.Serializable]
 public class BaseCardMasterClass : BaseCharacterClass {
 
 	public BaseCardMasterClass()
@@ -10,5 +10,6 @@ public class BaseCardMasterClass : BaseCharacterClass {
         MainStat        = MainStatBonuses.INTELLECT;
         SecondMainStat  = SecondStatBonuses.STRENGTH;
         BonusStat       = BonusStatBonuses.MASTERY;
+        CharacterClass  = CharacterClasses.CARDMASTER;
     }
 }

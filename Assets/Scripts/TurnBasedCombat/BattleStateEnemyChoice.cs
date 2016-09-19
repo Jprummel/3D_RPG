@@ -9,7 +9,6 @@ public class BattleStateEnemyChoice : MonoBehaviour {
     {
         //Choose ability
         TurnBasedCombatStateMachine.enemyUsedAbility = _enemyAbilityChoiceScript.ChooseEnemyAbility();
-        Debug.Log("Enemy used " + TurnBasedCombatStateMachine.enemyUsedAbility.AbilityName + "!");
         //Calculate Damage
         TurnBasedCombatStateMachine.currentState = TurnBasedCombatStateMachine.BattleStates.CALCDAMAGE;
         //End Turn

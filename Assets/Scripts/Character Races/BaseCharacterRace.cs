@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+[System.Serializable]
 public class BaseCharacterRace {
 
     private string  _raceName           = "Needs a name";
@@ -17,6 +17,7 @@ public class BaseCharacterRace {
         get;
         set;
     }
+
     public bool HasStrengthBonus    { get; set; }
     public bool HasStaminaBonus     { get; set; }
     public bool HasSpiritBonus      { get; set; }
