@@ -18,7 +18,7 @@ public class AddAbilities : MonoBehaviour {
                 switch(GameInformation.PlayerLevel)
                 {
                     case 3:
-                        GameInformation.PlayersSkills.Add(new Cripple());
+                        GameInformation.PlayerClass.PlayersSkills.Add(new Cripple());
                         break;
                 }
                 break;

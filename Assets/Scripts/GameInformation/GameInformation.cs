@@ -9,8 +9,8 @@ public class GameInformation : MonoBehaviour {
         DontDestroyOnLoad(transform.gameObject);
     }
 
-    public static List<BaseAbility>     PlayersSkills;
-    public static List<BaseAbility>     PlayersMagic;
+    public static List<BaseAbility>     PlayersSkills   { get; set; }
+    public static List<BaseAbility>     PlayersMagic    { get; set; }
 
     public static bool                  IsMale          { get; set; }
     public static string                PlayerBio       { get; set; }

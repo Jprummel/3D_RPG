@@ -32,7 +32,8 @@ public class BattleGUI : MonoBehaviour {
     [SerializeField]private GameObject _skillPanel;
     [SerializeField]private GameObject _magicPanel;
     [SerializeField]private Button _skillButton;
-    private List<Button> _skills = new List<Button>();
+    private List<int> _skillIndex = new List<int>();
+    private List<int> _magicIndex = new List<int>();
     
    
 
@@ -94,62 +95,72 @@ public class BattleGUI : MonoBehaviour {
         _enemyEnergyImage.fillAmount    = EnemyInformation.EnemyEnergy / 100;
     }
 
-    /*public void AbilityOne()
-    {
-        TurnBasedCombatStateMachine.playerUsedAbility   = GameInformation.playerMoveOne;
-        TurnBasedCombatStateMachine.currentState        = TurnBasedCombatStateMachine.BattleStates.ADDSTATUSEFFECTS;
-        
-    }
-
-    public void FindAbilityOneInfo()
-    {
-        _abilityOneName = transform.FindChild("MeleeAbilitiesContainer/Ability1/Text").GetComponent<Text>();
-        _abilityOneName.text = GameInformation.playerMoveOne.AbilityName;
-    }*/
-
-    public void GetPlayerSkills()
-    {
+    void GetPlayerSkills()
+    {    
         for (int i = 0; i < GameInformation.PlayerClass.PlayersSkills.Count; i++)
         {
-            /*_actionName = _actionButtons[i].GetComponentInChildren<Text>();
-            _actionName.text = GameInformation.PlayerClass.PlayersSkills[i].AbilityName;
-            //UseSkill(i);
-            _actionButtons[i].onClick.AddListener(() => { TurnBasedCombatStateMachine.playerUsedAbility = GameInformation.PlayerClass.PlayersSkills[i]; });
-            
-            //TurnBasedCombatStateMachine.playerUsedAbility = Button.skill;*/
+            _skillIndex.Add(i); //Adds a int to the list for every skill the player has
+        }
 
-            if (i != 0)//Skips the basic attack since the button is in the main panel
+        foreach (int skill in _skillIndex)
+        {
+            if (skill == 0)
             {
-                Button newSkillButton = Instantiate(_skillButton);
-                newSkillButton.name = GameInformation.PlayerClass.PlayersSkills[i].AbilityName + " Button";
-                Text SkillName = newSkillButton.GetComponentInChildren<Text>(); //Gets the text component of the spawned button
-                SkillName.text = GameInformation.PlayerClass.PlayersSkills[i].AbilityName; // Puts the name of the skill on the button
-                newSkillButton.transform.SetParent(_skillPanel.transform); //Sets the skillPanel as the parent so it spawns in there
-                
-                newSkillButton.onClick.AddListener(() => { TurnBasedCombatStateMachine.playerUsedAbility = GameInformation.PlayerClass.PlayersSkills[i]; });
-                _skills.Add(newSkillButton);
-                //UseSkill();
+                continue; //skips 0 in the list because that is always the basic attack and that has its own button
             }
-        }        
+
+            Button newSkillButton = Instantiate(_skillButton);
+            newSkillButton.name = GameInformation.PlayerClass.PlayersSkills[skill].AbilityName;
+            Text skillName = newSkillButton.GetComponentInChildren<Text>();
+            skillName.text = GameInformation.PlayerClass.PlayersSkills[skill].AbilityName;
+            newSkillButton.transform.SetParent(_skillPanel.transform);
+            int skillToUse = skill;
+            UseSkill(newSkillButton, skillToUse);
+        }
     }
 
-    public void UseSkill()
+    void UseSkill(Button button,int value)
     {
-        for (int i = 0; i < _skills.Count; i++)
-        {
-            _skills[i].onClick.AddListener(() => { TurnBasedCombatStateMachine.playerUsedAbility = GameInformation.PlayerClass.PlayersSkills[i]; });
-        }
+        button.onClick.AddListener(() => 
+        { 
+            TurnBasedCombatStateMachine.playerUsedAbility = GameInformation.PlayerClass.PlayersSkills[value]; 
+            Debug.Log("clicked"); 
+            TurnBasedCombatStateMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ADDSTATUSEFFECTS; 
+        });
     }
 
     void GetPlayerMagic()
     {
         for (int i = 0; i < GameInformation.PlayerClass.PlayerMagic.Count; i++)
         {
-            GameObject newMagicButton = Instantiate(_skillButton.gameObject);
-            Text MagicName = newMagicButton.GetComponentInChildren<Text>();
-            MagicName.text = GameInformation.PlayerClass.PlayerMagic[i].AbilityName;
-            newMagicButton.transform.SetParent(_magicPanel.transform);
-        } 
+            _magicIndex.Add(i); //Adds a int to the list for every skill the player has
+        }
+
+        foreach (int magic in _magicIndex)
+        {
+            if (magic == 0)
+            {
+                continue; //skips 0 in the list because that is always the basic attack and that has its own button
+            }
+
+            Button newMagicButton = Instantiate(_skillButton);
+            newMagicButton.name = GameInformation.PlayerClass.PlayerMagic[magic].AbilityName;
+            Text skillName = newMagicButton.GetComponentInChildren<Text>();
+            skillName.text = GameInformation.PlayerClass.PlayerMagic[magic].AbilityName;
+            newMagicButton.transform.SetParent(_skillPanel.transform);
+            int magicToUse = magic;
+            UseMagic(newMagicButton, magicToUse);
+        }
+    }
+    
+    void UseMagic(Button button, int value)
+    {
+        button.onClick.AddListener(() =>
+        {
+            TurnBasedCombatStateMachine.playerUsedAbility = GameInformation.PlayerClass.PlayerMagic[value];
+            Debug.Log("clicked");
+            TurnBasedCombatStateMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ADDSTATUSEFFECTS;
+        });
     }
 
     public void BasicAttack()

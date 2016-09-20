@@ -56,8 +56,8 @@ public class SaveLoadGame : MonoBehaviour
             GameInformation.PlayerRace      = saveData.playerRace;
             GameInformation.PlayerClass     = saveData.playerClass;
             GameInformation.PlayerLevel     = saveData.playerLevel;
-
             GameInformation.PlayersSkills   = saveData.playerSkills;
+            GameInformation.PlayersMagic    = saveData.playerMagic;
             GameInformation.Strength        = saveData.strength;
             GameInformation.Stamina         = saveData.stamina;
             GameInformation.Spirit          = saveData.spirit;
@@ -75,6 +75,7 @@ public class SaveLoadGame : MonoBehaviour
             //GameInformation.PlayerMapPos    = saveData.playerMapPos;
             file.Close();            
         }
+
         Debug.Log("It's "                               + GameInformation.IsMale + " that I'm a guy");
         Debug.Log("You want to hear my story? okay.. "  + GameInformation.PlayerBio);
         Debug.Log("My name is "                         + GameInformation.PlayerName);

@@ -60,7 +60,6 @@ public class BattleCalculations {
     //Player Ability Damage
     private float CalculatePlayerAbilityDamage()
     {
-        //_abilityPower = _playerUsedAbility.AbilityPower;   //Retrieves power of ability
         switch (_playerUsedAbility.AbilityType)
         {
             case BaseAbility.AbilityTypes.PHYSICAL:
@@ -116,7 +115,6 @@ public class BattleCalculations {
         }
         else
         {
-            //Debug.Log("Normal Hit.");
             return false; // Ability did not critically hit
         }
     }

@@ -9,7 +9,7 @@ public class RaceSelection : MonoBehaviour {
     [SerializeField]private List<Button> _raceSelectionButtons = new List<Button>();
     [SerializeField]private Text _raceDescription;
     private List<BaseCharacterRace> _playerRace = new List<BaseCharacterRace>();
-    private string[] _raceNames = new string[] { "Barbarian", "Dwarf", "Elf", "Dark Elf", "Human", "Troll","Skeleton", "Golem" };
+    //private string[] _raceNames = new string[] { "Barbarian", "Dwarf", "Elf", "Dark Elf", "Human", "Troll","Skeleton", "Golem" };
     private int _raceSelection;
     
     

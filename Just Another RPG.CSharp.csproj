@@ -108,9 +108,6 @@
     <Compile Include="Assets\Scripts\CreateNewCharacter\ClassSelection.cs" />
     <Compile Include="Assets\Scripts\CreateNewCharacter\RaceSelection.cs" />
     <Compile Include="Assets\Scripts\CreateNewCharacter\StatAllocation.cs" />
-    <Compile Include="Assets\Scripts\CreatePlayerGUI\StatAllocationModule\LevelUpStatPointAllocation.cs" />
-    <Compile Include="Assets\Scripts\CreatePlayerGUI\StatAllocationModule\StatAllocationModule.cs" />
-    <Compile Include="Assets\Scripts\CreatePlayerGUI\StatAllocationModule\StatAllocationModuleNew.cs" />
     <Compile Include="Assets\Scripts\Data\Tags.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAbilityChoice.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyInformation.cs" />
@@ -149,6 +146,9 @@
     <Compile Include="Assets\Scripts\PlayerMovement\PlayerController.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\SavingAndLoading\SaveLoadGame.cs" />
+    <Compile Include="Assets\Scripts\StatAllocationModule\LevelUpStatPointAllocation.cs" />
+    <Compile Include="Assets\Scripts\StatAllocationModule\StatAllocationModule.cs" />
+    <Compile Include="Assets\Scripts\StatAllocationModule\StatAllocationModuleNew.cs" />
     <Compile Include="Assets\Scripts\StatCalculations\StatCalculations.cs" />
     <Compile Include="Assets\Scripts\TestGUI.cs" />
     <Compile Include="Assets\Scripts\TurnBasedCombat\BattleGUI.cs" />

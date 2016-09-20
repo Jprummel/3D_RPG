@@ -9,7 +9,7 @@ public class ClassSelection : MonoBehaviour {
     [SerializeField]private Text            _classDescription;
     [SerializeField]private Button          _nextButton;
     private List<BaseCharacterClass>        _playerClass = new List<BaseCharacterClass>();
-    private string[]                        _classNames = new string[] { "Warrior", "Berserker", "Rogue", "Mage", "Card Master", "Mime", "Paladin", "Shaman" };
+    //private string[]                        _classNames = new string[] { "Warrior", "Berserker", "Rogue", "Mage", "Card Master", "Mime", "Paladin", "Shaman" };
     private int                             _classSelection;
 
     private Text _className;

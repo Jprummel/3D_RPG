@@ -68,6 +68,6 @@ public class CharacterFinalisation : MonoBehaviour {
         GameInformation.PlayerLevel = 1;
         GameInformation.Gold = 500;
         GameInformation.RequiredXP = 500;
-       //PlayersSkills.Add(new AttackAbility());
+        GameInformation.PlayerClass.PlayersSkills.Add(new AttackAbility());
     }
 }

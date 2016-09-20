@@ -5,6 +5,7 @@ public class LevelUp {
 
     private int _maxPlayerLevel = 50;
     private LevelUpStatPointAllocation _statPoints;
+    private AddAbilities _addAbilities = new AddAbilities();
 
     public void LevelUpCharacter()
     {
@@ -31,6 +32,7 @@ public class LevelUp {
         GameInformation.StatPoints += 3;
         //randomly give items
         //give them a skill/move
+        _addAbilities.AddAbilitiesOnLevelUp();
         //give money
         //determine next amount of required xp
         DetermineRequiredXP();

@@ -12,9 +12,6 @@ public class BaseBerserkerClass : BaseCharacterClass {
         BonusStat       = BonusStatBonuses.MASTERY;
         CharacterClass  = CharacterClasses.BERSERKER;
 
-        PlayersSkills.Add(new AttackAbility());
-        PlayersSkills.Add(new SwordSlash());
-        PlayersSkills.Add(new Cripple());
-        PlayersSkills.Add(new Rampage());
+        //PlayersSkills.Add(new AttackAbility());        
     }
 }
