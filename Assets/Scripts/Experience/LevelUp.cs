@@ -34,6 +34,7 @@ public class LevelUp {
         //give them a skill/move
         _addAbilities.AddAbilitiesOnLevelUp();
         //give money
+       
         //determine next amount of required xp
         DetermineRequiredXP();
     }
@@ -46,9 +47,10 @@ public class LevelUp {
 
     private void DetermineMoneyToGive()
     {
+        //give a certain amount of money
         if (GameInformation.PlayerLevel <= 10)
         {
-            //give a certain amount of money
+            GameInformation.Gold += 500;
         }
     }
 

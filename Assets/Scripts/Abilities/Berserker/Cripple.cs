@@ -7,13 +7,13 @@ public class Cripple : BaseAbility {
         AbilityDescription  = "Drops the enemies current hp by 1/4";
         AbilityType         = AbilityTypes.PHYSICAL;
         AbilityID           = 2;
-        AbilityBaseDamage   = (int)EnemyInformation.EnemyHealth;
+        AbilityBaseDamage   = (int)EnemyInformation.EnemyHealth/4;
         AbilityDamageStatModifier = 0f;
         AbilityCost         = 40;
         AbilityStatusEffect = null;
         AbilityCritChance   = 0; // 0% Chance to crit
         AbilityCritModifier = 0f;
-        AbilityHitChance = 100;//100%chance to hit
+        AbilityHitChance    = 80;//80%chance to hit
     }
 	
 }

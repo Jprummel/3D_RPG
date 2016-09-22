@@ -19,11 +19,11 @@ public class EnemyAbilityChoice : MonoBehaviour {
         }
         else if (_playerHealthPercentage < 75 && _playerHealthPercentage >= 30)
         {
-            return _chosenAbility = new SwordSlash();
+            return _chosenAbility = new AttackAbility();
         }
         else if (_playerHealthPercentage < 30 && _playerHealthPercentage >= 1)
         {
-            return _chosenAbility = new SwordSlash();
+            return _chosenAbility = new AttackAbility();
         }
         return _chosenAbility = new AttackAbility();
     }
@@ -31,6 +31,6 @@ public class EnemyAbilityChoice : MonoBehaviour {
     private BaseAbility ChooseAbilityAtSeventyFivePercent()
     {
         //Can also check for stats or other things to decide on abilities
-        return _chosenAbility = new SwordSlash();
+        return _chosenAbility = new AttackAbility();
     }
 }

@@ -10,9 +10,9 @@ public class Rampage : BaseAbility {
         AbilityBaseDamage   = 230;
         AbilityDamageStatModifier = 1.2f;
         AbilityCost         = 30;
-        AbilityCritChance   = 50; // 85% Chance to crit
+        AbilityCritChance   = 50; //50% Chance to crit
         AbilityCritModifier = 1.2f;
-        AbilityHitChance    = 100;//25% chance to hit
+        AbilityHitChance    = 25;//25% chance to hit
         AbilityDamageToSelf = 0;
     }
 }

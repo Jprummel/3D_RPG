@@ -5,6 +5,7 @@ public class BattleCalculations {
 
     private StatCalculations    _statCalcScript = new StatCalculations();
     private BaseAbility         _playerUsedAbility;
+    private BaseAbility         _enemyUsedAbility;
     private bool                _abilityHits;
     private int                 _abilityPower;
     private float               _totalAbilityPowerDamage;
@@ -20,35 +21,41 @@ public class BattleCalculations {
 
         //Calculation for the players damage to the enemy
         _playerUsedAbility      = usedAbility;  //Gets the chosen ability of the player
-        _totalUsedAbilityDamage = (int)CalculatePlayerAbilityDamage();
-        _totalCritStrikeDamage  = CalculateCriticalHitDamage();
-        _statusEffectDamage     = CalculateStatusEffectDamage();
-        _totalPlayerDamage      = _totalUsedAbilityDamage + _totalCritStrikeDamage + _statusEffectDamage;
-        _totalPlayerDamage     += (int)(Random.Range(-(_totalPlayerDamage * _damageVariatyModifier), _totalPlayerDamage * _damageVariatyModifier)); // Creates variety in damage by a max of -2.5% or a max of +2.5%
-        Debug.Log(_totalPlayerDamage + "Damage done by player");
-        GameInformation.PlayerEnergy -= _playerUsedAbility.AbilityCost;
-        if (CheckIfAbilityHits())
+        if (GameInformation.PlayerEnergy >= _playerUsedAbility.AbilityCost)
         {
-            EnemyInformation.EnemyHealth -= _totalPlayerDamage;
-            GameInformation.PlayerHealth -= CalculateDamageToSelf();
+            _totalUsedAbilityDamage = (int)CalculatePlayerAbilityDamage();
+            _totalCritStrikeDamage = CalculateCriticalHitDamage();
+            _statusEffectDamage = CalculateStatusEffectDamage();
+            _totalPlayerDamage = _totalUsedAbilityDamage + _totalCritStrikeDamage + _statusEffectDamage;
+            _totalPlayerDamage += (int)(Random.Range(-(_totalPlayerDamage * _damageVariatyModifier), _totalPlayerDamage * _damageVariatyModifier)); // Creates variety in damage by a max of -2.5% or a max of +2.5%
+            Debug.Log(_totalPlayerDamage + "Damage done by player");
+            GameInformation.PlayerEnergy -= _playerUsedAbility.AbilityCost;
+            if (CheckIfAbilityHits())
+            {
+                EnemyInformation.EnemyHealth -= _totalPlayerDamage;
+                GameInformation.PlayerHealth -= CalculateDamageToSelf();
+            }
+            TurnBasedCombatStateMachine.playerDidCompleteTurn = true;   //Tells the state machine that the player completed its turn
         }
-        TurnBasedCombatStateMachine.playerDidCompleteTurn = true;   //Tells the state machine that the player completed its turn
     }
 
     public void CalculateTotalEnemyDamage(BaseAbility usedAbility)
     {
         //Calculation for the enemy's damage to the player
-        _playerUsedAbility      = usedAbility;  //Gets the chosen ability of the enemy
-        _totalUsedAbilityDamage = (int)CalculateEnemyAbilityDamage();
-        _totalCritStrikeDamage  = CalculateCriticalHitDamage();
-        _statusEffectDamage     = CalculateStatusEffectDamage();
-        _totalPlayerDamage      = _totalUsedAbilityDamage + _totalCritStrikeDamage + _statusEffectDamage;
-        _totalPlayerDamage     += (int)(Random.Range(-(_totalPlayerDamage * _damageVariatyModifier), _totalPlayerDamage * _damageVariatyModifier)); // Creates variety in damage by a max of -2.5% or a max of +2.5%
-        Debug.Log(_totalPlayerDamage + "Damage done by enemy");
-        EnemyInformation.EnemyEnergy -= _playerUsedAbility.AbilityCost;
-        GameInformation.PlayerHealth -= _totalPlayerDamage;
-        EnemyInformation.EnemyHealth -= CalculateDamageToSelf();
-        TurnBasedCombatStateMachine.enemyDidCompleteTurn = true;    //Tells the state machine that the enemy completed its turn
+        _enemyUsedAbility       = usedAbility;  //Gets the chosen ability of the enemy
+        if (EnemyInformation.EnemyEnergy >= _enemyUsedAbility.AbilityCost)
+        {
+            _totalUsedAbilityDamage = (int)CalculateEnemyAbilityDamage();
+            _totalCritStrikeDamage = CalculateCriticalHitDamage();
+            _statusEffectDamage = CalculateStatusEffectDamage();
+            _totalPlayerDamage = _totalUsedAbilityDamage + _totalCritStrikeDamage + _statusEffectDamage;
+            _totalPlayerDamage += (int)(Random.Range(-(_totalPlayerDamage * _damageVariatyModifier), _totalPlayerDamage * _damageVariatyModifier)); // Creates variety in damage by a max of -2.5% or a max of +2.5%
+            Debug.Log(_totalPlayerDamage + "Damage done by enemy");
+            EnemyInformation.EnemyEnergy -= _playerUsedAbility.AbilityCost;
+            GameInformation.PlayerHealth -= _totalPlayerDamage;
+            EnemyInformation.EnemyHealth -= CalculateDamageToSelf();
+            TurnBasedCombatStateMachine.enemyDidCompleteTurn = true;    //Tells the state machine that the enemy completed its turn
+        }
     }
 
     private int CalculateDamageToSelf()
@@ -122,9 +129,6 @@ public class BattleCalculations {
     private bool CheckIfAbilityHits()
     {
         int abilityHitChance = Random.Range(1, 101);
-        Debug.Log(abilityHitChance);
-        Debug.Log(_playerUsedAbility.AbilityName + "Used by player");
-        Debug.Log(_playerUsedAbility.AbilityHitChance + "Hit chance");
         if (abilityHitChance <= _playerUsedAbility.AbilityHitChance)
         {
             Debug.Log("Hit");

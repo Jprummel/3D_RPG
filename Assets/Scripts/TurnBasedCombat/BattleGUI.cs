@@ -115,6 +115,7 @@ public class BattleGUI : MonoBehaviour {
             skillName.text = GameInformation.PlayerClass.PlayersSkills[skill].AbilityName;
             newSkillButton.transform.SetParent(_skillPanel.transform);
             int skillToUse = skill;
+            ShowSkillInfo(newSkillButton, skillToUse);
             UseSkill(newSkillButton, skillToUse);
         }
     }
@@ -138,11 +139,6 @@ public class BattleGUI : MonoBehaviour {
 
         foreach (int magic in _magicIndex)
         {
-            if (magic == 0)
-            {
-                continue; //skips 0 in the list because that is always the basic attack and that has its own button
-            }
-
             Button newMagicButton = Instantiate(_skillButton);
             newMagicButton.name = GameInformation.PlayerClass.PlayerMagic[magic].AbilityName;
             Text skillName = newMagicButton.GetComponentInChildren<Text>();
@@ -169,17 +165,8 @@ public class BattleGUI : MonoBehaviour {
         TurnBasedCombatStateMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ADDSTATUSEFFECTS;
     }
 
-    public void UseSkill(int index)
+    public void ShowSkillInfo(Button button, int value)
     {
-        Debug.Log(index + "Used" );
-            TurnBasedCombatStateMachine.playerUsedAbility = GameInformation.PlayerClass.PlayersSkills[index];
-            TurnBasedCombatStateMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ADDSTATUSEFFECTS;
-        
-        //Debug.Log(TurnBasedCombatStateMachine.playerUsedAbility);
-    }
-
-    public void ShowSkillInfo()
-    {
-        //_skillTooltip.text = GameInformation.PlayerClass.PlayersSkills[].AbilityDescription;
+        _skillTooltip.text = GameInformation.PlayerClass.PlayersSkills[value].AbilityDescription;
     }
 }

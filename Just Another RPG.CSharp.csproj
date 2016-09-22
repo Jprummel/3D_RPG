@@ -71,6 +71,7 @@
     <Compile Include="Assets\LoadPosition.cs" />
     <Compile Include="Assets\Scripts\Abilities\AddAbilities.cs" />
     <Compile Include="Assets\Scripts\Abilities\BaseAbility.cs" />
+    <Compile Include="Assets\Scripts\Abilities\Berserker\Bloodlust.cs" />
     <Compile Include="Assets\Scripts\Abilities\Berserker\Cripple.cs" />
     <Compile Include="Assets\Scripts\Abilities\Berserker\Rampage.cs" />
     <Compile Include="Assets\Scripts\Abilities\GeneralAbilities\AttackAbility.cs" />
@@ -80,7 +81,7 @@
     <Compile Include="Assets\Scripts\Abilities\StatusEffects\PoisonStatusEffect.cs" />
     <Compile Include="Assets\Scripts\Abilities\StatusEffects\SleepStatusEffect.cs" />
     <Compile Include="Assets\Scripts\Abilities\SwordSlash.cs" />
-    <Compile Include="Assets\Scripts\BasePlayer\BasePlayer.cs" />
+    <Compile Include="Assets\Scripts\BasePlayer\BaseCharacter.cs" />
     <Compile Include="Assets\Scripts\BattleCalculations\BattleCalculations.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
     <Compile Include="Assets\Scripts\Character Classes\BaseBerserkerClass.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="Assets\Scripts\NPCs\CheckForDialogue.cs" />
     <Compile Include="Assets\Scripts\NPCs\CheckForQuest.cs" />
     <Compile Include="Assets\Scripts\NPCs\TestNPC.cs" />
+    <Compile Include="Assets\Scripts\Party\Party.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement\PlayerController.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\SavingAndLoading\SaveLoadGame.cs" />

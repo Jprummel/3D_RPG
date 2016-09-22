@@ -9,7 +9,7 @@ public class GoblinChief : BaseEnemy {
         EnemyDescription    = "A goblin chieftain of a small tribe";
         EnemyLevel          = 4;
         Strength            = 12;
-        Stamina             = 14;
+        Stamina             = 12;
         Spirit              = 9;
         Intellect           = 6;
         Armor               = 2;

@@ -17,8 +17,11 @@ public class AddAbilities : MonoBehaviour {
             case BaseCharacterClass.CharacterClasses.BERSERKER:
                 switch(GameInformation.PlayerLevel)
                 {
-                    case 3:
+                    case 2:
                         GameInformation.PlayerClass.PlayersSkills.Add(new Cripple());
+                        break;
+                    case 5:
+                        GameInformation.PlayerClass.PlayersSkills.Add(new Rampage());
                         break;
                 }
                 break;

@@ -6,12 +6,10 @@ public class BaseBerserkerClass : BaseCharacterClass {
 	public BaseBerserkerClass()
     {
         CharacterClassName          = "Berserker";
-        CharacterClassDescription   = "A warrior that thrives in the thrill of battle, prefers offense above defense";
+        CharacterClassDescription   = "Berserkers don't stop fighting until they are the last man standing or until they die. The more damage has been done to them or their enemy the more damage they will further inflict";
         MainStat        = MainStatBonuses.STRENGTH;
         SecondMainStat  = SecondStatBonuses.SPIRIT;
         BonusStat       = BonusStatBonuses.MASTERY;
-        CharacterClass  = CharacterClasses.BERSERKER;
-
-        //PlayersSkills.Add(new AttackAbility());        
+        CharacterClass = CharacterClasses.BERSERKER;
     }
 }
