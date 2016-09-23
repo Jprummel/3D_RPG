@@ -5,63 +5,63 @@ public class AddAbilities : MonoBehaviour {
 
     public void AddAbilitiesOnLevelUp()
     {
-        switch (GameInformation.PlayerClass.CharacterClass) 
+        switch (PlayerInformation.CharactersClass.CharactersClass) 
         {
-            case BaseCharacterClass.CharacterClasses.WARRIOR:
-                switch (GameInformation.PlayerLevel)
+            case BaseCharacterClass.CharactersClasses.WARRIOR:
+                switch (PlayerInformation.CharactersLevel)
                 {
                     case 3:
                         break;
                 }
                 break;
-            case BaseCharacterClass.CharacterClasses.BERSERKER:
-                switch(GameInformation.PlayerLevel)
+            case BaseCharacterClass.CharactersClasses.BERSERKER:
+                switch(PlayerInformation.CharactersLevel)
                 {
                     case 2:
-                        GameInformation.PlayerClass.PlayersSkills.Add(new Cripple());
+                        PlayerInformation.CharactersClass.CharactersSkills.Add(new Cripple());
                         break;
                     case 5:
-                        GameInformation.PlayerClass.PlayersSkills.Add(new Rampage());
+                        PlayerInformation.CharactersClass.CharactersSkills.Add(new Rampage());
                         break;
                 }
                 break;
-            case BaseCharacterClass.CharacterClasses.ROGUE:
-                switch (GameInformation.PlayerLevel)
+            case BaseCharacterClass.CharactersClasses.ROGUE:
+                switch (PlayerInformation.CharactersLevel)
                 {
                     case 3:
                         break;
                 }
                 break;
-            case BaseCharacterClass.CharacterClasses.MAGE:
-                switch (GameInformation.PlayerLevel)
+            case BaseCharacterClass.CharactersClasses.MAGE:
+                switch (PlayerInformation.CharactersLevel)
                 {
                     case 3:
                         break;
                 }
                 break;
-            case BaseCharacterClass.CharacterClasses.CARDMASTER:
-                switch (GameInformation.PlayerLevel)
+            case BaseCharacterClass.CharactersClasses.CARDMASTER:
+                switch (PlayerInformation.CharactersLevel)
                 {
                     case 3:
                         break;
                 }
                 break;
-            case BaseCharacterClass.CharacterClasses.MIME:
-                switch (GameInformation.PlayerLevel)
+            case BaseCharacterClass.CharactersClasses.MIME:
+                switch (PlayerInformation.CharactersLevel)
                 {
                     case 3:
                         break;
                 }
                 break;
-            case BaseCharacterClass.CharacterClasses.PALADIN:
-                switch (GameInformation.PlayerLevel)
+            case BaseCharacterClass.CharactersClasses.PALADIN:
+                switch (PlayerInformation.CharactersLevel)
                 {
                     case 3:
                         break;
                 }
                 break;
-            case BaseCharacterClass.CharacterClasses.SHAMAN:
-                switch (GameInformation.PlayerLevel)
+            case BaseCharacterClass.CharactersClasses.SHAMAN:
+                switch (PlayerInformation.CharactersLevel)
                 {
                     case 3:
                         break;

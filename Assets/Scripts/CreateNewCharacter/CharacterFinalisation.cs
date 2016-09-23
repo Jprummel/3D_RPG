@@ -27,20 +27,13 @@ public class CharacterFinalisation : MonoBehaviour {
         _lastName = _inputFields[1].text;
     }
 
-    public void ChangeCharacterBio()
-    {
-        _characterBio = _inputFields[2].text;
-    }
-    
-
     public void Finalisation()
     {
-        GameInformation.PlayerName = _firstName + " " + _lastName; // Players full name
-        GameInformation.PlayerBio = _characterBio; //Sets the players backstory
+        PlayerInformation.CharactersName = _firstName + " " + _lastName; // Players full name
 
-        GameInformation.PlayerLevel = 1;
-        GameInformation.Gold = 500;
-        GameInformation.RequiredXP = 500;
-        GameInformation.PlayerClass.PlayersSkills.Add(new AttackAbility());
+        PlayerInformation.CharactersLevel = 1;
+        PlayerInformation.Gold = 500;
+        PlayerInformation.RequiredXP = 500;
+        PlayerInformation.CharactersClass.CharactersSkills.Add(new AttackAbility());
     }
 }

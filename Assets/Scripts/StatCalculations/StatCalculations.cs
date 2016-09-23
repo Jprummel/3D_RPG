@@ -73,9 +73,9 @@ public class StatCalculations
         }
     }
 
-    public int CalculatePlayerHealth(int statValue)
+    public int CalculateCharactersHealth(int statValue)
     {
-        return statValue * 100 + (GameInformation.PlayerLevel * 39) ; //Calculate health based on total Stamina stat times 100
+        return statValue * 100 + (PlayerInformation.CharactersLevel * 39) ; //Calculate health based on total Stamina stat times 100
     }
 
     public int CalculateEnemyHealth(int statValue)
@@ -83,7 +83,7 @@ public class StatCalculations
         return statValue * 100;
     }
 
-    public int CalculatePlayerEnergy(int statValue)
+    public int CalculateCharactersMana(int statValue)
     {
         return statValue * 20;  //Calculate energy based on total Spirit times 50
     }
@@ -95,24 +95,24 @@ public class StatCalculations
 
     public float FindAndCalculatePlayerMainStatModifier()
     {
-        switch (GameInformation.PlayerClass.CharacterClass)
+        switch (PlayerInformation.CharactersClass.CharactersClass)
         {
-            case(BaseCharacterClass.CharacterClasses.WARRIOR):          //WARRIOR
-                return (GameInformation.Stamina     * _mainStatModifier) + (GameInformation.Strength    * _secondaryStatModifier);
-            case (BaseCharacterClass.CharacterClasses.BERSERKER):       //BERSERKER
-                return (GameInformation.Strength    * _mainStatModifier) + (GameInformation.Spirit      * _secondaryStatModifier);
-            case (BaseCharacterClass.CharacterClasses.ROGUE):           //ROGUE
-                return (GameInformation.Strength    * _mainStatModifier) + (GameInformation.Spirit      * _secondaryStatModifier);
-            case (BaseCharacterClass.CharacterClasses.MAGE):            //MAGE
-                return (GameInformation.Intellect   * _mainStatModifier) + (GameInformation.Spirit      * _secondaryStatModifier);
-            case (BaseCharacterClass.CharacterClasses.CARDMASTER):      //CARD MASTER
-                return (GameInformation.Intellect   * _mainStatModifier) + (GameInformation.Strength    * _secondaryStatModifier);
-            case (BaseCharacterClass.CharacterClasses.MIME):            //MIME
-                return (GameInformation.Spirit      * _mainStatModifier) + (GameInformation.Intellect   * _secondaryStatModifier);
-            case (BaseCharacterClass.CharacterClasses.PALADIN):         //PALADIN
-                return (GameInformation.Stamina     * _mainStatModifier) + (GameInformation.Intellect   * _secondaryStatModifier);
-            case (BaseCharacterClass.CharacterClasses.SHAMAN):          //SHAMAN
-                return (GameInformation.Spirit      * _mainStatModifier) + (GameInformation.Intellect   * _secondaryStatModifier);
+            case(BaseCharacterClass.CharactersClasses.WARRIOR):          //WARRIOR
+                return (PlayerInformation.Stamina     * _mainStatModifier) + (PlayerInformation.Strength    * _secondaryStatModifier);
+            case (BaseCharacterClass.CharactersClasses.BERSERKER):       //BERSERKER
+                return (PlayerInformation.Strength    * _mainStatModifier) + (PlayerInformation.Spirit      * _secondaryStatModifier);
+            case (BaseCharacterClass.CharactersClasses.ROGUE):           //ROGUE
+                return (PlayerInformation.Strength    * _mainStatModifier) + (PlayerInformation.Spirit      * _secondaryStatModifier);
+            case (BaseCharacterClass.CharactersClasses.MAGE):            //MAGE
+                return (PlayerInformation.Intellect   * _mainStatModifier) + (PlayerInformation.Spirit      * _secondaryStatModifier);
+            case (BaseCharacterClass.CharactersClasses.CARDMASTER):      //CARD MASTER
+                return (PlayerInformation.Intellect   * _mainStatModifier) + (PlayerInformation.Strength    * _secondaryStatModifier);
+            case (BaseCharacterClass.CharactersClasses.MIME):            //MIME
+                return (PlayerInformation.Spirit      * _mainStatModifier) + (PlayerInformation.Intellect   * _secondaryStatModifier);
+            case (BaseCharacterClass.CharactersClasses.PALADIN):         //PALADIN
+                return (PlayerInformation.Stamina     * _mainStatModifier) + (PlayerInformation.Intellect   * _secondaryStatModifier);
+            case (BaseCharacterClass.CharactersClasses.SHAMAN):          //SHAMAN
+                return (PlayerInformation.Spirit      * _mainStatModifier) + (PlayerInformation.Intellect   * _secondaryStatModifier);
         }
 
        return 1.0f;

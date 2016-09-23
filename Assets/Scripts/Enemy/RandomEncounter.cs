@@ -24,10 +24,10 @@ public class RandomEncounter : MonoBehaviour {
             int encounterChance = Random.Range(1, 1000);
             if (encounterChance <= 5)
             {
-                GameInformation.PlayerMapScene = Application.loadedLevelName;
-                GameInformation.PlayerMapPos = transform.parent.position;
-                Debug.Log(GameInformation.PlayerMapScene);
-                SceneManager.LoadScene("BattleScene");
+                PlayerInformation.PlayerMapScene = Application.loadedLevelName;
+                PlayerInformation.PlayerMapPos = transform.parent.position;
+                Debug.Log(PlayerInformation.PlayerMapScene);
+                SceneManager.LoadScene("BattleSceneTest");
             }
         }
     }

@@ -9,19 +9,19 @@ public static class IncreaseExperience {
     public static void AddExperience()
     {
         _xpToGive = EnemyInformation.EnemyLevel * 100;
-        GameInformation.CurrentXP += _xpToGive;
+        PlayerInformation.CurrentXP += _xpToGive;
         CheckForLevelUp();
         Debug.Log(_xpToGive);
     }
 
     private static void CheckForLevelUp()
     {
-        if (GameInformation.CurrentXP >= GameInformation.RequiredXP)
+        if (PlayerInformation.CurrentXP >= PlayerInformation.RequiredXP)
         {
             //Levels up character
             _levelUp.LevelUpCharacter();
-            Debug.Log("Level Up! " + GameInformation.PlayerName + " is now level " + GameInformation.PlayerLevel);
-            // Debug.Log(GameInformation.PlayerLevel);
+            Debug.Log("Level Up! " + PlayerInformation.CharactersName + " is now level " + PlayerInformation.CharactersLevel);
+            // Debug.Log(PlayerInformation.CharactersLevel);
         }
     }
 }

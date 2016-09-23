@@ -3,7 +3,7 @@ using System.Collections;
 
 public class LevelUp {
 
-    private int _maxPlayerLevel = 50;
+    private int _maxCharactersLevel = 50;
     private LevelUpStatPointAllocation _statPoints;
     private AddAbilities _addAbilities = new AddAbilities();
 
@@ -11,25 +11,25 @@ public class LevelUp {
     {
         
         //Check to see if current xp is greater then required
-        if (GameInformation.CurrentXP > GameInformation.RequiredXP)
+        if (PlayerInformation.CurrentXP > PlayerInformation.RequiredXP)
         {
-            GameInformation.CurrentXP -= GameInformation.RequiredXP;
+            PlayerInformation.CurrentXP -= PlayerInformation.RequiredXP;
         }
         else
         {
-            GameInformation.CurrentXP = 0;
+            PlayerInformation.CurrentXP = 0;
         }
 
-        if (GameInformation.PlayerLevel < _maxPlayerLevel)
+        if (PlayerInformation.CharactersLevel < _maxCharactersLevel)
         {
-            GameInformation.PlayerLevel += 1;
+            PlayerInformation.CharactersLevel += 1;
         }
         else
         {
-            GameInformation.PlayerLevel = _maxPlayerLevel;
+            PlayerInformation.CharactersLevel = _maxCharactersLevel;
         }
         //Give player stat points
-        GameInformation.StatPoints += 3;
+        PlayerInformation.StatPoints += 3;
         //randomly give items
         //give them a skill/move
         _addAbilities.AddAbilitiesOnLevelUp();
@@ -41,16 +41,16 @@ public class LevelUp {
 
     private void DetermineRequiredXP()
     {
-        int temp = (GameInformation.PlayerLevel * 1000) + 250;
-        GameInformation.RequiredXP = temp;
+        int temp = (PlayerInformation.CharactersLevel * 1000) + 250;
+        PlayerInformation.RequiredXP = temp;
     }
 
     private void DetermineMoneyToGive()
     {
         //give a certain amount of money
-        if (GameInformation.PlayerLevel <= 10)
+        if (PlayerInformation.CharactersLevel <= 10)
         {
-            GameInformation.Gold += 500;
+            PlayerInformation.Gold += 500;
         }
     }
 

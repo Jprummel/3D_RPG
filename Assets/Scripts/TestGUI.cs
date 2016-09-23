@@ -10,8 +10,8 @@ public class TestGUI : MonoBehaviour {
     void Start()
     {
         class2 = new BaseWarriorClass();
-        Debug.Log(class2.CharacterClassName);
-        Debug.Log(class2.CharacterClassDescription);
+        Debug.Log(class2.CharactersClassName);
+        Debug.Log(class2.CharactersClassDescription);
         Debug.Log(class2.MainStat);
         Debug.Log(class2.SecondMainStat);
         Debug.Log(class2.BonusStat);

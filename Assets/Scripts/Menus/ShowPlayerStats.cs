@@ -8,6 +8,7 @@ public class ShowPlayerStats : MonoBehaviour {
     [SerializeField]private Text    _playerStats;
     [SerializeField]private Image   _xpBar;
     [SerializeField]private Text    _xpText;
+    [SerializeField]private Text _goldAmount;
 
     void Start()
     {
@@ -15,6 +16,7 @@ public class ShowPlayerStats : MonoBehaviour {
         _playerStats = _playerStats.GetComponent<Text>();
         _xpBar = _xpBar.GetComponent<Image>();
         _xpText = _xpText.GetComponent<Text>();
+        _goldAmount = _goldAmount.GetComponent<Text>();
     }
 
     void Update()
@@ -40,24 +42,29 @@ public class ShowPlayerStats : MonoBehaviour {
                                     "Charisma"  + "\n" +
                                     "Armor"     + "\n";
 
-        _playerStats.text = GameInformation.PlayerName + "\n" +
-            GameInformation.PlayerRace.RaceName  + "\n" +
-            GameInformation.PlayerClass.CharacterClassName +"\n" +
-            GameInformation.PlayerLevel + "\n" +
-            GameInformation.Strength + "\n" +
-            GameInformation.Stamina + "\n" +
-            GameInformation.Spirit + "\n" +
-            GameInformation.Intellect + "\n" +
-            GameInformation.Overpower + "\n" +
-            GameInformation.Luck + "\n" +
-            GameInformation.Mastery + "\n" +
-            GameInformation.Charisma + "\n" +
-            GameInformation.Armor;
+        _playerStats.text = PlayerInformation.CharactersName + "\n" +
+            PlayerInformation.CharactersRace.RaceName  + "\n" +
+            PlayerInformation.CharactersClass.CharactersClassName +"\n" +
+            PlayerInformation.CharactersLevel + "\n" +
+            PlayerInformation.Strength + "\n" +
+            PlayerInformation.Stamina + "\n" +
+            PlayerInformation.Spirit + "\n" +
+            PlayerInformation.Intellect + "\n" +
+            PlayerInformation.Overpower + "\n" +
+            PlayerInformation.Luck + "\n" +
+            PlayerInformation.Mastery + "\n" +
+            PlayerInformation.Charisma + "\n" +
+            PlayerInformation.Armor;
+    }
+
+    public void GoldAmount()
+    {
+
     }
 
     public void XPBar()
     {
-        _xpBar.fillAmount = GameInformation.CurrentXP / GameInformation.RequiredXP;
-        _xpText.text =(float) GameInformation.CurrentXP + " / " + GameInformation.RequiredXP + " XP";
+        _xpBar.fillAmount = PlayerInformation.CurrentXP / PlayerInformation.RequiredXP;
+        _xpText.text =(float) PlayerInformation.CurrentXP + " / " + PlayerInformation.RequiredXP + " XP";
     }
 }

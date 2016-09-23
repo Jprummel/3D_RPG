@@ -22,6 +22,7 @@ public class CharacterCreationStates : MonoBehaviour {
     private ClassSelection          _classSelection;
     private StatAllocation          _statAllocation;
     private CharacterFinalisation   _characterFinalisation;
+    private Party _party;
 
     private enum CreationStates
     {
@@ -95,6 +96,8 @@ public class CharacterCreationStates : MonoBehaviour {
             case (CreationStates.FINALSETUP):
                 _characterFinalisation.Finalisation();
                 SaveLoadGame saveCharacter = new SaveLoadGame();
+                //_party.partyMembers.Add(new PlayerInformation());
+                //Party.partyMembers.Add(new PlayerInformation());
                 saveCharacter.SaveGame();
                 SceneManager.LoadScene("MovementTest");
                 break;
@@ -111,7 +114,7 @@ public class CharacterCreationStates : MonoBehaviour {
                 Debug.Log(currentState);
                 break;
             case (CreationStates.CLASSSELECTION):
-                GameInformation.PlayerRace = null;  //Player can re-select his race
+                PlayerInformation.CharactersRace = null;  //Player can re-select his race
                 _classSelectionPanel.SetActive(false);
                 _raceSelectionPanel.SetActive(true);
                 _backButton.interactable = false;
@@ -120,7 +123,7 @@ public class CharacterCreationStates : MonoBehaviour {
                 break;
             case (CreationStates.STATALLOCATION):
                 _statAllocation.ResetToBaseStats(); //Resets the stats back to the basestats to prevent cheating
-                GameInformation.PlayerClass = null; //Player can re-select his class
+                PlayerInformation.CharactersClass = null; //Player can re-select his class
                 _statAllocationPanel.SetActive(false);
                 _classSelectionPanel.SetActive(true);
                 currentState = CreationStates.CLASSSELECTION;

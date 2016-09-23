@@ -4,8 +4,8 @@ using System.Collections.Generic;
 [System.Serializable]
 public class BaseCharacterClass{
 
-    private string _characterClassName;
-    private string _characterClassDescription;
+    private string _CharactersClassName;
+    private string _CharactersClassDescription;
     //Stats
     private int _strength   = 10;   //Physical damage modifier
     private int _stamina    = 12;   //Health modifier
@@ -17,7 +17,7 @@ public class BaseCharacterClass{
     private int _mastery    = 9;    //Chance for bonus damage
     private int _charisma   = 10;   //Lower buy prices , increase sell prices, bonus rep , influence on how people see you
 
-    public enum CharacterClasses
+    public enum CharactersClasses
     {
         WARRIOR,
         BERSERKER,
@@ -53,22 +53,22 @@ public class BaseCharacterClass{
         CHARISMA
     }
 
-    public CharacterClasses     CharacterClass  { get; set; }
+    public CharactersClasses     CharactersClass  { get; set; }
     public MainStatBonuses      MainStat        { get; set; }
     public SecondStatBonuses    SecondMainStat  { get; set; }
     public BonusStatBonuses     BonusStat       { get; set; }
-    public List<BaseAbility>    PlayersSkills   = new List<BaseAbility>();
-    public List<BaseAbility>    PlayerMagic     = new List<BaseAbility>();
+    public List<BaseAbility>    CharactersSkills   = new List<BaseAbility>();
+    public List<BaseAbility>    CharactersMagic     = new List<BaseAbility>();
 
-    public string CharacterClassName
+    public string CharactersClassName
     {
-        get { return _characterClassName;}
-        set { _characterClassName = value;}
+        get { return _CharactersClassName;}
+        set { _CharactersClassName = value;}
     }
-    public string CharacterClassDescription
+    public string CharactersClassDescription
     {
-        get { return _characterClassDescription;}
-        set { _characterClassDescription = value;}
+        get { return _CharactersClassDescription;}
+        set { _CharactersClassDescription = value;}
     }
     public int Strength
     {

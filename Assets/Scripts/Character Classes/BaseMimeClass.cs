@@ -5,11 +5,11 @@ public class BaseMimeClass : BaseCharacterClass {
 
 	public BaseMimeClass()
     {
-        CharacterClassName          = "Mime";
-        CharacterClassDescription   = "A french retard";
+        CharactersClassName          = "Mime";
+        CharactersClassDescription   = "A french retard";
         MainStat        = MainStatBonuses.SPIRIT;
         SecondMainStat  = SecondStatBonuses.INTELLECT;
         BonusStat       = BonusStatBonuses.CHARISMA;
-        CharacterClass  = CharacterClasses.MIME;
+        CharactersClass  = CharactersClasses.MIME;
     }
 }

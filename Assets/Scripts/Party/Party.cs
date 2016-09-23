@@ -1,17 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+[System.Serializable]
 public class Party : MonoBehaviour {
 
     public List<BaseCharacter> partyMembers = new List<BaseCharacter>();
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+    public BaseCharacter PartyMembers(int value)
+    {
+        return partyMembers[value];
+    }
+
 }

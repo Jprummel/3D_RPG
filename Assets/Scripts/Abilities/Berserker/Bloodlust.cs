@@ -9,7 +9,7 @@ public class Bloodlust : BaseAbility
         AbilityDescription  = "Deals more damage when you are lower on hp";
         AbilityType         = AbilityTypes.PHYSICAL;
         AbilityID           = 2;
-        AbilityBaseDamage   = (int)GameInformation.PlayerMaxHealth - (int)GameInformation.PlayerHealth;
+        AbilityBaseDamage   = (int)PlayerInformation.CharactersMaxHealth - (int)PlayerInformation.CharactersHealth;
         AbilityDamageStatModifier = 0f;
         AbilityCost         = 35;
         AbilityStatusEffect = null;

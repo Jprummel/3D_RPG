@@ -5,15 +5,16 @@ using System.Collections.Generic;
 
 
 public class BattleGUI : MonoBehaviour {
-    
+
+    private Party _party;
     //Player info
-    private Text    _playerName;
-    private Text    _playerHealth;
-    private Text    _playerEnergy;
+    private Text    _CharactersName;
+    private Text    _CharactersHealth;
+    private Text    _CharactersMana;
     private Text    _abilityOneName;
-    private Image   _playerHealthImage;
-    private Image   _playerEnergyImage;
-    private int     _playerLevel;
+    private Image   _CharactersHealthImage;
+    private Image   _CharactersManaImage;
+    private int     _CharactersLevel;
 
     //Enemy info
     private Text _enemyName;
@@ -44,13 +45,13 @@ public class BattleGUI : MonoBehaviour {
         
        
         //Gets player info components
-        _playerName         = transform.FindChild("PlayerInfoContainer/PlayerPortrait/PlayerName").GetComponent<Text>();
-        _playerName.text    = GameInformation.PlayerName;
-        _playerHealth       = transform.FindChild("PlayerInfoContainer/PlayerHealthBar/PlayerHealthValue").GetComponent<Text>();
-        _playerEnergy       = transform.FindChild("PlayerInfoContainer/PlayerEnergyBar/PlayerEnergyValue").GetComponent<Text>();
-        _playerHealthImage  = transform.FindChild("PlayerInfoContainer/PlayerHealthBar").GetComponent<Image>();
-        _playerEnergyImage  = transform.FindChild("PlayerInfoContainer/PlayerEnergyBar").GetComponent<Image>();
-        _playerLevel        = GameInformation.PlayerLevel;
+        _CharactersName         = transform.FindChild("BattlePanel/PartyPanel/PartyMember1/PartyMember1Name").GetComponent<Text>();
+        _CharactersName.text    = PlayerInformation.CharactersName;
+        _CharactersHealth       = transform.FindChild("BattlePanel/PartyPanel/PartyMember1/PartyMember1Health").GetComponent<Text>();
+        _CharactersMana         = transform.FindChild("BattlePanel/PartyPanel/PartyMember1/PartyMember1Mana").GetComponent<Text>();
+        //_CharactersHealthImage  = transform.FindChild("PlayerInfoContainer/CharactersHealthBar").GetComponent<Image>();
+        //_CharactersManaImage  = transform.FindChild("PlayerInfoContainer/CharactersManaBar").GetComponent<Image>();
+        _CharactersLevel        = PlayerInformation.CharactersLevel;
 
         //Gets enemy info components
         _enemyName          = transform.FindChild("EnemyInfoContainer/EnemyPortrait/EnemyName").GetComponent<Text>();
@@ -79,11 +80,12 @@ public class BattleGUI : MonoBehaviour {
     void PlayerInfo()
     {
         //maxhealth / 100 = 1 % 
-        _playerName.text                = GameInformation.PlayerName;
-        _playerHealth.text              = GameInformation.PlayerHealth.ToString() + "/" + GameInformation.PlayerMaxHealth.ToString();
-        _playerHealthImage.fillAmount   = GameInformation.PlayerHealth / GameInformation.PlayerMaxHealth;
-        _playerEnergy.text              = GameInformation.PlayerEnergy.ToString() + "/" + GameInformation.PlayerMaxEnergy.ToString();
-        _playerEnergyImage.fillAmount   = GameInformation.PlayerEnergy / GameInformation.PlayerMaxEnergy;
+        //_CharactersName.text = _party.PartyMembers(0).charactersName;
+        _CharactersName.text                = PlayerInformation.CharactersName;
+        _CharactersHealth.text              = PlayerInformation.CharactersHealth.ToString() + "/" + PlayerInformation.CharactersMaxHealth.ToString();
+        //_CharactersHealthImage.fillAmount   = PlayerInformation.CharactersHealth / PlayerInformation.CharactersMaxHealth;
+        _CharactersMana.text              = PlayerInformation.CharactersMana.ToString() + "/" + PlayerInformation.CharactersMaxMana.ToString();
+        //_CharactersManaImage.fillAmount   = PlayerInformation.CharactersMana / PlayerInformation.CharactersMaxMana;
     }
 
     void EnemyInfo()
@@ -97,7 +99,7 @@ public class BattleGUI : MonoBehaviour {
 
     void GetPlayerSkills()
     {    
-        for (int i = 0; i < GameInformation.PlayerClass.PlayersSkills.Count; i++)
+        for (int i = 0; i < PlayerInformation.CharactersClass.CharactersSkills.Count; i++)
         {
             _skillIndex.Add(i); //Adds a int to the list for every skill the player has
         }
@@ -110,9 +112,9 @@ public class BattleGUI : MonoBehaviour {
             }
 
             Button newSkillButton = Instantiate(_skillButton);
-            newSkillButton.name = GameInformation.PlayerClass.PlayersSkills[skill].AbilityName;
+            newSkillButton.name = PlayerInformation.CharactersClass.CharactersSkills[skill].AbilityName;
             Text skillName = newSkillButton.GetComponentInChildren<Text>();
-            skillName.text = GameInformation.PlayerClass.PlayersSkills[skill].AbilityName;
+            skillName.text = PlayerInformation.CharactersClass.CharactersSkills[skill].AbilityName;
             newSkillButton.transform.SetParent(_skillPanel.transform);
             int skillToUse = skill;
             ShowSkillInfo(newSkillButton, skillToUse);
@@ -124,15 +126,14 @@ public class BattleGUI : MonoBehaviour {
     {
         button.onClick.AddListener(() => 
         { 
-            TurnBasedCombatStateMachine.playerUsedAbility = GameInformation.PlayerClass.PlayersSkills[value]; 
-            Debug.Log("clicked"); 
+            TurnBasedCombatStateMachine.playerUsedAbility = PlayerInformation.CharactersClass.CharactersSkills[value];
             TurnBasedCombatStateMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ADDSTATUSEFFECTS; 
         });
     }
 
     void GetPlayerMagic()
     {
-        for (int i = 0; i < GameInformation.PlayerClass.PlayerMagic.Count; i++)
+        for (int i = 0; i < PlayerInformation.CharactersClass.CharactersMagic.Count; i++)
         {
             _magicIndex.Add(i); //Adds a int to the list for every skill the player has
         }
@@ -140,9 +141,9 @@ public class BattleGUI : MonoBehaviour {
         foreach (int magic in _magicIndex)
         {
             Button newMagicButton = Instantiate(_skillButton);
-            newMagicButton.name = GameInformation.PlayerClass.PlayerMagic[magic].AbilityName;
+            newMagicButton.name = PlayerInformation.CharactersClass.CharactersMagic[magic].AbilityName;
             Text skillName = newMagicButton.GetComponentInChildren<Text>();
-            skillName.text = GameInformation.PlayerClass.PlayerMagic[magic].AbilityName;
+            skillName.text = PlayerInformation.CharactersClass.CharactersMagic[magic].AbilityName;
             newMagicButton.transform.SetParent(_skillPanel.transform);
             int magicToUse = magic;
             UseMagic(newMagicButton, magicToUse);
@@ -153,7 +154,7 @@ public class BattleGUI : MonoBehaviour {
     {
         button.onClick.AddListener(() =>
         {
-            TurnBasedCombatStateMachine.playerUsedAbility = GameInformation.PlayerClass.PlayerMagic[value];
+            TurnBasedCombatStateMachine.playerUsedAbility = PlayerInformation.CharactersClass.CharactersMagic[value];
             Debug.Log("clicked");
             TurnBasedCombatStateMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ADDSTATUSEFFECTS;
         });
@@ -161,12 +162,12 @@ public class BattleGUI : MonoBehaviour {
 
     public void BasicAttack()
     {
-        TurnBasedCombatStateMachine.playerUsedAbility = GameInformation.PlayerClass.PlayersSkills[0];
+        TurnBasedCombatStateMachine.playerUsedAbility = PlayerInformation.CharactersClass.CharactersSkills[0];
         TurnBasedCombatStateMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ADDSTATUSEFFECTS;
     }
 
     public void ShowSkillInfo(Button button, int value)
     {
-        _skillTooltip.text = GameInformation.PlayerClass.PlayersSkills[value].AbilityDescription;
+        _skillTooltip.text = PlayerInformation.CharactersClass.CharactersSkills[value].AbilityDescription;
     }
 }

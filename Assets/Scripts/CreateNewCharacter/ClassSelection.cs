@@ -8,21 +8,21 @@ public class ClassSelection : MonoBehaviour {
     [SerializeField]private List<Button>    _classSelectionButtons = new List<Button>();
     [SerializeField]private Text            _classDescription;
     [SerializeField]private Button          _nextButton;
-    private List<BaseCharacterClass>        _playerClass = new List<BaseCharacterClass>();
+    private List<BaseCharacterClass>        _CharactersClass = new List<BaseCharacterClass>();
     private int                             _classSelection;
 
     private Text _className;
 
 	void Start () 
     {
-        _playerClass.Add(new BaseWarriorClass());
-        _playerClass.Add(new BaseBerserkerClass());
-        _playerClass.Add(new BaseRogueClass());
-        _playerClass.Add(new BaseMageClass());
-        _playerClass.Add(new BaseCardMasterClass());
-	    _playerClass.Add(new BaseMimeClass());
-        _playerClass.Add(new BasePaladinClass());
-        _playerClass.Add(new BaseShamanClass());
+        _CharactersClass.Add(new BaseWarriorClass());
+        _CharactersClass.Add(new BaseBerserkerClass());
+        _CharactersClass.Add(new BaseRogueClass());
+        _CharactersClass.Add(new BaseMageClass());
+        _CharactersClass.Add(new BaseCardMasterClass());
+	    _CharactersClass.Add(new BaseMimeClass());
+        _CharactersClass.Add(new BasePaladinClass());
+        _CharactersClass.Add(new BaseShamanClass());
 
         _classDescription = _classDescription.GetComponent<Text>();
         _nextButton.interactable = false;
@@ -34,9 +34,9 @@ public class ClassSelection : MonoBehaviour {
         BaseCharacterClass tempClass;
         for (int i = 0; i < _classSelectionButtons.Count; i++)
         {
-            tempClass = _playerClass[i];
+            tempClass = _CharactersClass[i];
             _className = _classSelectionButtons[i].GetComponentInChildren<Text>();
-            _className.text = tempClass.CharacterClassName;
+            _className.text = tempClass.CharactersClassName;
         }
     }
 
@@ -44,16 +44,16 @@ public class ClassSelection : MonoBehaviour {
     {
         BaseCharacterClass tempClass;
         _classSelection = classSelection;
-        tempClass = _playerClass[_classSelection];
-        _classDescription.text = tempClass.CharacterClassDescription;
+        tempClass = _CharactersClass[_classSelection];
+        _classDescription.text = tempClass.CharactersClassDescription;
         _nextButton.interactable = true;
     }
 
     public void ChooseClass()
     {
         BaseCharacterClass chosenClass;
-        chosenClass = _playerClass[_classSelection];
-        GameInformation.PlayerClass = chosenClass;
-        Debug.Log(GameInformation.PlayerClass.CharacterClassName);
+        chosenClass = _CharactersClass[_classSelection];
+        PlayerInformation.CharactersClass = chosenClass;
+        Debug.Log(PlayerInformation.CharactersClass.CharactersClassName);
     }
 }

@@ -78,9 +78,9 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                 totalTurnCount += 1;
                 playerDidCompleteTurn = false;
                 enemyDidCompleteTurn = false;
-                if (GameInformation.PlayerHealth <= 0)
+                if (PlayerInformation.CharactersHealth <= 0)
                 {
-                    GameInformation.PlayerHealth = 0;
+                    PlayerInformation.CharactersHealth = 0;
                     currentState = BattleStates.LOSE;
                 }else if(EnemyInformation.EnemyHealth <=0 )
                 {
@@ -100,7 +100,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                 {
                     IncreaseExperience.AddExperience();
                     _hasAddedXP = true;
-                    SceneManager.LoadScene(GameInformation.PlayerMapScene);
+                    SceneManager.LoadScene(PlayerInformation.PlayerMapScene);
 
                 }
                 break;

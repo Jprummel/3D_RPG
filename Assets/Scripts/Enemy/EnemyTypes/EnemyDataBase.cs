@@ -9,17 +9,17 @@ public class EnemyDataBase : MonoBehaviour {
 
     public void AddEnemies()
     {
-        if(GameInformation.PlayerLevel<=5){
+        if(PlayerInformation.CharactersLevel<=5){
             
             enemies.Add(new Rat());
             enemies.Add(new Goblin());
             enemies.Add(new GoblinChief());
         }
-        else if (GameInformation.PlayerLevel > 5 && GameInformation.PlayerLevel <= 10)
+        else if (PlayerInformation.CharactersLevel > 5 && PlayerInformation.CharactersLevel <= 10)
         {
             enemies.Add(new Knight());
         }
-        else if (GameInformation.PlayerLevel > 10 && GameInformation.PlayerLevel <= 15)
+        else if (PlayerInformation.CharactersLevel > 10 && PlayerInformation.CharactersLevel <= 15)
         {
 
         }
