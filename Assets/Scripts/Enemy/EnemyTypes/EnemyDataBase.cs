@@ -2,24 +2,25 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class EnemyDataBase : MonoBehaviour {
+public class EnemyDataBase {
 
+    private Party _party = GameObject.Find("PartyManager").GetComponent<Party>();
     public List<BaseEnemy> enemies = new List<BaseEnemy>();
     private int _randomEnemy;
 
     public void AddEnemies()
     {
-        if(PlayerInformation.CharactersLevel<=5){
+        if(_party.characters[0].Level<=5){
             
             enemies.Add(new Rat());
             enemies.Add(new Goblin());
             enemies.Add(new GoblinChief());
         }
-        else if (PlayerInformation.CharactersLevel > 5 && PlayerInformation.CharactersLevel <= 10)
+        else if (_party.characters[0].Level > 5 && _party.characters[0].Level <= 10)
         {
             enemies.Add(new Knight());
         }
-        else if (PlayerInformation.CharactersLevel > 10 && PlayerInformation.CharactersLevel <= 15)
+        else if (_party.characters[0].Level > 10 && _party.characters[0].Level <= 15)
         {
 
         }

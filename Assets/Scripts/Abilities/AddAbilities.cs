@@ -2,66 +2,68 @@
 using System.Collections;
 
 public class AddAbilities : MonoBehaviour {
-
+    
     public void AddAbilitiesOnLevelUp()
     {
-        switch (PlayerInformation.CharactersClass.CharactersClass) 
+        Party _party = GameObject.Find("PartyManager").GetComponent<Party>();
+
+        switch (_party.characters[0].Class.CharactersClass) 
         {
             case BaseCharacterClass.CharactersClasses.WARRIOR:
-                switch (PlayerInformation.CharactersLevel)
+                switch (_party.characters[0].Level)
                 {
                     case 3:
                         break;
                 }
                 break;
             case BaseCharacterClass.CharactersClasses.BERSERKER:
-                switch(PlayerInformation.CharactersLevel)
+                switch(_party.characters[0].Level)
                 {
                     case 2:
-                        PlayerInformation.CharactersClass.CharactersSkills.Add(new Cripple());
+                        _party.characters[0].Class.CharactersSkills.Add(new Cripple());
                         break;
                     case 5:
-                        PlayerInformation.CharactersClass.CharactersSkills.Add(new Rampage());
+                        _party.characters[0].Class.CharactersSkills.Add(new Rampage());
                         break;
                 }
                 break;
             case BaseCharacterClass.CharactersClasses.ROGUE:
-                switch (PlayerInformation.CharactersLevel)
+                switch (_party.characters[0].Level)
                 {
                     case 3:
                         break;
                 }
                 break;
             case BaseCharacterClass.CharactersClasses.MAGE:
-                switch (PlayerInformation.CharactersLevel)
+                switch (_party.characters[0].Level)
                 {
                     case 3:
                         break;
                 }
                 break;
             case BaseCharacterClass.CharactersClasses.CARDMASTER:
-                switch (PlayerInformation.CharactersLevel)
+                switch (_party.characters[0].Level)
                 {
                     case 3:
                         break;
                 }
                 break;
             case BaseCharacterClass.CharactersClasses.MIME:
-                switch (PlayerInformation.CharactersLevel)
+                switch (_party.characters[0].Level)
                 {
                     case 3:
                         break;
                 }
                 break;
             case BaseCharacterClass.CharactersClasses.PALADIN:
-                switch (PlayerInformation.CharactersLevel)
+                switch (_party.characters[0].Level)
                 {
                     case 3:
                         break;
                 }
                 break;
             case BaseCharacterClass.CharactersClasses.SHAMAN:
-                switch (PlayerInformation.CharactersLevel)
+                switch (_party.characters[0].Level)
                 {
                     case 3:
                         break;

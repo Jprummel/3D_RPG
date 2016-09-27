@@ -109,6 +109,12 @@
     <Compile Include="Assets\Scripts\CreateNewCharacter\ClassSelection.cs" />
     <Compile Include="Assets\Scripts\CreateNewCharacter\RaceSelection.cs" />
     <Compile Include="Assets\Scripts\CreateNewCharacter\StatAllocation.cs" />
+    <Compile Include="Assets\Scripts\Data\Dialogue.cs" />
+    <Compile Include="Assets\Scripts\Data\DialogueNode.cs" />
+    <Compile Include="Assets\Scripts\Data\DialogueOption.cs" />
+    <Compile Include="Assets\Scripts\Data\DialogueProgram.cs" />
+    <Compile Include="Assets\Scripts\Data\LoadXMLDialog.cs" />
+    <Compile Include="Assets\Scripts\Data\NPCDialogue.cs" />
     <Compile Include="Assets\Scripts\Data\Tags.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAbilityChoice.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyInformation.cs" />
@@ -149,8 +155,6 @@
     <Compile Include="Assets\Scripts\PlayerMovement\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\SavingAndLoading\SaveLoadGame.cs" />
     <Compile Include="Assets\Scripts\StatAllocationModule\LevelUpStatPointAllocation.cs" />
-    <Compile Include="Assets\Scripts\StatAllocationModule\StatAllocationModule.cs" />
-    <Compile Include="Assets\Scripts\StatAllocationModule\StatAllocationModuleNew.cs" />
     <Compile Include="Assets\Scripts\StatCalculations\StatCalculations.cs" />
     <Compile Include="Assets\Scripts\TestGUI.cs" />
     <Compile Include="Assets\Scripts\TurnBasedCombat\BattleGUI.cs" />
@@ -163,6 +167,8 @@
   <ItemGroup>
     <None Include="Assets\Art\CharacterModels\Mage\HairShader.shader" />
     <None Include="Assets\Art\CharacterModels\Warrior\models\overlord\Materials\clothshader.shader" />
+    <None Include="Assets\Scripts\Data\Dialog.xml" />
+    <None Include="Assets\Scripts\Data\DialogueTest.xml" />
     <None Include="Assets\Scripts\Items\ItemDatabase.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />

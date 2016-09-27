@@ -3,7 +3,7 @@ using System.Collections;
 
 public class StatCalculations
 {
-
+    private Party _party = GameObject.Find("PartyManager").GetComponent<Party>();
     //Player stat modifiers
     private float _playerStrengthModifier   = 0.2f;     //20%
     private float _playerStaminaModifier    = 0.0f;     //0%
@@ -75,7 +75,7 @@ public class StatCalculations
 
     public int CalculateCharactersHealth(int statValue)
     {
-        return statValue * 100 + (PlayerInformation.CharactersLevel * 39) ; //Calculate health based on total Stamina stat times 100
+        return statValue * 100 + (_party.characters[0].Level * 39) ; //Calculate health based on total Stamina stat times 100
     }
 
     public int CalculateEnemyHealth(int statValue)
@@ -95,24 +95,24 @@ public class StatCalculations
 
     public float FindAndCalculatePlayerMainStatModifier()
     {
-        switch (PlayerInformation.CharactersClass.CharactersClass)
+        switch (_party.characters[0].Class.CharactersClass)
         {
             case(BaseCharacterClass.CharactersClasses.WARRIOR):          //WARRIOR
-                return (PlayerInformation.Stamina     * _mainStatModifier) + (PlayerInformation.Strength    * _secondaryStatModifier);
+                return (_party.characters[0].Stamina     * _mainStatModifier) + (_party.characters[0].Strength    * _secondaryStatModifier);
             case (BaseCharacterClass.CharactersClasses.BERSERKER):       //BERSERKER
-                return (PlayerInformation.Strength    * _mainStatModifier) + (PlayerInformation.Spirit      * _secondaryStatModifier);
+                return (_party.characters[0].Strength    * _mainStatModifier) + (_party.characters[0].Spirit      * _secondaryStatModifier);
             case (BaseCharacterClass.CharactersClasses.ROGUE):           //ROGUE
-                return (PlayerInformation.Strength    * _mainStatModifier) + (PlayerInformation.Spirit      * _secondaryStatModifier);
+                return (_party.characters[0].Strength    * _mainStatModifier) + (_party.characters[0].Spirit      * _secondaryStatModifier);
             case (BaseCharacterClass.CharactersClasses.MAGE):            //MAGE
-                return (PlayerInformation.Intellect   * _mainStatModifier) + (PlayerInformation.Spirit      * _secondaryStatModifier);
+                return (_party.characters[0].Intellect   * _mainStatModifier) + (_party.characters[0].Spirit      * _secondaryStatModifier);
             case (BaseCharacterClass.CharactersClasses.CARDMASTER):      //CARD MASTER
-                return (PlayerInformation.Intellect   * _mainStatModifier) + (PlayerInformation.Strength    * _secondaryStatModifier);
+                return (_party.characters[0].Intellect   * _mainStatModifier) + (_party.characters[0].Strength    * _secondaryStatModifier);
             case (BaseCharacterClass.CharactersClasses.MIME):            //MIME
-                return (PlayerInformation.Spirit      * _mainStatModifier) + (PlayerInformation.Intellect   * _secondaryStatModifier);
+                return (_party.characters[0].Spirit      * _mainStatModifier) + (_party.characters[0].Intellect   * _secondaryStatModifier);
             case (BaseCharacterClass.CharactersClasses.PALADIN):         //PALADIN
-                return (PlayerInformation.Stamina     * _mainStatModifier) + (PlayerInformation.Intellect   * _secondaryStatModifier);
+                return (_party.characters[0].Stamina     * _mainStatModifier) + (_party.characters[0].Intellect   * _secondaryStatModifier);
             case (BaseCharacterClass.CharactersClasses.SHAMAN):          //SHAMAN
-                return (PlayerInformation.Spirit      * _mainStatModifier) + (PlayerInformation.Intellect   * _secondaryStatModifier);
+                return (_party.characters[0].Spirit      * _mainStatModifier) + (_party.characters[0].Intellect   * _secondaryStatModifier);
         }
 
        return 1.0f;

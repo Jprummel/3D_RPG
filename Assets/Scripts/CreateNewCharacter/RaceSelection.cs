@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public class RaceSelection : MonoBehaviour {
 
+    private Party _party;
     [SerializeField]private List<Button> _genderButtons = new List<Button>();
     [SerializeField]private List<Button> _raceSelectionButtons = new List<Button>();
     [SerializeField]private Text _raceDescription;
@@ -17,6 +18,7 @@ public class RaceSelection : MonoBehaviour {
     private Text _raceName;
     
 	void Start () {
+        _party = GameObject.Find("PartyManager").GetComponent<Party>();
         _CharactersRace.Add(new BaseBarbarianRace());
         _CharactersRace.Add(new BaseDwarfRace());
         _CharactersRace.Add(new BaseElfRace());
@@ -65,16 +67,16 @@ public class RaceSelection : MonoBehaviour {
     {
         BaseCharacterRace chosenRace;
         chosenRace = _CharactersRace[_raceSelection];
-        PlayerInformation.CharactersRace = chosenRace;
+        _party.characters[0].Race = chosenRace;
 
         if (_isMale)
         {
-            PlayerInformation.IsMale = true;
+            _party.characters[0].IsMale = true;
         }
         else
         {
-            PlayerInformation.IsMale = false;
+            _party.characters[0].IsMale = false;
         }
-        Debug.Log(PlayerInformation.CharactersRace.RaceName);
+        Debug.Log(_party.characters[0].Race.RaceName);
     }
 }

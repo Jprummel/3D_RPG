@@ -1,26 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public static class IncreaseExperience {
+public class IncreaseExperience {
 
+    private Party _party = GameObject.Find("PartyManager").GetComponent<Party>();
     private static int      _xpToGive;
     private static LevelUp  _levelUp = new LevelUp();
 
-    public static void AddExperience()
+    public void AddExperience()
     {
         _xpToGive = EnemyInformation.EnemyLevel * 100;
-        PlayerInformation.CurrentXP += _xpToGive;
+        _party.characters[0].CurrentXP += _xpToGive;
         CheckForLevelUp();
         Debug.Log(_xpToGive);
     }
 
-    private static void CheckForLevelUp()
+    private void CheckForLevelUp()
     {
-        if (PlayerInformation.CurrentXP >= PlayerInformation.RequiredXP)
+        if (_party.characters[0].CurrentXP >= _party.characters[0].RequiredXP)
         {
             //Levels up character
             _levelUp.LevelUpCharacter();
-            Debug.Log("Level Up! " + PlayerInformation.CharactersName + " is now level " + PlayerInformation.CharactersLevel);
+            Debug.Log("Level Up! " + _party.characters[0].Name + " is now level " + _party.characters[0].Level);
             // Debug.Log(PlayerInformation.CharactersLevel);
         }
     }

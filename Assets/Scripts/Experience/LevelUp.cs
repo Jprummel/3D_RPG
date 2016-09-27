@@ -3,6 +3,7 @@ using System.Collections;
 
 public class LevelUp {
 
+    private Party _party = GameObject.Find("PartyManager").GetComponent<Party>();
     private int _maxCharactersLevel = 50;
     private LevelUpStatPointAllocation _statPoints;
     private AddAbilities _addAbilities = new AddAbilities();
@@ -11,25 +12,25 @@ public class LevelUp {
     {
         
         //Check to see if current xp is greater then required
-        if (PlayerInformation.CurrentXP > PlayerInformation.RequiredXP)
+        if (_party.characters[0].CurrentXP > _party.characters[0].RequiredXP)
         {
-            PlayerInformation.CurrentXP -= PlayerInformation.RequiredXP;
+            _party.characters[0].CurrentXP -= _party.characters[0].RequiredXP;
         }
         else
         {
-            PlayerInformation.CurrentXP = 0;
+            _party.characters[0].CurrentXP = 0;
         }
 
-        if (PlayerInformation.CharactersLevel < _maxCharactersLevel)
+        if (_party.characters[0].Level < _maxCharactersLevel)
         {
-            PlayerInformation.CharactersLevel += 1;
+            _party.characters[0].Level += 1;
         }
         else
         {
-            PlayerInformation.CharactersLevel = _maxCharactersLevel;
+            _party.characters[0].Level = _maxCharactersLevel;
         }
         //Give player stat points
-        PlayerInformation.StatPoints += 3;
+        _party.characters[0].StatPoints += 3;
         //randomly give items
         //give them a skill/move
         _addAbilities.AddAbilitiesOnLevelUp();
@@ -41,14 +42,14 @@ public class LevelUp {
 
     private void DetermineRequiredXP()
     {
-        int temp = (PlayerInformation.CharactersLevel * 1000) + 250;
-        PlayerInformation.RequiredXP = temp;
+        int temp = (_party.characters[0].Level * 1000) + 250;
+        _party.characters[0].RequiredXP = temp;
     }
 
     private void DetermineMoneyToGive()
     {
         //give a certain amount of money
-        if (PlayerInformation.CharactersLevel <= 10)
+        if (_party.characters[0].Level <= 10)
         {
             PlayerInformation.Gold += 500;
         }

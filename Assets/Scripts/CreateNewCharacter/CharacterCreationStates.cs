@@ -35,8 +35,14 @@ public class CharacterCreationStates : MonoBehaviour {
 
     private CreationStates currentState;
 
+    void Awake()
+    {
+        _party = GameObject.Find("PartyManager").GetComponent<Party>();
+    }
+
 	void Start () {
         //Gets instance of the scripts
+        
         _raceSelection          = _raceSelectionPanel.GetComponent<RaceSelection>();
         _classSelection         = _classSelectionPanel.GetComponent<ClassSelection>();
         _statAllocation         = _statAllocationPanel.GetComponent<StatAllocation>();
@@ -95,10 +101,10 @@ public class CharacterCreationStates : MonoBehaviour {
                 break;
             case (CreationStates.FINALSETUP):
                 _characterFinalisation.Finalisation();
-                SaveLoadGame saveCharacter = new SaveLoadGame();
-                //_party.partyMembers.Add(new PlayerInformation());
-                //Party.partyMembers.Add(new PlayerInformation());
-                saveCharacter.SaveGame();
+                //SaveLoadGame saveCharacter = new SaveLoadGame();
+                //_party.partyMembers.Add(new _party.characters[0]());
+                //Party.partyMembers.Add(new _party.characters[0]());
+                //saveCharacter.SaveGame();
                 SceneManager.LoadScene("MovementTest");
                 break;
             case(CreationStates.SAVECHARACTER):
@@ -114,7 +120,7 @@ public class CharacterCreationStates : MonoBehaviour {
                 Debug.Log(currentState);
                 break;
             case (CreationStates.CLASSSELECTION):
-                PlayerInformation.CharactersRace = null;  //Player can re-select his race
+                _party.characters[0].Race = null;  //Player can re-select his race
                 _classSelectionPanel.SetActive(false);
                 _raceSelectionPanel.SetActive(true);
                 _backButton.interactable = false;
@@ -123,7 +129,7 @@ public class CharacterCreationStates : MonoBehaviour {
                 break;
             case (CreationStates.STATALLOCATION):
                 _statAllocation.ResetToBaseStats(); //Resets the stats back to the basestats to prevent cheating
-                PlayerInformation.CharactersClass = null; //Player can re-select his class
+                _party.characters[0].Class = null; //Player can re-select his class
                 _statAllocationPanel.SetActive(false);
                 _classSelectionPanel.SetActive(true);
                 currentState = CreationStates.CLASSSELECTION;

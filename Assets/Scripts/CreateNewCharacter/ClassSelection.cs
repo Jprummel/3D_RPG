@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class ClassSelection : MonoBehaviour {
 
+    private Party _party;
     [SerializeField]private List<Button>    _classSelectionButtons = new List<Button>();
     [SerializeField]private Text            _classDescription;
     [SerializeField]private Button          _nextButton;
@@ -15,6 +16,7 @@ public class ClassSelection : MonoBehaviour {
 
 	void Start () 
     {
+        _party = GameObject.Find("PartyManager").GetComponent<Party>();
         _CharactersClass.Add(new BaseWarriorClass());
         _CharactersClass.Add(new BaseBerserkerClass());
         _CharactersClass.Add(new BaseRogueClass());
@@ -53,7 +55,7 @@ public class ClassSelection : MonoBehaviour {
     {
         BaseCharacterClass chosenClass;
         chosenClass = _CharactersClass[_classSelection];
-        PlayerInformation.CharactersClass = chosenClass;
-        Debug.Log(PlayerInformation.CharactersClass.CharactersClassName);
+        _party.characters[0].Class = chosenClass;
+        Debug.Log(_party.characters[0].Class.CharactersClassName);
     }
 }

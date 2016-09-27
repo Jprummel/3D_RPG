@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class TurnBasedCombatStateMachine : MonoBehaviour {
 
+    private Party _party;
+    private IncreaseExperience _incrXP = new IncreaseExperience();
     private BattleStateStart            _battleStateStartScript             = new BattleStateStart();
     private BattleCalculations          _battleCalcScript                   = new BattleCalculations();
     private BattleStateAddStatusEffects _battleStateAddStatusEffectScript   = new BattleStateAddStatusEffects();
@@ -31,7 +33,13 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 
     public static BattleStates currentState;
 
+    void Awake ()
+    {
+        
+    }
+
 	void Start () {
+        _party = GameObject.Find("PartyManager").GetComponent<Party>();
         _hasAddedXP = false;
         totalTurnCount = 1;
         currentState = BattleStates.START;        
@@ -39,7 +47,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
+        //_party = GameObject.Find("PartyManager").GetComponent<Party>();
         //Debug.Log(currentState);
 
         switch (currentState)
@@ -78,9 +86,9 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                 totalTurnCount += 1;
                 playerDidCompleteTurn = false;
                 enemyDidCompleteTurn = false;
-                if (PlayerInformation.CharactersHealth <= 0)
+                if (_party.characters[0].Health <= 0)
                 {
-                    PlayerInformation.CharactersHealth = 0;
+                    _party.characters[0].Health = 0;
                     currentState = BattleStates.LOSE;
                 }else if(EnemyInformation.EnemyHealth <=0 )
                 {
@@ -98,7 +106,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
             case (BattleStates.WIN):
                 if (!_hasAddedXP)
                 {
-                    IncreaseExperience.AddExperience();
+                    _incrXP.AddExperience();
                     _hasAddedXP = true;
                     SceneManager.LoadScene(PlayerInformation.PlayerMapScene);
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class BattleStateStart{
 
+    private Party _party = GameObject.Find("PartyManager").GetComponent<Party>();
     private EnemyDataBase _enemies;
     private BaseEnemy _newEnemy;
     private StatCalculations        _statCalculationsScript     = new StatCalculations();
@@ -65,17 +66,17 @@ public class BattleStateStart{
 
     public void ChooseWhoGoesFirst()
     {
-        if (PlayerInformation.Luck >= EnemyInformation.Luck)
+        if (_party.characters[0].Luck >= EnemyInformation.Luck)
         {
             //Player goes first
             TurnBasedCombatStateMachine.currentState = TurnBasedCombatStateMachine.BattleStates.PLAYERCHOICE;
         }
-        if (PlayerInformation.Luck < EnemyInformation.Luck)
+        if (_party.characters[0].Luck < EnemyInformation.Luck)
         {
             //Enemy goes first
             TurnBasedCombatStateMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE;            
         }
-        if (PlayerInformation.Luck == EnemyInformation.Luck)
+        if (_party.characters[0].Luck == EnemyInformation.Luck)
         {
             float randomTurnChecker = Random.Range(0, 1);
             if (randomTurnChecker >= 0.5f)
@@ -93,13 +94,13 @@ public class BattleStateStart{
 
     private void DeterminePlayerVitals()
     {
-        _playerStamina                      = _statCalculationsScript.CalculateStat(PlayerInformation.Stamina , StatCalculations.StatType.STAMINA , PlayerInformation.CharactersLevel);
-        _playerSpirit                       = _statCalculationsScript.CalculateStat(PlayerInformation.Spirit  , StatCalculations.StatType.SPIRIT  , PlayerInformation.CharactersLevel);
-        _CharactersHealth                       = _statCalculationsScript.CalculateCharactersHealth(_playerStamina);
-        _CharactersMana                       = _statCalculationsScript.CalculateCharactersMana(_playerSpirit);
-        PlayerInformation.CharactersMaxHealth     = _CharactersHealth;
-        PlayerInformation.CharactersHealth        = PlayerInformation.CharactersMaxHealth;
-        PlayerInformation.CharactersMaxMana     = _CharactersMana;
-        PlayerInformation.CharactersMana        = PlayerInformation.CharactersMaxMana;
+        _playerStamina                  = _statCalculationsScript.CalculateStat(_party.characters[0].Stamina , StatCalculations.StatType.STAMINA , _party.characters[0].Level);
+        _playerSpirit                   = _statCalculationsScript.CalculateStat(_party.characters[0].Spirit  , StatCalculations.StatType.SPIRIT  , _party.characters[0].Level);
+        _CharactersHealth               = _statCalculationsScript.CalculateCharactersHealth(_playerStamina);
+        _CharactersMana                 = _statCalculationsScript.CalculateCharactersMana(_playerSpirit);
+        _party.characters[0].MaxHealth  = _CharactersHealth;
+        _party.characters[0].Health     = _party.characters[0].MaxHealth;
+        _party.characters[0].MaxMana    = _CharactersMana;
+        _party.characters[0].Mana       = _party.characters[0].MaxMana;
     }
 }

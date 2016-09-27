@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BattleCalculations {
 
+    private Party _party = new Party();
     private StatCalculations    _statCalcScript = new StatCalculations();
     private BaseAbility         _playerUsedAbility;
     private BaseAbility         _enemyUsedAbility;
@@ -22,7 +23,7 @@ public class BattleCalculations {
 
         //Calculation for the players damage to the enemy
         _playerUsedAbility      = usedAbility;  //Gets the chosen ability of the player
-        if (PlayerInformation.CharactersMana >= _playerUsedAbility.AbilityCost)
+        if (_party.characters[0].Mana >= _playerUsedAbility.AbilityCost)
         {
             _totalUsedAbilityDamage = (int)CalculatePlayerAbilityDamage();
             _totalCritStrikeDamage = CalculateCriticalHitDamage();
@@ -30,11 +31,11 @@ public class BattleCalculations {
             _totalPlayerDamage = _totalUsedAbilityDamage + _totalCritStrikeDamage + _statusEffectDamage;
             _totalPlayerDamage += (int)(Random.Range(-(_totalPlayerDamage * _damageVariatyModifier), _totalPlayerDamage * _damageVariatyModifier)); // Creates variety in damage by a max of -2.5% or a max of +2.5%
             Debug.Log(_totalPlayerDamage + "Damage done by player");
-            PlayerInformation.CharactersMana -= _playerUsedAbility.AbilityCost;
+            _party.characters[0].Mana -= _playerUsedAbility.AbilityCost;
             if (CheckIfAbilityHits())
             {
                 EnemyInformation.EnemyHealth -= _totalPlayerDamage;
-                PlayerInformation.CharactersHealth -= CalculateDamageToSelf();
+                _party.characters[0].Health -= CalculateDamageToSelf();
             }
             TurnBasedCombatStateMachine.playerDidCompleteTurn = true;   //Tells the state machine that the player completed its turn
         }
@@ -54,7 +55,7 @@ public class BattleCalculations {
             Debug.Log(_totalEnemyDamage + "Damage done by enemy");
             Debug.Log(_enemyUsedAbility + "Enemyskill");
             EnemyInformation.EnemyEnergy -= _enemyUsedAbility.AbilityCost;
-            PlayerInformation.CharactersHealth -= _totalEnemyDamage;
+            _party.characters[0].Health -= _totalEnemyDamage;
             EnemyInformation.EnemyHealth -= CalculateDamageToSelf();
             TurnBasedCombatStateMachine.enemyDidCompleteTurn = true;    //Tells the state machine that the enemy completed its turn
         }
@@ -72,11 +73,11 @@ public class BattleCalculations {
         switch (_playerUsedAbility.AbilityType)
         {
             case BaseAbility.AbilityTypes.PHYSICAL:
-               return _totalAbilityPowerDamage = (PlayerInformation.Strength * _playerUsedAbility.AbilityDamageStatModifier) + _playerUsedAbility.AbilityBaseDamage;               
+               return _totalAbilityPowerDamage = (_party.characters[0].Strength * _playerUsedAbility.AbilityDamageStatModifier) + _playerUsedAbility.AbilityBaseDamage;               
             case BaseAbility.AbilityTypes.MAGICAL:
-                return _totalAbilityPowerDamage = (PlayerInformation.Intellect * _playerUsedAbility.AbilityDamageStatModifier) + _playerUsedAbility.AbilityBaseDamage;                
+                return _totalAbilityPowerDamage = (_party.characters[0].Intellect * _playerUsedAbility.AbilityDamageStatModifier) + _playerUsedAbility.AbilityBaseDamage;                
             case BaseAbility.AbilityTypes.HYBRID:
-               return _totalAbilityPowerDamage = (PlayerInformation.Strength + PlayerInformation.Intellect / 1.5f * _playerUsedAbility.AbilityDamageStatModifier) + _playerUsedAbility.AbilityBaseDamage;
+               return _totalAbilityPowerDamage = (_party.characters[0].Strength + _party.characters[0].Intellect / 1.5f * _playerUsedAbility.AbilityDamageStatModifier) + _playerUsedAbility.AbilityBaseDamage;
         }
         return _totalAbilityPowerDamage;
     }
@@ -98,7 +99,7 @@ public class BattleCalculations {
     //STATUS EFFECTS
     private int CalculateStatusEffectDamage()
     {
-        return _statusEffectDamage = TurnBasedCombatStateMachine._statusEffectBaseDamage * PlayerInformation.CharactersLevel;
+        return _statusEffectDamage = TurnBasedCombatStateMachine._statusEffectBaseDamage * _party.characters[0].Level;
     }
     //CRITICAL HITS
     private int CalculateCriticalHitDamage()

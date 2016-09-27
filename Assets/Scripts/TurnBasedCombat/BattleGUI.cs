@@ -40,18 +40,19 @@ public class BattleGUI : MonoBehaviour {
 
     void Start()
     {
+        _party = GameObject.Find("PartyManager").GetComponent<Party>();
         GetPlayerSkills();
         
         
        
         //Gets player info components
         _CharactersName         = transform.FindChild("BattlePanel/PartyPanel/PartyMember1/PartyMember1Name").GetComponent<Text>();
-        _CharactersName.text    = PlayerInformation.CharactersName;
+        _CharactersName.text    = _party.characters[0].Name;
         _CharactersHealth       = transform.FindChild("BattlePanel/PartyPanel/PartyMember1/PartyMember1Health").GetComponent<Text>();
         _CharactersMana         = transform.FindChild("BattlePanel/PartyPanel/PartyMember1/PartyMember1Mana").GetComponent<Text>();
         //_CharactersHealthImage  = transform.FindChild("PlayerInfoContainer/CharactersHealthBar").GetComponent<Image>();
         //_CharactersManaImage  = transform.FindChild("PlayerInfoContainer/CharactersManaBar").GetComponent<Image>();
-        _CharactersLevel        = PlayerInformation.CharactersLevel;
+        _CharactersLevel        = _party.characters[0].Level;
 
         //Gets enemy info components
         _enemyName          = transform.FindChild("EnemyInfoContainer/EnemyPortrait/EnemyName").GetComponent<Text>();
@@ -81,11 +82,11 @@ public class BattleGUI : MonoBehaviour {
     {
         //maxhealth / 100 = 1 % 
         //_CharactersName.text = _party.PartyMembers(0).charactersName;
-        _CharactersName.text                = PlayerInformation.CharactersName;
-        _CharactersHealth.text              = PlayerInformation.CharactersHealth.ToString() + "/" + PlayerInformation.CharactersMaxHealth.ToString();
-        //_CharactersHealthImage.fillAmount   = PlayerInformation.CharactersHealth / PlayerInformation.CharactersMaxHealth;
-        _CharactersMana.text              = PlayerInformation.CharactersMana.ToString() + "/" + PlayerInformation.CharactersMaxMana.ToString();
-        //_CharactersManaImage.fillAmount   = PlayerInformation.CharactersMana / PlayerInformation.CharactersMaxMana;
+        _CharactersName.text                = _party.characters[0].Name;
+        _CharactersHealth.text              = _party.characters[0].Health.ToString() + "/" + _party.characters[0].MaxHealth.ToString();
+        //_CharactersHealthImage.fillAmount   = _party.characters[0].CharactersHealth / _party.characters[0].CharactersMaxHealth;
+        _CharactersMana.text              = _party.characters[0].Mana.ToString() + "/" + _party.characters[0].MaxMana.ToString();
+        //_CharactersManaImage.fillAmount   = _party.characters[0].CharactersMana / _party.characters[0].CharactersMaxMana;
     }
 
     void EnemyInfo()
@@ -99,7 +100,7 @@ public class BattleGUI : MonoBehaviour {
 
     void GetPlayerSkills()
     {    
-        for (int i = 0; i < PlayerInformation.CharactersClass.CharactersSkills.Count; i++)
+        for (int i = 0; i < _party.characters[0].Class.CharactersSkills.Count; i++)
         {
             _skillIndex.Add(i); //Adds a int to the list for every skill the player has
         }
@@ -112,9 +113,9 @@ public class BattleGUI : MonoBehaviour {
             }
 
             Button newSkillButton = Instantiate(_skillButton);
-            newSkillButton.name = PlayerInformation.CharactersClass.CharactersSkills[skill].AbilityName;
+            newSkillButton.name = _party.characters[0].Class.CharactersSkills[skill].AbilityName;
             Text skillName = newSkillButton.GetComponentInChildren<Text>();
-            skillName.text = PlayerInformation.CharactersClass.CharactersSkills[skill].AbilityName;
+            skillName.text = _party.characters[0].Class.CharactersSkills[skill].AbilityName;
             newSkillButton.transform.SetParent(_skillPanel.transform);
             int skillToUse = skill;
             ShowSkillInfo(newSkillButton, skillToUse);
@@ -126,14 +127,14 @@ public class BattleGUI : MonoBehaviour {
     {
         button.onClick.AddListener(() => 
         { 
-            TurnBasedCombatStateMachine.playerUsedAbility = PlayerInformation.CharactersClass.CharactersSkills[value];
+            TurnBasedCombatStateMachine.playerUsedAbility = _party.characters[0].Class.CharactersSkills[value];
             TurnBasedCombatStateMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ADDSTATUSEFFECTS; 
         });
     }
 
     void GetPlayerMagic()
     {
-        for (int i = 0; i < PlayerInformation.CharactersClass.CharactersMagic.Count; i++)
+        for (int i = 0; i < _party.characters[0].Class.CharactersMagic.Count; i++)
         {
             _magicIndex.Add(i); //Adds a int to the list for every skill the player has
         }
@@ -141,9 +142,9 @@ public class BattleGUI : MonoBehaviour {
         foreach (int magic in _magicIndex)
         {
             Button newMagicButton = Instantiate(_skillButton);
-            newMagicButton.name = PlayerInformation.CharactersClass.CharactersMagic[magic].AbilityName;
+            newMagicButton.name = _party.characters[0].Class.CharactersMagic[magic].AbilityName;
             Text skillName = newMagicButton.GetComponentInChildren<Text>();
-            skillName.text = PlayerInformation.CharactersClass.CharactersMagic[magic].AbilityName;
+            skillName.text = _party.characters[0].Class.CharactersMagic[magic].AbilityName;
             newMagicButton.transform.SetParent(_skillPanel.transform);
             int magicToUse = magic;
             UseMagic(newMagicButton, magicToUse);
@@ -154,7 +155,7 @@ public class BattleGUI : MonoBehaviour {
     {
         button.onClick.AddListener(() =>
         {
-            TurnBasedCombatStateMachine.playerUsedAbility = PlayerInformation.CharactersClass.CharactersMagic[value];
+            TurnBasedCombatStateMachine.playerUsedAbility = _party.characters[0].Class.CharactersMagic[value];
             Debug.Log("clicked");
             TurnBasedCombatStateMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ADDSTATUSEFFECTS;
         });
@@ -162,12 +163,12 @@ public class BattleGUI : MonoBehaviour {
 
     public void BasicAttack()
     {
-        TurnBasedCombatStateMachine.playerUsedAbility = PlayerInformation.CharactersClass.CharactersSkills[0];
+        TurnBasedCombatStateMachine.playerUsedAbility = _party.characters[0].Class.CharactersSkills[0];
         TurnBasedCombatStateMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ADDSTATUSEFFECTS;
     }
 
     public void ShowSkillInfo(Button button, int value)
     {
-        _skillTooltip.text = PlayerInformation.CharactersClass.CharactersSkills[value].AbilityDescription;
+        _skillTooltip.text = _party.characters[0].Class.CharactersSkills[value].AbilityDescription;
     }
 }

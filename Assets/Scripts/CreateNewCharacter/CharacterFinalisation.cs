@@ -6,6 +6,8 @@ using System.Collections.Generic;
 
 public class CharacterFinalisation : MonoBehaviour {
 
+    private Party _party;
+    private SaveLoadGame _save;
     [SerializeField]private List<InputField>    _inputFields = new List<InputField>();
     [SerializeField]private Button              _createButton;
     private string  _firstName;
@@ -13,6 +15,8 @@ public class CharacterFinalisation : MonoBehaviour {
     private string  _characterBio;
 
 	void Start () {
+        _save = GetComponent<SaveLoadGame>();
+        _party = GameObject.Find("PartyManager").GetComponent<Party>();
         _createButton.interactable = false;
 	}
 
@@ -29,11 +33,12 @@ public class CharacterFinalisation : MonoBehaviour {
 
     public void Finalisation()
     {
-        PlayerInformation.CharactersName = _firstName + " " + _lastName; // Players full name
+        _party.characters[0].Name = _firstName + " " + _lastName; // Players full name
 
-        PlayerInformation.CharactersLevel = 1;
+        _party.characters[0].Level = 1;
         PlayerInformation.Gold = 500;
-        PlayerInformation.RequiredXP = 500;
-        PlayerInformation.CharactersClass.CharactersSkills.Add(new AttackAbility());
+        _party.characters[0].RequiredXP = 500;
+        _party.characters[0].Class.CharactersSkills.Add(new AttackAbility());
+        _save.SaveGame();
     }
 }

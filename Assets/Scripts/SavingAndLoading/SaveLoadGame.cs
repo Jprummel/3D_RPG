@@ -7,36 +7,42 @@ using UnityEngine.SceneManagement;
 
 public class SaveLoadGame : MonoBehaviour
 {
-    
+    private Party _party;
+
+    void Awake()
+    {
+        _party = GameObject.Find("PartyManager").GetComponent<Party>();
+    }
+
     public void SaveGame()
     {
         BinaryFormatter bf  = new BinaryFormatter();
         FileStream file     = File.Create(Application.persistentDataPath + "/SaveDataSlot.dat");
 
         SaveData saveData           = new SaveData();
-        //saveData.Party            = Party.partyMembers;
-        saveData.isMale             = PlayerInformation.IsMale;
-        saveData.charactersName     = PlayerInformation.CharactersName;
-        saveData.charactersRace     = PlayerInformation.CharactersRace;
-        saveData.charactersClass    = PlayerInformation.CharactersClass;
-        saveData.charactersLevel    = PlayerInformation.CharactersLevel;
-        saveData.charactersSkills   = PlayerInformation.CharactersSkills;
-        saveData.charactersMagic    = PlayerInformation.CharactersMagic;
-        saveData.strength           = PlayerInformation.Strength;
-        saveData.stamina            = PlayerInformation.Stamina;
-        saveData.spirit             = PlayerInformation.Spirit;
-        saveData.intellect          = PlayerInformation.Intellect;
-        saveData.overpower          = PlayerInformation.Overpower;
-        saveData.luck               = PlayerInformation.Luck;
-        saveData.armor              = PlayerInformation.Armor;
-        saveData.mastery            = PlayerInformation.Mastery;
-        saveData.charisma           = PlayerInformation.Charisma;
-        saveData.currentXP          = PlayerInformation.CurrentXP;
-        saveData.requiredXP         = PlayerInformation.RequiredXP;
-        saveData.statPoints         = PlayerInformation.StatPoints;
+        //saveData.Party              = _party.characters;
+        saveData.isMale             = _party.characters[0].IsMale;
+        saveData.charactersName     = _party.characters[0].Name;
+        saveData.charactersRace     = _party.characters[0].Race;
+        saveData.charactersClass    = _party.characters[0].Class;
+        saveData.charactersLevel    = _party.characters[0].Level;
+        saveData.charactersSkills   = _party.characters[0].Skills;
+        saveData.charactersMagic    = _party.characters[0].Magic;
+        saveData.strength           = _party.characters[0].Strength;
+        saveData.stamina            = _party.characters[0].Stamina;
+        saveData.spirit             = _party.characters[0].Spirit;
+        saveData.intellect          = _party.characters[0].Intellect;
+        saveData.overpower          = _party.characters[0].Overpower;
+        saveData.luck               = _party.characters[0].Luck;
+        saveData.armor              = _party.characters[0].Armor;
+        saveData.mastery            = _party.characters[0].Mastery;
+        saveData.charisma           = _party.characters[0].Charisma;
+        saveData.currentXP          = _party.characters[0].CurrentXP;
+        saveData.requiredXP         = _party.characters[0].RequiredXP;
+        saveData.statPoints         = _party.characters[0].StatPoints;
         saveData.gold               = PlayerInformation.Gold;
         saveData.playerMapScene     = PlayerInformation.PlayerMapScene;
-        //saveData.playerMapPos     = PlayerInformation.PlayerMapPos;
+        //saveData.playerMapPos     = _party.characters[0].PlayerMapPos;
         bf.Serialize(file, saveData);
         file.Close();
 
@@ -52,33 +58,33 @@ public class SaveLoadGame : MonoBehaviour
 
             SaveData saveData               = (SaveData)bf.Deserialize(file);
             //Party.partyMembers = saveData.Party;
-            PlayerInformation.IsMale            = saveData.isMale;
-            PlayerInformation.CharactersName    = saveData.charactersName;
-            PlayerInformation.CharactersRace    = saveData.charactersRace;
-            PlayerInformation.CharactersClass   = saveData.charactersClass;
-            PlayerInformation.CharactersLevel   = saveData.charactersLevel;
-            PlayerInformation.CharactersSkills  = saveData.charactersSkills;
-            PlayerInformation.CharactersMagic   = saveData.charactersMagic;
-            PlayerInformation.Strength          = saveData.strength;
-            PlayerInformation.Stamina           = saveData.stamina;
-            PlayerInformation.Spirit            = saveData.spirit;
-            PlayerInformation.Intellect         = saveData.intellect;
-            PlayerInformation.Overpower         = saveData.overpower;
-            PlayerInformation.Luck              = saveData.luck;
-            PlayerInformation.Armor             = saveData.armor;
-            PlayerInformation.Mastery           = saveData.mastery;
-            PlayerInformation.Charisma          = saveData.charisma;
-            PlayerInformation.CurrentXP         = saveData.currentXP;
-            PlayerInformation.RequiredXP        = saveData.requiredXP;
-            PlayerInformation.StatPoints        = saveData.statPoints;
+            _party.characters[0].IsMale            = saveData.isMale;
+            _party.characters[0].Name    = saveData.charactersName;
+            _party.characters[0].Race    = saveData.charactersRace;
+            _party.characters[0].Class   = saveData.charactersClass;
+            _party.characters[0].Level   = saveData.charactersLevel;
+            _party.characters[0].Skills  = saveData.charactersSkills;
+            _party.characters[0].Magic   = saveData.charactersMagic;
+            _party.characters[0].Strength          = saveData.strength;
+            _party.characters[0].Stamina           = saveData.stamina;
+            _party.characters[0].Spirit            = saveData.spirit;
+            _party.characters[0].Intellect         = saveData.intellect;
+            _party.characters[0].Overpower         = saveData.overpower;
+            _party.characters[0].Luck              = saveData.luck;
+            _party.characters[0].Armor             = saveData.armor;
+            _party.characters[0].Mastery           = saveData.mastery;
+            _party.characters[0].Charisma          = saveData.charisma;
+            _party.characters[0].CurrentXP         = saveData.currentXP;
+            _party.characters[0].RequiredXP        = saveData.requiredXP;
+            _party.characters[0].StatPoints        = saveData.statPoints;
             PlayerInformation.Gold              = saveData.gold;
             PlayerInformation.PlayerMapScene    = saveData.playerMapScene;
-            //PlayerInformation.PlayerMapPos    = saveData.playerMapPos;
+            //_party.characters[0].PlayerMapPos    = saveData.playerMapPos;
             file.Close();            
         }
 
-        Debug.Log("Current XP "                         + PlayerInformation.CurrentXP);
-        Debug.Log("Required XP "                        + PlayerInformation.RequiredXP);
+        Debug.Log("Current XP "                         + _party.characters[0].CurrentXP);
+        Debug.Log("Required XP "                        + _party.characters[0].RequiredXP);
         Debug.Log("Gold "                               + PlayerInformation.Gold);
         SceneManager.LoadScene("MovementTest");
     }

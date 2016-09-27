@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class StatAllocation : MonoBehaviour {
 
+    private Party _party;
     [SerializeField]private List<GameObject> _addStatButtons = new List<GameObject>();
     [SerializeField]private List<GameObject> _removeStatButtons = new List<GameObject>();
     [SerializeField]private Text _availablePointsText;
@@ -15,7 +16,11 @@ public class StatAllocation : MonoBehaviour {
     private int[]   _baseStatPoints = new int[8];       //Starting stat values for the chosen class
     private int     _usedPoints;
     private int     _availablePoints;
-    
+
+    void Awake()
+    {
+        _party = GameObject.Find("PartyManager").GetComponent<Party>();
+    }
 
     void Start()
     {
@@ -83,28 +88,28 @@ public class StatAllocation : MonoBehaviour {
         switch (statIndex)
         {
             case 0:
-                PlayerInformation.CharactersClass.Strength += 1;
+                _party.characters[0].Class.Strength += 1;
                 break;
             case 1:
-                PlayerInformation.CharactersClass.Stamina += 1;
+                _party.characters[0].Class.Stamina += 1;
                 break;
             case 2:
-                PlayerInformation.CharactersClass.Spirit += 1;
+                _party.characters[0].Class.Spirit += 1;
                 break;
             case 3:
-                PlayerInformation.CharactersClass.Intellect += 1;
+                _party.characters[0].Class.Intellect += 1;
                 break;
             case 4:
-                PlayerInformation.CharactersClass.Overpower += 1;
+                _party.characters[0].Class.Overpower += 1;
                 break;
             case 5:
-                PlayerInformation.CharactersClass.Luck += 1;
+                _party.characters[0].Class.Luck += 1;
                 break;
             case 6:
-                PlayerInformation.CharactersClass.Mastery += 1;
+                _party.characters[0].Class.Mastery += 1;
                 break;
             case 7:
-                PlayerInformation.CharactersClass.Charisma += 1;
+                _party.characters[0].Class.Charisma += 1;
                 break;
         }
         _usedPoints += 1;
@@ -116,28 +121,28 @@ public class StatAllocation : MonoBehaviour {
         switch (statIndex)
         {
             case 0:
-                PlayerInformation.CharactersClass.Strength -= 1;
+                _party.characters[0].Class.Strength -= 1;
                 break;
             case 1:
-                PlayerInformation.CharactersClass.Stamina -= 1;
+                _party.characters[0].Class.Stamina -= 1;
                 break;
             case 2:
-                PlayerInformation.CharactersClass.Spirit -= 1;
+                _party.characters[0].Class.Spirit -= 1;
                 break;
             case 3:
-                PlayerInformation.CharactersClass.Intellect -= 1;
+                _party.characters[0].Class.Intellect -= 1;
                 break;
             case 4:
-                PlayerInformation.CharactersClass.Overpower -= 1;
+                _party.characters[0].Class.Overpower -= 1;
                 break;
             case 5:
-                PlayerInformation.CharactersClass.Luck -= 1;
+                _party.characters[0].Class.Luck -= 1;
                 break;
             case 6:
-                PlayerInformation.CharactersClass.Mastery -= 1;
+                _party.characters[0].Class.Mastery -= 1;
                 break;
             case 7:
-                PlayerInformation.CharactersClass.Charisma -= 1;
+                _party.characters[0].Class.Charisma -= 1;
                 break;
         }
         _usedPoints -= 1;
@@ -146,50 +151,50 @@ public class StatAllocation : MonoBehaviour {
 
     public void ConfirmStats()
     {
-        PlayerInformation.Strength    = PlayerInformation.CharactersClass.Strength;
-        PlayerInformation.Stamina     = PlayerInformation.CharactersClass.Stamina;
-        PlayerInformation.Spirit      = PlayerInformation.CharactersClass.Spirit;
-        PlayerInformation.Intellect   = PlayerInformation.CharactersClass.Intellect;
-        PlayerInformation.Overpower   = PlayerInformation.CharactersClass.Overpower;
-        PlayerInformation.Luck        = PlayerInformation.CharactersClass.Luck;
-        PlayerInformation.Mastery     = PlayerInformation.CharactersClass.Mastery;
-        PlayerInformation.Charisma    = PlayerInformation.CharactersClass.Charisma;
+        _party.characters[0].Strength    = _party.characters[0].Class.Strength;
+        _party.characters[0].Stamina     = _party.characters[0].Class.Stamina;
+        _party.characters[0].Spirit      = _party.characters[0].Class.Spirit;
+        _party.characters[0].Intellect   = _party.characters[0].Class.Intellect;
+        _party.characters[0].Overpower   = _party.characters[0].Class.Overpower;
+        _party.characters[0].Luck        = _party.characters[0].Class.Luck;
+        _party.characters[0].Mastery     = _party.characters[0].Class.Mastery;
+        _party.characters[0].Charisma    = _party.characters[0].Class.Charisma;
     }
 
     public void ResetToBaseStats()
     {
-        PlayerInformation.CharactersClass.Strength    = _baseStatPoints[0];
-        PlayerInformation.CharactersClass.Stamina     = _baseStatPoints[1];
-        PlayerInformation.CharactersClass.Spirit      = _baseStatPoints[2];
-        PlayerInformation.CharactersClass.Intellect   = _baseStatPoints[3];
-        PlayerInformation.CharactersClass.Overpower   = _baseStatPoints[4];
-        PlayerInformation.CharactersClass.Luck        = _baseStatPoints[5];
-        PlayerInformation.CharactersClass.Mastery     = _baseStatPoints[6];
-        PlayerInformation.CharactersClass.Charisma    = _baseStatPoints[7];
+        _party.characters[0].Class.Strength    = _baseStatPoints[0];
+        _party.characters[0].Class.Stamina     = _baseStatPoints[1];
+        _party.characters[0].Class.Spirit      = _baseStatPoints[2];
+        _party.characters[0].Class.Intellect   = _baseStatPoints[3];
+        _party.characters[0].Class.Overpower   = _baseStatPoints[4];
+        _party.characters[0].Class.Luck        = _baseStatPoints[5];
+        _party.characters[0].Class.Mastery     = _baseStatPoints[6];
+        _party.characters[0].Class.Charisma    = _baseStatPoints[7];
     }
 
     void RetrieveStatBaseStatPoints()
     {
-        _baseStatPoints[0] = PlayerInformation.CharactersClass.Strength;
-        _baseStatPoints[1] = PlayerInformation.CharactersClass.Stamina;
-        _baseStatPoints[2] = PlayerInformation.CharactersClass.Spirit;
-        _baseStatPoints[3] = PlayerInformation.CharactersClass.Intellect;
-        _baseStatPoints[4] = PlayerInformation.CharactersClass.Overpower;
-        _baseStatPoints[5] = PlayerInformation.CharactersClass.Luck;
-        _baseStatPoints[6] = PlayerInformation.CharactersClass.Mastery;
-        _baseStatPoints[7] = PlayerInformation.CharactersClass.Charisma;
+        _baseStatPoints[0] = _party.characters[0].Class.Strength;
+        _baseStatPoints[1] = _party.characters[0].Class.Stamina;
+        _baseStatPoints[2] = _party.characters[0].Class.Spirit;
+        _baseStatPoints[3] = _party.characters[0].Class.Intellect;
+        _baseStatPoints[4] = _party.characters[0].Class.Overpower;
+        _baseStatPoints[5] = _party.characters[0].Class.Luck;
+        _baseStatPoints[6] = _party.characters[0].Class.Mastery;
+        _baseStatPoints[7] = _party.characters[0].Class.Charisma;
     }
 
     void RetrievePointsToAllocate()
     {
-        _pointsToAllocate[0] = PlayerInformation.CharactersClass.Strength;
-        _pointsToAllocate[1] = PlayerInformation.CharactersClass.Stamina;
-        _pointsToAllocate[2] = PlayerInformation.CharactersClass.Spirit;
-        _pointsToAllocate[3] = PlayerInformation.CharactersClass.Intellect;
-        _pointsToAllocate[4] = PlayerInformation.CharactersClass.Overpower;
-        _pointsToAllocate[5] = PlayerInformation.CharactersClass.Luck;
-        _pointsToAllocate[6] = PlayerInformation.CharactersClass.Mastery;
-        _pointsToAllocate[7] = PlayerInformation.CharactersClass.Charisma;
+        _pointsToAllocate[0] = _party.characters[0].Class.Strength;
+        _pointsToAllocate[1] = _party.characters[0].Class.Stamina;
+        _pointsToAllocate[2] = _party.characters[0].Class.Spirit;
+        _pointsToAllocate[3] = _party.characters[0].Class.Intellect;
+        _pointsToAllocate[4] = _party.characters[0].Class.Overpower;
+        _pointsToAllocate[5] = _party.characters[0].Class.Luck;
+        _pointsToAllocate[6] = _party.characters[0].Class.Mastery;
+        _pointsToAllocate[7] = _party.characters[0].Class.Charisma;
     }
 
     public void ShowStatValues()
@@ -199,28 +204,28 @@ public class StatAllocation : MonoBehaviour {
             switch (i)
             {
                 case 0:
-                    _statValueText[i].text = PlayerInformation.CharactersClass.Strength.ToString();
+                    _statValueText[i].text = _party.characters[0].Class.Strength.ToString();
                     break;
                 case 1:
-                    _statValueText[i].text = PlayerInformation.CharactersClass.Stamina.ToString();
+                    _statValueText[i].text = _party.characters[0].Class.Stamina.ToString();
                     break;
                 case 2:
-                    _statValueText[i].text = PlayerInformation.CharactersClass.Spirit.ToString();
+                    _statValueText[i].text = _party.characters[0].Class.Spirit.ToString();
                     break;
                 case 3:
-                    _statValueText[i].text = PlayerInformation.CharactersClass.Intellect.ToString();
+                    _statValueText[i].text = _party.characters[0].Class.Intellect.ToString();
                     break;
                 case 4:
-                    _statValueText[i].text = PlayerInformation.CharactersClass.Overpower.ToString();
+                    _statValueText[i].text = _party.characters[0].Class.Overpower.ToString();
                     break;
                 case 5:
-                    _statValueText[i].text = PlayerInformation.CharactersClass.Luck.ToString();
+                    _statValueText[i].text = _party.characters[0].Class.Luck.ToString();
                     break;
                 case 6:
-                    _statValueText[i].text = PlayerInformation.CharactersClass.Mastery.ToString();
+                    _statValueText[i].text = _party.characters[0].Class.Mastery.ToString();
                     break;
                 case 7:
-                    _statValueText[i].text = PlayerInformation.CharactersClass.Charisma.ToString();
+                    _statValueText[i].text = _party.characters[0].Class.Charisma.ToString();
                     break;
             }
         }

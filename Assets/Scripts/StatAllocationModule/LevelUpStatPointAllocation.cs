@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class LevelUpStatPointAllocation : MonoBehaviour {
 
+    private Party _party;
     private int[] _pointsToAllocate = new int[8];       //Points to put in stats chosen by the player 
     private int[] _baseStatPoints = new int[8];       //Starting stat values for the chosen class
     private bool _didRunOnce;
@@ -17,6 +18,7 @@ public class LevelUpStatPointAllocation : MonoBehaviour {
 
     void Start()
     {
+        _party = GameObject.Find("PartyManager").GetComponent<Party>();
         if (!_didRunOnce)
         {
             RetrieveStatBaseStatPoints();
@@ -27,7 +29,7 @@ public class LevelUpStatPointAllocation : MonoBehaviour {
 
     void Update()
     {
-        _availablePoints = PlayerInformation.StatPoints;
+        _availablePoints = _party.characters[0].StatPoints;
 
         if (_availablePoints > 0)
         {
@@ -87,32 +89,32 @@ public class LevelUpStatPointAllocation : MonoBehaviour {
         switch (statIndex)
         {
             case 0:
-                PlayerInformation.Strength += 1;
+                _party.characters[0].Strength += 1;
                 break;
             case 1:
-                PlayerInformation.Stamina += 1;
+                _party.characters[0].Stamina += 1;
                 break;
             case 2:
-                PlayerInformation.Spirit += 1;
+                _party.characters[0].Spirit += 1;
                 break;
             case 3:
-                PlayerInformation.Intellect += 1;
+                _party.characters[0].Intellect += 1;
                 break;
             case 4:
-                PlayerInformation.Overpower += 1;
+                _party.characters[0].Overpower += 1;
                 break;
             case 5:
-                PlayerInformation.Luck += 1;
+                _party.characters[0].Luck += 1;
                 break;
             case 6:
-                PlayerInformation.Mastery += 1;
+                _party.characters[0].Mastery += 1;
                 break;
             case 7:
-                PlayerInformation.Charisma += 1;
+                _party.characters[0].Charisma += 1;
                 break;
         }
         _usedPoints += 1;
-            PlayerInformation.StatPoints--;        
+            _party.characters[0].StatPoints--;        
     }
 
     public void RemoveStatPoint(int statIndex)
@@ -120,82 +122,82 @@ public class LevelUpStatPointAllocation : MonoBehaviour {
         switch (statIndex)
         {
             case 0:
-                PlayerInformation.Strength -= 1;
+                _party.characters[0].Strength -= 1;
                 break;
             case 1:
-                PlayerInformation.Stamina -= 1;
+                _party.characters[0].Stamina -= 1;
                 break;
             case 2:
-                PlayerInformation.Spirit -= 1;
+                _party.characters[0].Spirit -= 1;
                 break;
             case 3:
-                PlayerInformation.Intellect -= 1;
+                _party.characters[0].Intellect -= 1;
                 break;
             case 4:
-                PlayerInformation.Overpower -= 1;
+                _party.characters[0].Overpower -= 1;
                 break;
             case 5:
-                PlayerInformation.Luck -= 1;
+                _party.characters[0].Luck -= 1;
                 break;
             case 6:
-                PlayerInformation.Mastery -= 1;
+                _party.characters[0].Mastery -= 1;
                 break;
             case 7:
-                PlayerInformation.Charisma -= 1;
+                _party.characters[0].Charisma -= 1;
                 break;
         }
         _usedPoints -= 1;
-        PlayerInformation.StatPoints++;
+        _party.characters[0].StatPoints++;
     }
 
     public void ConfirmChanges()
     {
-        _baseStatPoints[0] = PlayerInformation.Strength;
-        _baseStatPoints[1] = PlayerInformation.Stamina;
-        _baseStatPoints[2] = PlayerInformation.Spirit;
-        _baseStatPoints[3] = PlayerInformation.Intellect;
-        _baseStatPoints[4] = PlayerInformation.Overpower;
-        _baseStatPoints[5] = PlayerInformation.Luck;
-        _baseStatPoints[6] = PlayerInformation.Mastery;
-        _baseStatPoints[7] = PlayerInformation.Charisma;
+        _baseStatPoints[0] = _party.characters[0].Strength;
+        _baseStatPoints[1] = _party.characters[0].Stamina;
+        _baseStatPoints[2] = _party.characters[0].Spirit;
+        _baseStatPoints[3] = _party.characters[0].Intellect;
+        _baseStatPoints[4] = _party.characters[0].Overpower;
+        _baseStatPoints[5] = _party.characters[0].Luck;
+        _baseStatPoints[6] = _party.characters[0].Mastery;
+        _baseStatPoints[7] = _party.characters[0].Charisma;
         _usedPoints = 0;
     }
 
     public void CancelChanges()
     {
-        PlayerInformation.Strength = _baseStatPoints[0];
-        PlayerInformation.Stamina = _baseStatPoints[1];
-        PlayerInformation.Spirit = _baseStatPoints[2];
-        PlayerInformation.Intellect = _baseStatPoints[3];
-        PlayerInformation.Overpower = _baseStatPoints[4];
-        PlayerInformation.Luck = _baseStatPoints[5];
-        PlayerInformation.Mastery = _baseStatPoints[6];
-        PlayerInformation.Charisma = _baseStatPoints[7];
-        PlayerInformation.StatPoints += _usedPoints;
+        _party.characters[0].Strength = _baseStatPoints[0];
+        _party.characters[0].Stamina = _baseStatPoints[1];
+        _party.characters[0].Spirit = _baseStatPoints[2];
+        _party.characters[0].Intellect = _baseStatPoints[3];
+        _party.characters[0].Overpower = _baseStatPoints[4];
+        _party.characters[0].Luck = _baseStatPoints[5];
+        _party.characters[0].Mastery = _baseStatPoints[6];
+        _party.characters[0].Charisma = _baseStatPoints[7];
+        _party.characters[0].StatPoints += _usedPoints;
         _usedPoints = 0;
     }
 
     void RetrieveStatBaseStatPoints()
     {        
-        _baseStatPoints[0] = PlayerInformation.Strength;        
-        _baseStatPoints[1] = PlayerInformation.Stamina;        
-        _baseStatPoints[2] = PlayerInformation.Spirit;        
-        _baseStatPoints[3] = PlayerInformation.Intellect;
-        _baseStatPoints[4] = PlayerInformation.Overpower;       
-        _baseStatPoints[5] = PlayerInformation.Luck;        
-        _baseStatPoints[6] = PlayerInformation.Mastery;
-        _baseStatPoints[7] = PlayerInformation.Charisma;
+        _baseStatPoints[0] = _party.characters[0].Strength;        
+        _baseStatPoints[1] = _party.characters[0].Stamina;        
+        _baseStatPoints[2] = _party.characters[0].Spirit;        
+        _baseStatPoints[3] = _party.characters[0].Intellect;
+        _baseStatPoints[4] = _party.characters[0].Overpower;       
+        _baseStatPoints[5] = _party.characters[0].Luck;        
+        _baseStatPoints[6] = _party.characters[0].Mastery;
+        _baseStatPoints[7] = _party.characters[0].Charisma;
     }
 
     void RetrievePointsToAllocate()
     {
-        _pointsToAllocate[0] = PlayerInformation.Strength;
-        _pointsToAllocate[1] = PlayerInformation.Stamina;
-        _pointsToAllocate[2] = PlayerInformation.Spirit;
-        _pointsToAllocate[3] = PlayerInformation.Intellect;
-        _pointsToAllocate[4] = PlayerInformation.Overpower;
-        _pointsToAllocate[5] = PlayerInformation.Luck;
-        _pointsToAllocate[6] = PlayerInformation.Mastery;
-        _pointsToAllocate[7] = PlayerInformation.Charisma;
+        _pointsToAllocate[0] = _party.characters[0].Strength;
+        _pointsToAllocate[1] = _party.characters[0].Stamina;
+        _pointsToAllocate[2] = _party.characters[0].Spirit;
+        _pointsToAllocate[3] = _party.characters[0].Intellect;
+        _pointsToAllocate[4] = _party.characters[0].Overpower;
+        _pointsToAllocate[5] = _party.characters[0].Luck;
+        _pointsToAllocate[6] = _party.characters[0].Mastery;
+        _pointsToAllocate[7] = _party.characters[0].Charisma;
     }
 }
