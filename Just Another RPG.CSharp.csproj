@@ -109,12 +109,12 @@
     <Compile Include="Assets\Scripts\CreateNewCharacter\ClassSelection.cs" />
     <Compile Include="Assets\Scripts\CreateNewCharacter\RaceSelection.cs" />
     <Compile Include="Assets\Scripts\CreateNewCharacter\StatAllocation.cs" />
-    <Compile Include="Assets\Scripts\Data\Dialogue.cs" />
-    <Compile Include="Assets\Scripts\Data\DialogueNode.cs" />
-    <Compile Include="Assets\Scripts\Data\DialogueOption.cs" />
-    <Compile Include="Assets\Scripts\Data\DialogueProgram.cs" />
-    <Compile Include="Assets\Scripts\Data\LoadXMLDialog.cs" />
-    <Compile Include="Assets\Scripts\Data\NPCDialogue.cs" />
+    <Compile Include="Assets\Scripts\Data\Dialogue\Dialogue.cs" />
+    <Compile Include="Assets\Scripts\Data\Dialogue\DialogueNode.cs" />
+    <Compile Include="Assets\Scripts\Data\Dialogue\DialogueOption.cs" />
+    <Compile Include="Assets\Scripts\Data\Dialogue\DialogueProgram.cs" />
+    <Compile Include="Assets\Scripts\Data\Dialogue\LoadXMLDialog.cs" />
+    <Compile Include="Assets\Scripts\Data\Dialogue\NPCDialogue.cs" />
     <Compile Include="Assets\Scripts\Data\Tags.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAbilityChoice.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyInformation.cs" />
@@ -157,18 +157,22 @@
     <Compile Include="Assets\Scripts\StatAllocationModule\LevelUpStatPointAllocation.cs" />
     <Compile Include="Assets\Scripts\StatCalculations\StatCalculations.cs" />
     <Compile Include="Assets\Scripts\TestGUI.cs" />
-    <Compile Include="Assets\Scripts\TurnBasedCombat\BattleGUI.cs" />
+    <Compile Include="Assets\Scripts\TurnBasedCombat\BattleGUI\BattleGUI.cs" />
+    <Compile Include="Assets\Scripts\TurnBasedCombat\BattleGUI\EnemyGUI.cs" />
+    <Compile Include="Assets\Scripts\TurnBasedCombat\BattleGUI\HeroGUI.cs" />
     <Compile Include="Assets\Scripts\TurnBasedCombat\BattleStateAddStatusEffects.cs" />
-    <Compile Include="Assets\Scripts\TurnBasedCombat\BattleStateEndTurn.cs" />
     <Compile Include="Assets\Scripts\TurnBasedCombat\BattleStateEnemyChoice.cs" />
     <Compile Include="Assets\Scripts\TurnBasedCombat\BattleStateStart.cs" />
+    <Compile Include="Assets\Scripts\TurnBasedCombat\NewStateMachine\BattleStateMachine.cs" />
+    <Compile Include="Assets\Scripts\TurnBasedCombat\NewStateMachine\EnemyStateMachine.cs" />
+    <Compile Include="Assets\Scripts\TurnBasedCombat\NewStateMachine\HeroStateMachine.cs" />
     <Compile Include="Assets\Scripts\TurnBasedCombat\TurnBasedCombatStateMachine.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Art\CharacterModels\Mage\HairShader.shader" />
     <None Include="Assets\Art\CharacterModels\Warrior\models\overlord\Materials\clothshader.shader" />
-    <None Include="Assets\Scripts\Data\Dialog.xml" />
-    <None Include="Assets\Scripts\Data\DialogueTest.xml" />
+    <None Include="Assets\Scripts\Data\Dialogue\Dialog.xml" />
+    <None Include="Assets\Scripts\Data\Dialogue\DialogueTest.xml" />
     <None Include="Assets\Scripts\Items\ItemDatabase.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />

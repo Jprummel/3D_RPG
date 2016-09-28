@@ -13,12 +13,12 @@ public class BattleStateAddStatusEffects{
                     if (TryToApplyStatusEffect(usedAbility))
                     {
                         Debug.Log("RETURNED TRUE, APPLIED EFFECT");
-                        TurnBasedCombatStateMachine._statusEffectBaseDamage = usedAbility.AbilityStatusEffect.StatusEffectPower;
-                        Debug.Log(TurnBasedCombatStateMachine._statusEffectBaseDamage);
+                        TurnBasedCombatStateMachine.statusEffectBaseDamage = usedAbility.AbilityStatusEffect.StatusEffectPower;
+                        Debug.Log(TurnBasedCombatStateMachine.statusEffectBaseDamage);
                     }
                     else
                     {
-                        TurnBasedCombatStateMachine._statusEffectBaseDamage = 0;
+                        TurnBasedCombatStateMachine.statusEffectBaseDamage = 0;
                     }
 
                     TurnBasedCombatStateMachine.currentState = TurnBasedCombatStateMachine.BattleStates.CALCDAMAGE;

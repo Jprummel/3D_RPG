@@ -3,7 +3,7 @@ using System.Collections;
 
 public class IncreaseExperience {
 
-    private Party _party = GameObject.Find("PartyManager").GetComponent<Party>();
+    private Party _party = GameObject.Find(Tags.PARTYMANAGER).GetComponent<Party>();
     private static int      _xpToGive;
     private static LevelUp  _levelUp = new LevelUp();
 

@@ -19,7 +19,7 @@ public class StatAllocation : MonoBehaviour {
 
     void Awake()
     {
-        _party = GameObject.Find("PartyManager").GetComponent<Party>();
+        _party = GameObject.FindGameObjectWithTag(Tags.PARTYMANAGER).GetComponent<Party>();
     }
 
     void Start()

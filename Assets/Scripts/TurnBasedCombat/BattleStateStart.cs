@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class BattleStateStart{
+    //This class is responsible for setting up the battle in the first state
 
-    private Party _party = GameObject.Find("PartyManager").GetComponent<Party>();
-    private EnemyDataBase _enemies;
-    private BaseEnemy _newEnemy;
-    private StatCalculations        _statCalculationsScript     = new StatCalculations();
+
+    private Party               _party;
+    private EnemyDataBase       _enemies;
+    private BaseEnemy           _newEnemy;
+    private StatCalculations    _statCalculationsScript = new StatCalculations();
    
     private int _playerStamina;
     private int _playerSpirit;
@@ -19,6 +21,7 @@ public class BattleStateStart{
     
     public void PrepareBattle()
     {
+        _party = GameObject.Find(Tags.PARTYMANAGER).GetComponent<Party>();
         _enemies = new EnemyDataBase();
         //Create enemy
         CreateNewEnemy();
@@ -91,6 +94,7 @@ public class BattleStateStart{
             }
         }
     }
+
 
     private void DeterminePlayerVitals()
     {

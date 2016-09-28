@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class EnemyDataBase {
 
-    private Party _party = GameObject.Find("PartyManager").GetComponent<Party>();
+    private Party _party = GameObject.FindGameObjectWithTag(Tags.PARTYMANAGER).GetComponent<Party>();
     public List<BaseEnemy> enemies = new List<BaseEnemy>();
     private int _randomEnemy;
 

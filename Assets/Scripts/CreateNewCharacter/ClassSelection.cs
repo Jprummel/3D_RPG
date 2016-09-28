@@ -16,7 +16,7 @@ public class ClassSelection : MonoBehaviour {
 
 	void Start () 
     {
-        _party = GameObject.Find("PartyManager").GetComponent<Party>();
+        _party = GameObject.FindGameObjectWithTag(Tags.PARTYMANAGER).GetComponent<Party>();
         _CharactersClass.Add(new BaseWarriorClass());
         _CharactersClass.Add(new BaseBerserkerClass());
         _CharactersClass.Add(new BaseRogueClass());

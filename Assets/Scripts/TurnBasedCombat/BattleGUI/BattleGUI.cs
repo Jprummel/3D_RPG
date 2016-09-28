@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class BattleGUI : MonoBehaviour {
 
     private Party _party;
-    //Player info
+    /*//Player info
     private Text    _CharactersName;
     private Text    _CharactersHealth;
     private Text    _CharactersMana;
@@ -21,7 +21,7 @@ public class BattleGUI : MonoBehaviour {
     private Text _enemyHealth;
     private Text _enemyEnergy;
     private Image _enemyHealthImage;
-    private Image _enemyEnergyImage;
+    private Image _enemyEnergyImage;*/
     //Action Menu
     [SerializeField]private List<Button> _actionButtons = new List<Button>();
     private Text _actionName;
@@ -40,27 +40,8 @@ public class BattleGUI : MonoBehaviour {
 
     void Start()
     {
-        _party = GameObject.Find("PartyManager").GetComponent<Party>();
+        _party = GameObject.FindGameObjectWithTag(Tags.PARTYMANAGER).GetComponent<Party>();
         GetPlayerSkills();
-        
-        
-       
-        //Gets player info components
-        _CharactersName         = transform.FindChild("BattlePanel/PartyPanel/PartyMember1/PartyMember1Name").GetComponent<Text>();
-        _CharactersName.text    = _party.characters[0].Name;
-        _CharactersHealth       = transform.FindChild("BattlePanel/PartyPanel/PartyMember1/PartyMember1Health").GetComponent<Text>();
-        _CharactersMana         = transform.FindChild("BattlePanel/PartyPanel/PartyMember1/PartyMember1Mana").GetComponent<Text>();
-        //_CharactersHealthImage  = transform.FindChild("PlayerInfoContainer/CharactersHealthBar").GetComponent<Image>();
-        //_CharactersManaImage  = transform.FindChild("PlayerInfoContainer/CharactersManaBar").GetComponent<Image>();
-        _CharactersLevel        = _party.characters[0].Level;
-
-        //Gets enemy info components
-        _enemyName          = transform.FindChild("EnemyInfoContainer/EnemyPortrait/EnemyName").GetComponent<Text>();
-        _enemyName.text     = EnemyInformation.EnemyName;
-        _enemyHealth        = transform.FindChild("EnemyInfoContainer/EnemyHealthBar/EnemyHealthValue").GetComponent<Text>();
-        _enemyEnergy        = transform.FindChild("EnemyInfoContainer/EnemyEnergyBar/EnemyEnergyValue").GetComponent<Text>();
-        _enemyHealthImage   = transform.FindChild("EnemyInfoContainer/EnemyHealthBar").GetComponent<Image>();
-        _enemyEnergyImage   = transform.FindChild("EnemyInfoContainer/EnemyEnergyBar").GetComponent<Image>();
     }
 
     void Update()
@@ -73,29 +54,6 @@ public class BattleGUI : MonoBehaviour {
         {
             _playerActionMenu.SetActive(false);
         }
-        PlayerInfo();
-        EnemyInfo();
-        //UseSkill();
-    }
-
-    void PlayerInfo()
-    {
-        //maxhealth / 100 = 1 % 
-        //_CharactersName.text = _party.PartyMembers(0).charactersName;
-        _CharactersName.text                = _party.characters[0].Name;
-        _CharactersHealth.text              = _party.characters[0].Health.ToString() + "/" + _party.characters[0].MaxHealth.ToString();
-        //_CharactersHealthImage.fillAmount   = _party.characters[0].CharactersHealth / _party.characters[0].CharactersMaxHealth;
-        _CharactersMana.text              = _party.characters[0].Mana.ToString() + "/" + _party.characters[0].MaxMana.ToString();
-        //_CharactersManaImage.fillAmount   = _party.characters[0].CharactersMana / _party.characters[0].CharactersMaxMana;
-    }
-
-    void EnemyInfo()
-    {
-        _enemyName.text                 = EnemyInformation.EnemyName;
-        _enemyHealth.text               = EnemyInformation.EnemyHealth.ToString() + "/" + EnemyInformation.EnemyMaxHealth.ToString();
-        _enemyHealthImage.fillAmount    = EnemyInformation.EnemyHealth / EnemyInformation.EnemyMaxHealth;
-        _enemyEnergy.text               = EnemyInformation.EnemyEnergy.ToString() + "/" + EnemyInformation.EnemyMaxEnergy.ToString();
-        _enemyEnergyImage.fillAmount    = EnemyInformation.EnemyEnergy / 100;
     }
 
     void GetPlayerSkills()

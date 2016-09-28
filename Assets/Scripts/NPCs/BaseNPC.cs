@@ -5,10 +5,10 @@ using System.Collections;
 public class BaseNPC : MonoBehaviour {
 
     
-    [SerializeField]private GameObject _overheadPanel;
-    [SerializeField]private GameObject _npcModel;
-    [SerializeField]private Text _npcNamePlate;    
-    [SerializeField]private GameObject _dialogueCanvas;
+    [SerializeField]private GameObject  _overheadPanel;
+    [SerializeField]private GameObject  _npcModel;
+    [SerializeField]private Text        _npcNamePlate;    
+    [SerializeField]private GameObject  _dialogueCanvas;
     public string NPCName { get; set; }
     public string NPCTag { get; set; }
     private GameObject _player;
@@ -22,7 +22,7 @@ public class BaseNPC : MonoBehaviour {
     public NPCType NpcType { get; set; }
 
 	void Start () {
-        _player = GameObject.FindGameObjectWithTag(Tags.PLAYER);
+        _player = GameObject.FindGameObjectWithTag(Tags.HERO);
         _npcNamePlate.text = NPCName + "\n" + "<" + NPCTag + ">";
         _npcNamePlate = GetComponent<Text>();
 

@@ -18,7 +18,7 @@ public class LevelUpStatPointAllocation : MonoBehaviour {
 
     void Start()
     {
-        _party = GameObject.Find("PartyManager").GetComponent<Party>();
+        _party = GameObject.FindGameObjectWithTag(Tags.PARTYMANAGER).GetComponent<Party>();
         if (!_didRunOnce)
         {
             RetrieveStatBaseStatPoints();

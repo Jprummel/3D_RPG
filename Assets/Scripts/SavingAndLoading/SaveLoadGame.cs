@@ -8,10 +8,10 @@ using UnityEngine.SceneManagement;
 public class SaveLoadGame : MonoBehaviour
 {
     private Party _party;
-
     void Awake()
+
     {
-        _party = GameObject.Find("PartyManager").GetComponent<Party>();
+        _party = GameObject.FindGameObjectWithTag(Tags.PARTYMANAGER).GetComponent<Party>();
     }
 
     public void SaveGame()

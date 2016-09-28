@@ -16,7 +16,7 @@ public class CharacterFinalisation : MonoBehaviour {
 
 	void Start () {
         _save = GetComponent<SaveLoadGame>();
-        _party = GameObject.Find("PartyManager").GetComponent<Party>();
+        _party = GameObject.FindGameObjectWithTag(Tags.PARTYMANAGER).GetComponent<Party>();
         _createButton.interactable = false;
 	}
 

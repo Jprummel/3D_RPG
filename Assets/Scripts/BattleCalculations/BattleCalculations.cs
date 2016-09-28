@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BattleCalculations {
 
-    private Party _party = new Party();
+    private Party _party = GameObject.FindGameObjectWithTag(Tags.PARTYMANAGER).GetComponent<Party>();
     private StatCalculations    _statCalcScript = new StatCalculations();
     private BaseAbility         _playerUsedAbility;
     private BaseAbility         _enemyUsedAbility;
@@ -64,7 +64,17 @@ public class BattleCalculations {
     private int CalculateDamageToSelf()
     {
         //Debug.Log(_playerUsedAbility.AbilityDamageToSelf + "Self Damage");
-        return _abilityDamageToSelf = _playerUsedAbility.AbilityDamageToSelf;
+        if (TurnBasedCombatStateMachine.currentState == TurnBasedCombatStateMachine.BattleStates.PLAYERCHOICE)
+        {
+            return _abilityDamageToSelf = _playerUsedAbility.AbilityDamageToSelf;
+        }
+
+        if (TurnBasedCombatStateMachine.currentState == TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE)
+        {
+            return _abilityDamageToSelf = _enemyUsedAbility.AbilityDamageToSelf;
+        }
+
+        return 0;
     }
     
     //Player Ability Damage
@@ -99,34 +109,70 @@ public class BattleCalculations {
     //STATUS EFFECTS
     private int CalculateStatusEffectDamage()
     {
-        return _statusEffectDamage = TurnBasedCombatStateMachine._statusEffectBaseDamage * _party.characters[0].Level;
+        return _statusEffectDamage = TurnBasedCombatStateMachine.statusEffectBaseDamage * _party.characters[0].Level;
     }
     //CRITICAL HITS
     private int CalculateCriticalHitDamage()
     {
-        if (DecideIfAbilityCriticalHits())
+        if (TurnBasedCombatStateMachine.currentState == TurnBasedCombatStateMachine.BattleStates.PLAYERCHOICE)
         {
-            //_totalCritStrikeDamage = 0;
-            return _totalCritStrikeDamage = (int)(_playerUsedAbility.AbilityCritModifier * _totalAbilityPowerDamage);
+            if (DecideIfAbilityCriticalHits())
+            {
+                //_totalCritStrikeDamage = 0;
+                return _totalCritStrikeDamage = (int)(_playerUsedAbility.AbilityCritModifier * _totalAbilityPowerDamage);
+            }
+            else
+            {
+                return _totalCritStrikeDamage = 0;
+            }
         }
-        else
+
+        if (TurnBasedCombatStateMachine.currentState == TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE)
         {
-            return _totalCritStrikeDamage = 0;
+            if (DecideIfAbilityCriticalHits())
+            {
+                //_totalCritStrikeDamage = 0;
+                return _totalCritStrikeDamage = (int)(_enemyUsedAbility.AbilityCritModifier * _totalAbilityPowerDamage);
+            }
+            else
+            {
+                return _totalCritStrikeDamage = 0;
+            }
         }
+
+        return _totalCritStrikeDamage = 0;
     }
 
     private bool DecideIfAbilityCriticalHits()
     {        
         int randomTemp = Random.Range(1, 101);
-        if (randomTemp <= _playerUsedAbility.AbilityCritChance)
+        if (TurnBasedCombatStateMachine.currentState == TurnBasedCombatStateMachine.BattleStates.PLAYERCHOICE)
         {
-            Debug.Log("Critical Hit!!");
-            return true; // Ability did critically hit
+            if (randomTemp <= _playerUsedAbility.AbilityCritChance)
+            {
+                Debug.Log("Critical Hit!!");
+                return true; // Ability did critically hit
+            }
+            else
+            {
+                return false; // Ability did not critically hit
+            }
         }
-        else
+
+        if (TurnBasedCombatStateMachine.currentState == TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE)
         {
-            return false; // Ability did not critically hit
+            if (randomTemp <= _enemyUsedAbility.AbilityCritChance)
+            {
+                Debug.Log("Critical Hit!!");
+                return true; // Ability did critically hit
+            }
+            else
+            {
+                return false; // Ability did not critically hit
+            }
         }
+
+        return false;
     }
 
     private bool CheckIfAbilityHits()

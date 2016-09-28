@@ -9,7 +9,7 @@ public class RandomEncounter : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         _movement = GetComponent<PlayerMovement>();
-        _encounterAreaCheck = GameObject.FindGameObjectWithTag("EncounterAreaChecker").GetComponent<SceneInformation>();
+        _encounterAreaCheck = GameObject.FindGameObjectWithTag(Tags.ENCOUNTERAREA).GetComponent<SceneInformation>();
 	}
 	
 	// Update is called once per frame
@@ -27,7 +27,7 @@ public class RandomEncounter : MonoBehaviour {
                 PlayerInformation.PlayerMapScene = Application.loadedLevelName;
                 PlayerInformation.PlayerMapPos = transform.parent.position;
                 Debug.Log(PlayerInformation.PlayerMapScene);
-                SceneManager.LoadScene("BattleSceneTest");
+                SceneManager.LoadScene("BattleScene");
             }
         }
     }

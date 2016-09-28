@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AddAbilities : MonoBehaviour {
-    
+public class AddAbilities{
+    private Party _party = GameObject.FindGameObjectWithTag(Tags.PARTYMANAGER).GetComponent<Party>();
+
     public void AddAbilitiesOnLevelUp()
     {
-        Party _party = GameObject.Find("PartyManager").GetComponent<Party>();
-
         switch (_party.characters[0].Class.CharactersClass) 
         {
             case BaseCharacterClass.CharactersClasses.WARRIOR:

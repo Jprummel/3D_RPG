@@ -4,16 +4,16 @@ using UnityEngine.SceneManagement;
 
 public class TurnBasedCombatStateMachine : MonoBehaviour {
 
-    private Party _party;
-    private IncreaseExperience _incrXP = new IncreaseExperience();
-    private BattleStateStart            _battleStateStartScript             = new BattleStateStart();
-    private BattleCalculations          _battleCalcScript                   = new BattleCalculations();
-    private BattleStateAddStatusEffects _battleStateAddStatusEffectScript   = new BattleStateAddStatusEffects();
-    private BattleStateEnemyChoice      _battleStateEnemyChoiceScript       = new BattleStateEnemyChoice();
+    private Party                       _party;
+    private IncreaseExperience          _incrXP;
+    private BattleStateStart            _battleStateStartScript;
+    private BattleCalculations          _battleCalcScript;
+    private BattleStateAddStatusEffects _battleStateAddStatusEffectScript;
+    private BattleStateEnemyChoice      _battleStateEnemyChoiceScript;
     private bool                        _hasAddedXP;   
     public static BaseAbility           playerUsedAbility;
     public static BaseAbility           enemyUsedAbility;
-    public static int                   _statusEffectBaseDamage;
+    public static int                   statusEffectBaseDamage;
     public static int                   totalTurnCount;
     public static bool                  playerDidCompleteTurn;
     public static bool                  enemyDidCompleteTurn;
@@ -35,11 +35,15 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 
     void Awake ()
     {
-        
+        _party = GameObject.FindGameObjectWithTag(Tags.PARTYMANAGER).GetComponent<Party>();
+        _incrXP = new IncreaseExperience();
+        _battleStateStartScript = new BattleStateStart();
+        _battleCalcScript = new BattleCalculations();
+        _battleStateAddStatusEffectScript = new BattleStateAddStatusEffects();
+        _battleStateEnemyChoiceScript = new BattleStateEnemyChoice();
     }
 
 	void Start () {
-        _party = GameObject.Find("PartyManager").GetComponent<Party>();
         _hasAddedXP = false;
         totalTurnCount = 1;
         currentState = BattleStates.START;        
@@ -47,7 +51,6 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        //_party = GameObject.Find("PartyManager").GetComponent<Party>();
         //Debug.Log(currentState);
 
         switch (currentState)
@@ -75,7 +78,6 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                 {
                     _battleCalcScript.CalculateTotalEnemyDamage(enemyUsedAbility);
                 }
-                //Debug.Log("Calculating Damage");
                  CheckWhoGoesNext();
                 break;
             case (BattleStates.ADDSTATUSEFFECTS):   //try to add a status effect if it exists

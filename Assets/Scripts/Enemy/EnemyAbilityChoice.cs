@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemyAbilityChoice {
 
-    private Party _party = GameObject.Find("PartyManager").GetComponent<Party>();
+    private Party _party;
     private float     _totalCharactersHealth;
     private float   _CharactersHealthPercentage;
     private BaseAbility _chosenAbility;
@@ -11,6 +11,7 @@ public class EnemyAbilityChoice {
 
     public BaseAbility ChooseEnemyAbility()
     {
+        _party = GameObject.FindGameObjectWithTag(Tags.PARTYMANAGER).GetComponent<Party>();
         _totalCharactersHealth = _party.characters[0].Health;
         _CharactersHealthPercentage = (_totalCharactersHealth /100) * 100;
 

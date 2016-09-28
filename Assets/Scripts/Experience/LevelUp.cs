@@ -3,7 +3,7 @@ using System.Collections;
 
 public class LevelUp {
 
-    private Party _party = GameObject.Find("PartyManager").GetComponent<Party>();
+    private Party _party = GameObject.FindGameObjectWithTag(Tags.PARTYMANAGER).GetComponent<Party>();
     private int _maxCharactersLevel = 50;
     private LevelUpStatPointAllocation _statPoints;
     private AddAbilities _addAbilities = new AddAbilities();

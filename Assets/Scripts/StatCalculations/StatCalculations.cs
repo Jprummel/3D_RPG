@@ -3,7 +3,7 @@ using System.Collections;
 
 public class StatCalculations
 {
-    private Party _party = GameObject.Find("PartyManager").GetComponent<Party>();
+    private Party _party = GameObject.FindGameObjectWithTag(Tags.PARTYMANAGER).GetComponent<Party>();
     //Player stat modifiers
     private float _playerStrengthModifier   = 0.2f;     //20%
     private float _playerStaminaModifier    = 0.0f;     //0%

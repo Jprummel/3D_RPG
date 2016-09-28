@@ -15,5 +15,4 @@ public class Party : MonoBehaviour {
     {
         return characters[value];
     }
-
 }

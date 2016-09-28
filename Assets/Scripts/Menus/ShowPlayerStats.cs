@@ -13,7 +13,7 @@ public class ShowPlayerStats : MonoBehaviour {
 
     void Start()
     {
-        _party = GameObject.Find("PartyManager").GetComponent<Party>();
+        _party = GameObject.FindGameObjectWithTag(Tags.PARTYMANAGER).GetComponent<Party>();
         _playerStatNames = _playerStatNames.GetComponent<Text>();
         _playerStats = _playerStats.GetComponent<Text>();
         _xpBar = _xpBar.GetComponent<Image>();

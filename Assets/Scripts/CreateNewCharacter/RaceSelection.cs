@@ -18,7 +18,7 @@ public class RaceSelection : MonoBehaviour {
     private Text _raceName;
     
 	void Start () {
-        _party = GameObject.Find("PartyManager").GetComponent<Party>();
+        _party = GameObject.FindGameObjectWithTag(Tags.PARTYMANAGER).GetComponent<Party>();
         _CharactersRace.Add(new BaseBarbarianRace());
         _CharactersRace.Add(new BaseDwarfRace());
         _CharactersRace.Add(new BaseElfRace());
