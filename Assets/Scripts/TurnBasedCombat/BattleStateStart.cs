@@ -5,26 +5,28 @@ using System.Collections.Generic;
 public class BattleStateStart{
     //This class is responsible for setting up the battle in the first state
 
-
-    private Party               _party;
+    private Party               _party = GameObject.FindGameObjectWithTag(Tags.PARTYMANAGER).GetComponent<Party>();
+    private TurnBasedCombatStateMachine _tbs = GameObject.FindGameObjectWithTag(Tags.BATTLEMANAGER).GetComponent<TurnBasedCombatStateMachine>();
     private EnemyDataBase       _enemies;
     private BaseEnemy           _newEnemy;
     private StatCalculations    _statCalculationsScript = new StatCalculations();
+
+    public List<BaseEnemy> _createdEnemies;
    
     private int _playerStamina;
     private int _playerSpirit;
     private int _CharactersHealth;
     private int _CharactersMana;
 
-    private int _enemyHealth;
-    private int _enemyEnergy;
+    private int _Health;
+    private int _Energy;
     
     public void PrepareBattle()
     {
-        _party = GameObject.Find(Tags.PARTYMANAGER).GetComponent<Party>();
         _enemies = new EnemyDataBase();
         //Create enemy
-        CreateNewEnemy();
+        //CreateNewEnemy();
+        AddEnemies();
         //find out players vitals (stat calcs)
         DeterminePlayerVitals();
         //figure out who goes first based on luck stat
@@ -32,39 +34,49 @@ public class BattleStateStart{
         //Does scene have status effect? if it does apply that effect throughout the fight
     }
 
-    private void CreateNewEnemy()
+    private void AddEnemies()
     {
+        int enemiesToCreate = Random.Range(1, 4);
+        Debug.Log(enemiesToCreate);
+        switch (enemiesToCreate)
+        {
+            case 1:
+                _tbs.enemiesInBattle.Add(CreateNewEnemy());
+                //_createdEnemies.Add(CreateNewEnemy());
+                break;
+            case 2:
+                _tbs.enemiesInBattle.Add(CreateNewEnemy());
+                _tbs.enemiesInBattle.Add(CreateNewEnemy());
+                Debug.Log(_tbs.enemiesInBattle[0].Name + _tbs.enemiesInBattle[1].Name);
+                break;
+            case 3:
+                _tbs.enemiesInBattle.Add(CreateNewEnemy());
+                _tbs.enemiesInBattle.Add(CreateNewEnemy());
+                _tbs.enemiesInBattle.Add(CreateNewEnemy());
+                Debug.Log(_tbs.enemiesInBattle[0].Name + _tbs.enemiesInBattle[1].Name + _tbs.enemiesInBattle[2].Name);
+                break;
+            case 4:
+                _createdEnemies.Add(CreateNewEnemy());
+                _createdEnemies.Add(CreateNewEnemy());
+                _createdEnemies.Add(CreateNewEnemy());
+                _createdEnemies.Add(CreateNewEnemy());
+                Debug.Log(_createdEnemies[0].Name + _createdEnemies[1].Name + _createdEnemies[2].Name + _createdEnemies[3].Name);
+                break;
+        }
+    }
+
+    private BaseEnemy CreateNewEnemy()
+    {
+        
+
         _newEnemy = _enemies.SpawnRandomEnemy(); //Gets random enemy from the enemy database appropriate for the players level
+        
+        _newEnemy.MaxHealth = _statCalculationsScript.CalculateHealth(_newEnemy.Stamina);
+        _newEnemy.Health    = _newEnemy.MaxHealth;
+        _newEnemy.MaxMana   = _statCalculationsScript.CalculateEnergy(_newEnemy.Spirit);
+        _newEnemy.Mana      = _newEnemy.MaxMana;
 
-        EnemyInformation.EnemyName    = _newEnemy.EnemyName;
-        EnemyInformation.EnemyLevel = _newEnemy.EnemyLevel;
-        EnemyInformation.EnemyClass = new BaseWarriorClass();
-        //Get initial stats
-        EnemyInformation.Strength   = _newEnemy.Strength;
-        EnemyInformation.Stamina    = _newEnemy.Stamina;
-        EnemyInformation.Spirit     = _newEnemy.Spirit;
-        EnemyInformation.Intellect  = _newEnemy.Intellect;
-        EnemyInformation.Overpower  = _newEnemy.Overpower;
-        EnemyInformation.Luck       = _newEnemy.Luck;
-        EnemyInformation.Mastery    = _newEnemy.Mastery;
-        EnemyInformation.Charisma   = _newEnemy.Charisma;
-        //Calculate final modified enemy stats
-        /*EnemyInformation.Strength   = _statCalculationsScript.CalculateStat(EnemyInformation.Strength, StatCalculations.StatType.STRENGTH, EnemyInformation.EnemyLevel, true);
-        EnemyInformation.Stamina    = _statCalculationsScript.CalculateStat(EnemyInformation.Stamina, StatCalculations.StatType.STAMINA, EnemyInformation.EnemyLevel, true);
-        EnemyInformation.Spirit     = _statCalculationsScript.CalculateStat(EnemyInformation.Spirit, StatCalculations.StatType.SPIRIT, EnemyInformation.EnemyLevel, true);
-        EnemyInformation.Intellect  = _statCalculationsScript.CalculateStat(EnemyInformation.Intellect, StatCalculations.StatType.INTELLECT, EnemyInformation.EnemyLevel, true);
-        EnemyInformation.Overpower  = _statCalculationsScript.CalculateStat(EnemyInformation.Overpower, StatCalculations.StatType.OVERPOWER, EnemyInformation.EnemyLevel, true);
-        EnemyInformation.Luck       = _statCalculationsScript.CalculateStat(EnemyInformation.Luck, StatCalculations.StatType.LUCK, EnemyInformation.EnemyLevel, true);
-        EnemyInformation.Mastery    = _statCalculationsScript.CalculateStat(EnemyInformation.Mastery, StatCalculations.StatType.MASTERY, EnemyInformation.EnemyLevel, true);
-        EnemyInformation.Charisma   = _statCalculationsScript.CalculateStat(EnemyInformation.Charisma, StatCalculations.StatType.CHARISMA, EnemyInformation.EnemyLevel, true);*/
-        EnemyInformation.EnemyMaxHealth = _statCalculationsScript.CalculateEnemyHealth(EnemyInformation.Stamina);
-        EnemyInformation.EnemyHealth    = EnemyInformation.EnemyMaxHealth;
-        EnemyInformation.EnemyMaxEnergy = _statCalculationsScript.CalculateEnemyEnergy(EnemyInformation.Spirit);
-        EnemyInformation.EnemyEnergy    = EnemyInformation.EnemyMaxEnergy;
-
-        Debug.Log(EnemyInformation.EnemyClass.CharactersClassName);
-        Debug.Log(EnemyInformation.EnemyLevel);
-        Debug.Log(EnemyInformation.EnemyName);        
+        return _newEnemy;
     }
 
     public void ChooseWhoGoesFirst()
@@ -77,7 +89,7 @@ public class BattleStateStart{
         if (_party.characters[0].Luck < EnemyInformation.Luck)
         {
             //Enemy goes first
-            TurnBasedCombatStateMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE;            
+            TurnBasedCombatStateMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE;
         }
         if (_party.characters[0].Luck == EnemyInformation.Luck)
         {
@@ -95,16 +107,19 @@ public class BattleStateStart{
         }
     }
 
-
     private void DeterminePlayerVitals()
     {
-        _playerStamina                  = _statCalculationsScript.CalculateStat(_party.characters[0].Stamina , StatCalculations.StatType.STAMINA , _party.characters[0].Level);
-        _playerSpirit                   = _statCalculationsScript.CalculateStat(_party.characters[0].Spirit  , StatCalculations.StatType.SPIRIT  , _party.characters[0].Level);
-        _CharactersHealth               = _statCalculationsScript.CalculateCharactersHealth(_playerStamina);
-        _CharactersMana                 = _statCalculationsScript.CalculateCharactersMana(_playerSpirit);
-        _party.characters[0].MaxHealth  = _CharactersHealth;
-        _party.characters[0].Health     = _party.characters[0].MaxHealth;
-        _party.characters[0].MaxMana    = _CharactersMana;
-        _party.characters[0].Mana       = _party.characters[0].MaxMana;
+        foreach (BaseCharacter character in _tbs.heroesInBattle)
+        {
+            BaseCharacter partyMember = character;
+            _playerStamina = _statCalculationsScript.CalculateStat(partyMember.Stamina, StatCalculations.StatType.STAMINA, partyMember.Level);
+            _playerSpirit = _statCalculationsScript.CalculateStat(partyMember.Spirit, StatCalculations.StatType.SPIRIT, partyMember.Level);
+            _CharactersHealth = _statCalculationsScript.CalculateCharactersHealth(_playerStamina);
+            _CharactersMana = _statCalculationsScript.CalculateCharactersMana(_playerSpirit);
+            partyMember.MaxHealth = _CharactersHealth;
+            partyMember.Health = partyMember.MaxHealth;
+            partyMember.MaxMana = _CharactersMana;
+            partyMember.Mana = partyMember.MaxMana;
+        }
     }
 }

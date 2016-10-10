@@ -4,55 +4,50 @@ using System.Collections;
 public class LevelUp {
 
     private Party _party = GameObject.FindGameObjectWithTag(Tags.PARTYMANAGER).GetComponent<Party>();
+    private TurnBasedCombatStateMachine _tbs = GameObject.FindGameObjectWithTag(Tags.BATTLEMANAGER).GetComponent<TurnBasedCombatStateMachine>();
     private int _maxCharactersLevel = 50;
     private LevelUpStatPointAllocation _statPoints;
     private AddAbilities _addAbilities = new AddAbilities();
 
     public void LevelUpCharacter()
     {
-        
-        //Check to see if current xp is greater then required
-        if (_party.characters[0].CurrentXP > _party.characters[0].RequiredXP)
+        foreach (BaseCharacter character in _tbs.heroesInBattle)
         {
-            _party.characters[0].CurrentXP -= _party.characters[0].RequiredXP;
-        }
-        else
-        {
-            _party.characters[0].CurrentXP = 0;
-        }
+            BaseCharacter partyMember = character;
+            //Check to see if current xp is greater then required
+            if (partyMember.CurrentXP > partyMember.RequiredXP)
+            {
+                partyMember.CurrentXP -= partyMember.RequiredXP;
+            }
+            else
+            {
+                partyMember.CurrentXP = 0;
+            }
 
-        if (_party.characters[0].Level < _maxCharactersLevel)
-        {
-            _party.characters[0].Level += 1;
+            if (partyMember.Level < _maxCharactersLevel)
+            {
+                partyMember.Level += 1;
+            }
+            else
+            {
+                partyMember.Level = _maxCharactersLevel;
+            }
+            //Give player stat points
+            partyMember.StatPoints += 3;
+            //give them a skill/move
+            _addAbilities.AddAbilitiesOnLevelUp();
+            //determine next amount of required xp
+            DetermineRequiredXP();
         }
-        else
-        {
-            _party.characters[0].Level = _maxCharactersLevel;
-        }
-        //Give player stat points
-        _party.characters[0].StatPoints += 3;
-        //randomly give items
-        //give them a skill/move
-        _addAbilities.AddAbilitiesOnLevelUp();
-        //give money
-       
-        //determine next amount of required xp
-        DetermineRequiredXP();
     }
 
     private void DetermineRequiredXP()
     {
-        int temp = (_party.characters[0].Level * 1000) + 250;
-        _party.characters[0].RequiredXP = temp;
-    }
-
-    private void DetermineMoneyToGive()
-    {
-        //give a certain amount of money
-        if (_party.characters[0].Level <= 10)
+        foreach (BaseCharacter character in _tbs.heroesInBattle)
         {
-            PlayerInformation.Gold += 500;
+            BaseCharacter partyMember = character;
+            int temp = (partyMember.Level * 1000) + 250;
+            partyMember.RequiredXP = temp;
         }
     }
-
 }

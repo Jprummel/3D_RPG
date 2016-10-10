@@ -6,13 +6,12 @@ public class RandomEncounter : MonoBehaviour {
 
     private PlayerMovement _movement;
     private SceneInformation _encounterAreaCheck;
-	// Use this for initialization
+
 	void Start () {
         _movement = GetComponent<PlayerMovement>();
         _encounterAreaCheck = GameObject.FindGameObjectWithTag(Tags.ENCOUNTERAREA).GetComponent<SceneInformation>();
 	}
 	
-	// Update is called once per frame
 	void Update () {
         CheckForEncounter();
 	}

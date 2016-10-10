@@ -10,4 +10,6 @@ public class Tags : MonoBehaviour
     public const string PARTYMEMBER     = "PartyMember";
     public const string PARTYMANAGER    = "PartyManager";
     public const string ENCOUNTERAREA   = "EncounterAreaChecker";
+    public const string PARTYPANEL      = "PartyPanel";
+    public const string TARGETPANEL     = "TargetPanel";
 }

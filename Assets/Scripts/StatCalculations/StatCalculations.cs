@@ -4,6 +4,7 @@ using System.Collections;
 public class StatCalculations
 {
     private Party _party = GameObject.FindGameObjectWithTag(Tags.PARTYMANAGER).GetComponent<Party>();
+    private TurnBasedCombatStateMachine _tbs = GameObject.FindGameObjectWithTag(Tags.BATTLEMANAGER).GetComponent<TurnBasedCombatStateMachine>();
     //Player stat modifiers
     private float _playerStrengthModifier   = 0.2f;     //20%
     private float _playerStaminaModifier    = 0.0f;     //0%
@@ -75,47 +76,35 @@ public class StatCalculations
 
     public int CalculateCharactersHealth(int statValue)
     {
-        return statValue * 100 + (_party.characters[0].Level * 39) ; //Calculate health based on total Stamina stat times 100
+        foreach (BaseCharacter character in _tbs.heroesInBattle)
+        {
+            BaseCharacter partyMember = character;
+            return statValue * 100 + (partyMember.Level * 39);
+        }
+        return 0 ; //Calculate health based on total Stamina stat times 100
     }
 
-    public int CalculateEnemyHealth(int statValue)
+    public int CalculateHealth(int statValue)
     {
         return statValue * 100;
     }
 
     public int CalculateCharactersMana(int statValue)
     {
-        return statValue * 20;  //Calculate energy based on total Spirit times 50
-    }
-
-    public int CalculateEnemyEnergy(int statValue)
-    {
-        return statValue * 20;
-    }
-
-    public float FindAndCalculatePlayerMainStatModifier()
-    {
-        switch (_party.characters[0].Class.CharactersClass)
+        foreach (BaseCharacter character in _tbs.heroesInBattle)
         {
-            case(BaseCharacterClass.CharactersClasses.WARRIOR):          //WARRIOR
-                return (_party.characters[0].Stamina     * _mainStatModifier) + (_party.characters[0].Strength    * _secondaryStatModifier);
-            case (BaseCharacterClass.CharactersClasses.BERSERKER):       //BERSERKER
-                return (_party.characters[0].Strength    * _mainStatModifier) + (_party.characters[0].Spirit      * _secondaryStatModifier);
-            case (BaseCharacterClass.CharactersClasses.ROGUE):           //ROGUE
-                return (_party.characters[0].Strength    * _mainStatModifier) + (_party.characters[0].Spirit      * _secondaryStatModifier);
-            case (BaseCharacterClass.CharactersClasses.MAGE):            //MAGE
-                return (_party.characters[0].Intellect   * _mainStatModifier) + (_party.characters[0].Spirit      * _secondaryStatModifier);
-            case (BaseCharacterClass.CharactersClasses.CARDMASTER):      //CARD MASTER
-                return (_party.characters[0].Intellect   * _mainStatModifier) + (_party.characters[0].Strength    * _secondaryStatModifier);
-            case (BaseCharacterClass.CharactersClasses.MIME):            //MIME
-                return (_party.characters[0].Spirit      * _mainStatModifier) + (_party.characters[0].Intellect   * _secondaryStatModifier);
-            case (BaseCharacterClass.CharactersClasses.PALADIN):         //PALADIN
-                return (_party.characters[0].Stamina     * _mainStatModifier) + (_party.characters[0].Intellect   * _secondaryStatModifier);
-            case (BaseCharacterClass.CharactersClasses.SHAMAN):          //SHAMAN
-                return (_party.characters[0].Spirit      * _mainStatModifier) + (_party.characters[0].Intellect   * _secondaryStatModifier);
+            return statValue * 20;
         }
+        return 0;  //Calculate energy based on total Spirit times 50
+    }
 
-       return 1.0f;
+    public int CalculateEnergy(int statValue)
+    {
+        foreach (BaseEnemy enemy in _tbs.enemiesInBattle)
+        {
+            return statValue * 20;
+        }
+        return 0;
     }
 }
 

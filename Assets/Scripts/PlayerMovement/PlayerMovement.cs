@@ -19,14 +19,13 @@ public class PlayerMovement : MonoBehaviour {
     //Bool
     private bool _isJumping;
     public  bool isMoving;
-	// Use this for initialization
+
 	void Start () {
         _cc = GetComponent<CharacterController>();
         _speed = _defaultSpeed;
         _cam = Camera.main.GetComponent<CameraController>();
 	}
 	
-	// Update is called once per frame
 	void Update () 
     {
         Movement();
@@ -52,8 +51,8 @@ public class PlayerMovement : MonoBehaviour {
 
     void Movement()
     {
-        _cc.Move(transform.forward * _moveDirection.z * _speed * Time.deltaTime);
-        _cc.Move(transform.right * _moveDirection.x * _speed * Time.deltaTime);
+        _cc.Move(transform.forward  * _moveDirection.z * _speed * Time.deltaTime);
+        _cc.Move(transform.right    * _moveDirection.x * _speed * Time.deltaTime);
         if (_moveDirection.z != 0 || _moveDirection.x != 0)
         {
             isMoving = true;
@@ -73,7 +72,6 @@ public class PlayerMovement : MonoBehaviour {
     {
         if (_cc.isGrounded && _isJumping)
         {
-            Debug.Log("Jumperino");
             _cc.Move(Vector3.up * 200);
         }
     }

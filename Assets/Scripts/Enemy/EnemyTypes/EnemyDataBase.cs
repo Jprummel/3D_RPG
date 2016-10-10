@@ -30,7 +30,7 @@ public class EnemyDataBase {
     {
         AddEnemies();
         _randomEnemy = Random.Range(0, enemies.Count); //Gets a random enemy from the list
-        Debug.Log(enemies[_randomEnemy].EnemyName);
+        Debug.Log(enemies[_randomEnemy].Name);
         return enemies[_randomEnemy]; //Returns a random enemy from the enemies list
     }
 }

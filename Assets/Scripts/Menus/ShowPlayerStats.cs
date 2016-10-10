@@ -9,7 +9,8 @@ public class ShowPlayerStats : MonoBehaviour {
     [SerializeField]private Text    _playerStats;
     [SerializeField]private Image   _xpBar;
     [SerializeField]private Text    _xpText;
-    [SerializeField]private Text _goldAmount;
+    [SerializeField]private Text    _goldAmount;
+    private int _characterIndex;
 
     void Start()
     {
@@ -19,6 +20,7 @@ public class ShowPlayerStats : MonoBehaviour {
         _xpBar = _xpBar.GetComponent<Image>();
         _xpText = _xpText.GetComponent<Text>();
         _goldAmount = _goldAmount.GetComponent<Text>();
+        //_characterIndex = 0;
     }
 
     void Update()
@@ -45,19 +47,45 @@ public class ShowPlayerStats : MonoBehaviour {
                                     "Charisma"  + "\n" +
                                     "Armor"     + "\n";
 
-        _playerStats.text = _party.characters[0].Name + "\n" +
-            _party.characters[0].Race.RaceName  + "\n" +
-            _party.characters[0].Class.CharactersClassName +"\n" +
-            _party.characters[0].Level + "\n" +
-            _party.characters[0].Strength + "\n" +
-            _party.characters[0].Stamina + "\n" +
-            _party.characters[0].Spirit + "\n" +
-            _party.characters[0].Intellect + "\n" +
-            _party.characters[0].Overpower + "\n" +
-            _party.characters[0].Luck + "\n" +
-            _party.characters[0].Mastery + "\n" +
-            _party.characters[0].Charisma + "\n" +
-            _party.characters[0].Armor;
+        _playerStats.text = _party.characters[_characterIndex].Name + "\n" +
+        _party.characters[_characterIndex].Race.RaceName + "\n" +
+        _party.characters[_characterIndex].Class.CharactersClassName + "\n" +
+        _party.characters[_characterIndex].Level + "\n" +
+        _party.characters[_characterIndex].Strength + "\n" +
+        _party.characters[_characterIndex].Stamina + "\n" +
+        _party.characters[_characterIndex].Spirit + "\n" +
+        _party.characters[_characterIndex].Intellect + "\n" +
+        _party.characters[_characterIndex].Overpower + "\n" +
+        _party.characters[_characterIndex].Luck + "\n" +
+        _party.characters[_characterIndex].Mastery + "\n" +
+        _party.characters[_characterIndex].Charisma + "\n" +
+        _party.characters[_characterIndex].Armor;
+    }
+
+    public void NextCharacter()
+    {
+        if (_characterIndex <= _party.characters.Count -2)
+        {
+            Debug.Log("Showing " + _characterIndex + " out of " + _party.characters.Count);
+            _characterIndex += 1;
+        }
+        else if(_characterIndex >= _party.characters.Count-2)
+        {
+            Debug.Log("Whyyyyy");
+            _characterIndex = 0;
+        }
+    }
+
+    public void PreviousCharacter()
+    {
+        if (_characterIndex == 0)
+        {
+            _characterIndex = _party.characters.Count;
+        }
+        else
+        {
+            _characterIndex -= 1;
+        }
     }
 
     public void GoldAmount()
@@ -67,7 +95,7 @@ public class ShowPlayerStats : MonoBehaviour {
 
     public void XPBar()
     {
-        _xpBar.fillAmount = _party.characters[0].CurrentXP / _party.characters[0].RequiredXP;
-        _xpText.text =(float) _party.characters[0].CurrentXP + " / " + _party.characters[0].RequiredXP + " XP";
+        _xpBar.fillAmount   = _party.characters[_characterIndex].CurrentXP / _party.characters[_characterIndex].RequiredXP;
+        _xpText.text        = (float) _party.characters[_characterIndex].CurrentXP + " / " + _party.characters[_characterIndex].RequiredXP + " XP";
     }
 }

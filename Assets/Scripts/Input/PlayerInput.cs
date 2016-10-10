@@ -20,7 +20,7 @@ public class PlayerInput : MonoBehaviour {
 
     void Update()
     {
-        Inputs();
+            Inputs();
     }
 
     void Inputs()

@@ -38,7 +38,7 @@ public class CharacterFinalisation : MonoBehaviour {
         _party.characters[0].Level = 1;
         PlayerInformation.Gold = 500;
         _party.characters[0].RequiredXP = 500;
-        _party.characters[0].Class.CharactersSkills.Add(new AttackAbility());
+        _party.characters[0].Skills.Add(new AttackAbility());
         _save.SaveGame();
     }
 }

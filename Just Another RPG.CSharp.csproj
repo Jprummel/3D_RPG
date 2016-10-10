@@ -75,6 +75,9 @@
     <Compile Include="Assets\Scripts\Abilities\Berserker\Cripple.cs" />
     <Compile Include="Assets\Scripts\Abilities\Berserker\Rampage.cs" />
     <Compile Include="Assets\Scripts\Abilities\GeneralAbilities\AttackAbility.cs" />
+    <Compile Include="Assets\Scripts\Abilities\Mage\Fire.cs" />
+    <Compile Include="Assets\Scripts\Abilities\Mage\Ice.cs" />
+    <Compile Include="Assets\Scripts\Abilities\Mage\Water.cs" />
     <Compile Include="Assets\Scripts\Abilities\SkillButton.cs" />
     <Compile Include="Assets\Scripts\Abilities\StatusEffects\BaseStatusEffect.cs" />
     <Compile Include="Assets\Scripts\Abilities\StatusEffects\BurnStatusEffect.cs" />
@@ -109,12 +112,6 @@
     <Compile Include="Assets\Scripts\CreateNewCharacter\ClassSelection.cs" />
     <Compile Include="Assets\Scripts\CreateNewCharacter\RaceSelection.cs" />
     <Compile Include="Assets\Scripts\CreateNewCharacter\StatAllocation.cs" />
-    <Compile Include="Assets\Scripts\Data\Dialogue\Dialogue.cs" />
-    <Compile Include="Assets\Scripts\Data\Dialogue\DialogueNode.cs" />
-    <Compile Include="Assets\Scripts\Data\Dialogue\DialogueOption.cs" />
-    <Compile Include="Assets\Scripts\Data\Dialogue\DialogueProgram.cs" />
-    <Compile Include="Assets\Scripts\Data\Dialogue\LoadXMLDialog.cs" />
-    <Compile Include="Assets\Scripts\Data\Dialogue\NPCDialogue.cs" />
     <Compile Include="Assets\Scripts\Data\Tags.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAbilityChoice.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyInformation.cs" />
@@ -150,29 +147,36 @@
     <Compile Include="Assets\Scripts\NPCs\CheckForDialogue.cs" />
     <Compile Include="Assets\Scripts\NPCs\CheckForQuest.cs" />
     <Compile Include="Assets\Scripts\NPCs\TestNPC.cs" />
+    <Compile Include="Assets\Scripts\Party\LunarInformation.cs" />
     <Compile Include="Assets\Scripts\Party\Party.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerAnimationHandling.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerStateMachine.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement\PlayerController.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\SavingAndLoading\SaveLoadGame.cs" />
     <Compile Include="Assets\Scripts\StatAllocationModule\LevelUpStatPointAllocation.cs" />
     <Compile Include="Assets\Scripts\StatCalculations\StatCalculations.cs" />
-    <Compile Include="Assets\Scripts\TestGUI.cs" />
-    <Compile Include="Assets\Scripts\TurnBasedCombat\BattleGUI\BattleGUI.cs" />
-    <Compile Include="Assets\Scripts\TurnBasedCombat\BattleGUI\EnemyGUI.cs" />
-    <Compile Include="Assets\Scripts\TurnBasedCombat\BattleGUI\HeroGUI.cs" />
     <Compile Include="Assets\Scripts\TurnBasedCombat\BattleStateAddStatusEffects.cs" />
     <Compile Include="Assets\Scripts\TurnBasedCombat\BattleStateEnemyChoice.cs" />
     <Compile Include="Assets\Scripts\TurnBasedCombat\BattleStateStart.cs" />
     <Compile Include="Assets\Scripts\TurnBasedCombat\NewStateMachine\BattleStateMachine.cs" />
     <Compile Include="Assets\Scripts\TurnBasedCombat\NewStateMachine\EnemyStateMachine.cs" />
     <Compile Include="Assets\Scripts\TurnBasedCombat\NewStateMachine\HeroStateMachine.cs" />
+    <Compile Include="Assets\Scripts\TurnBasedCombat\NewStateMachine\MoveToTarget.cs" />
+    <Compile Include="Assets\Scripts\TurnBasedCombat\NewStateMachine\TurnInformation.cs" />
+    <Compile Include="Assets\Scripts\TurnBasedCombat\SpawnPositions.cs" />
     <Compile Include="Assets\Scripts\TurnBasedCombat\TurnBasedCombatStateMachine.cs" />
+    <Compile Include="Assets\Scripts\UI\BattleGUI\EnemyGUI.cs" />
+    <Compile Include="Assets\Scripts\UI\BattleGUI\HeroGUI.cs" />
+    <Compile Include="Assets\Scripts\UI\BattleGUI\HeroInfoGUI.cs" />
+    <Compile Include="Assets\Scripts\UI\BattleGUI\HeroTurnGUI.cs" />
+    <Compile Include="Assets\Scripts\UI\BattleGUI\TargetingGUI.cs" />
+    <Compile Include="Assets\Scripts\UI\DynamicGrid.cs" />
+    <Compile Include="Assets\Scripts\World\DayNightCycle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Art\CharacterModels\Mage\HairShader.shader" />
     <None Include="Assets\Art\CharacterModels\Warrior\models\overlord\Materials\clothshader.shader" />
-    <None Include="Assets\Scripts\Data\Dialogue\Dialog.xml" />
-    <None Include="Assets\Scripts\Data\Dialogue\DialogueTest.xml" />
     <None Include="Assets\Scripts\Items\ItemDatabase.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />

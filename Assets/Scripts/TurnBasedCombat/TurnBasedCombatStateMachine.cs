@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
 public class TurnBasedCombatStateMachine : MonoBehaviour {
@@ -19,9 +20,12 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
     public static bool                  enemyDidCompleteTurn;
     public static BattleStates          currentUser; // enemy or player choice
 
+    public List<BaseCharacter> heroesInBattle = new List<BaseCharacter>();
+    public List<BaseEnemy> enemiesInBattle = new List<BaseEnemy>();
+    public List<BaseEnemy> enemiesKilled = new List<BaseEnemy>();
+
     public enum BattleStates
     {
-        START,
         PLAYERCHOICE,
         CALCDAMAGE,
         ADDSTATUSEFFECTS,
@@ -36,17 +40,19 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
     void Awake ()
     {
         _party = GameObject.FindGameObjectWithTag(Tags.PARTYMANAGER).GetComponent<Party>();
+        AddHeroesToBattle();
         _incrXP = new IncreaseExperience();
         _battleStateStartScript = new BattleStateStart();
         _battleCalcScript = new BattleCalculations();
         _battleStateAddStatusEffectScript = new BattleStateAddStatusEffects();
         _battleStateEnemyChoiceScript = new BattleStateEnemyChoice();
+
+        _battleStateStartScript.PrepareBattle();
     }
 
 	void Start () {
         _hasAddedXP = false;
         totalTurnCount = 1;
-        currentState = BattleStates.START;        
 	}
 
 	// Update is called once per frame
@@ -55,15 +61,9 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 
         switch (currentState)
         {
-            case (BattleStates.START):
-                //Setup Battle Function
-                //Create enemy
-                _battleStateStartScript.PrepareBattle();
-                break;
             case (BattleStates.PLAYERCHOICE):       //Player chooses his/her abillity
                 currentUser = BattleStates.PLAYERCHOICE;
                 break;
-            
             case (BattleStates.ENEMYCHOICE):
                 //Coded AI goes here
                 currentUser = BattleStates.ENEMYCHOICE;
@@ -88,13 +88,13 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                 totalTurnCount += 1;
                 playerDidCompleteTurn = false;
                 enemyDidCompleteTurn = false;
-                if (_party.characters[0].Health <= 0)
+
+
+                if (heroesInBattle.Count <= 0)
                 {
-                    _party.characters[0].Health = 0;
                     currentState = BattleStates.LOSE;
-                }else if(EnemyInformation.EnemyHealth <=0 )
+                }else if(enemiesInBattle.Count <= 0)
                 {
-                    EnemyInformation.EnemyHealth = 0;
                     currentState = BattleStates.WIN;
                 }
                 else
@@ -111,7 +111,6 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                     _incrXP.AddExperience();
                     _hasAddedXP = true;
                     SceneManager.LoadScene(PlayerInformation.PlayerMapScene);
-
                 }
                 break;
         }
@@ -130,6 +129,24 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
         if (playerDidCompleteTurn && enemyDidCompleteTurn)
         {
             currentState = BattleStates.ENDTURN;
+        }
+    }
+
+    public void AddHeroesToBattle()
+    {
+        foreach (BaseCharacter character in _party.characters)
+        {
+            BaseCharacter partyMember = character;
+            heroesInBattle.Add(partyMember);
+        }
+    }
+
+    public void AddEnemiesToBattle()
+    {
+        foreach (BaseEnemy enemy in _battleStateStartScript._createdEnemies)
+        {
+            BaseEnemy enemyPartyMember = enemy;
+            enemiesInBattle.Add(enemyPartyMember);
         }
     }
 }

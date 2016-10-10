@@ -3,24 +3,20 @@ using System.Collections;
 
 public class BattleCalculations {
 
-    private Party _party = GameObject.FindGameObjectWithTag(Tags.PARTYMANAGER).GetComponent<Party>();
-    private StatCalculations    _statCalcScript = new StatCalculations();
+    private TurnBasedCombatStateMachine _tbs = GameObject.FindGameObjectWithTag(Tags.BATTLEMANAGER).GetComponent<TurnBasedCombatStateMachine>();
+    private Party               _party = GameObject.FindGameObjectWithTag(Tags.PARTYMANAGER).GetComponent<Party>();
+    private TargetingGUI        _hero = GameObject.FindGameObjectWithTag(Tags.PARTYPANEL).GetComponent<TargetingGUI>();
+    private MoveToTarget        _move = new MoveToTarget();
     private BaseAbility         _playerUsedAbility;
     private BaseAbility         _enemyUsedAbility;
     private bool                _abilityHits;
     private int                 _abilityPower;
     private float               _totalAbilityPowerDamage;
-    private int                 _totalUsedAbilityDamage;
-    private int                 _statusEffectDamage;
-    private int                 _totalCritStrikeDamage;
-    private int                 _abilityDamageToSelf;
-    private int                 _totalPlayerDamage;
-    private int                 _totalEnemyDamage;
+    private int                 _totalUsedAbilityDamage, _statusEffectDamage, _totalCritStrikeDamage, _abilityDamageToSelf, _totalPlayerDamage, _totalEnemyDamage;
     private float               _damageVariatyModifier = .025f; // 2.5%   
 
     public void CalculateTotalPlayerDamage(BaseAbility usedAbility)
     {
-
         //Calculation for the players damage to the enemy
         _playerUsedAbility      = usedAbility;  //Gets the chosen ability of the player
         if (_party.characters[0].Mana >= _playerUsedAbility.AbilityCost)
@@ -34,8 +30,15 @@ public class BattleCalculations {
             _party.characters[0].Mana -= _playerUsedAbility.AbilityCost;
             if (CheckIfAbilityHits())
             {
-                EnemyInformation.EnemyHealth -= _totalPlayerDamage;
+                _hero.heroesTarget.Health -= _totalPlayerDamage;
+                if (_hero.heroesTarget.Health <= 0)
+                {
+                    _tbs.enemiesKilled.Add(_hero.heroesTarget);
+                    _tbs.enemiesInBattle.Remove(_hero.heroesTarget);
+                    Debug.Log("removed" + _hero.heroesTarget.Name);
+                }
                 _party.characters[0].Health -= CalculateDamageToSelf();
+                Debug.Log(_hero.heroesTarget.Name+ " has " + _hero.heroesTarget.Health + " health");
             }
             TurnBasedCombatStateMachine.playerDidCompleteTurn = true;   //Tells the state machine that the player completed its turn
         }
@@ -44,19 +47,25 @@ public class BattleCalculations {
     public void CalculateTotalEnemyDamage(BaseAbility usedAbility)
     {
         //Calculation for the enemy's damage to the player
+        int target = Random.Range(0, _tbs.heroesInBattle.Count);
         _enemyUsedAbility       = usedAbility;  //Gets the chosen ability of the enemy
-        if (EnemyInformation.EnemyEnergy >= _enemyUsedAbility.AbilityCost)
+        if (EnemyInformation.Energy >= _enemyUsedAbility.AbilityCost)
         {
             _totalUsedAbilityDamage = (int)CalculateEnemyAbilityDamage();
-            _totalCritStrikeDamage = CalculateCriticalHitDamage();
-            _statusEffectDamage = CalculateStatusEffectDamage();
-            _totalEnemyDamage = _totalUsedAbilityDamage + _totalCritStrikeDamage + _statusEffectDamage;
-            _totalEnemyDamage += (int)(Random.Range(-(_totalEnemyDamage * _damageVariatyModifier), _totalEnemyDamage * _damageVariatyModifier)); // Creates variety in damage by a max of -2.5% or a max of +2.5%
+            _totalCritStrikeDamage  = CalculateCriticalHitDamage();
+            _statusEffectDamage     = CalculateStatusEffectDamage();
+            _totalEnemyDamage       = _totalUsedAbilityDamage + _totalCritStrikeDamage + _statusEffectDamage;
+            _totalEnemyDamage       += (int)(Random.Range(-(_totalEnemyDamage * _damageVariatyModifier), _totalEnemyDamage * _damageVariatyModifier)); // Creates variety in damage by a max of -2.5% or a max of +2.5%
             Debug.Log(_totalEnemyDamage + "Damage done by enemy");
             Debug.Log(_enemyUsedAbility + "Enemyskill");
-            EnemyInformation.EnemyEnergy -= _enemyUsedAbility.AbilityCost;
-            _party.characters[0].Health -= _totalEnemyDamage;
-            EnemyInformation.EnemyHealth -= CalculateDamageToSelf();
+            EnemyInformation.Energy -= _enemyUsedAbility.AbilityCost;
+            _tbs.heroesInBattle[target].Health -= _totalEnemyDamage;
+            if (_tbs.heroesInBattle[target].Health <= 0)
+            {
+                Debug.Log("removing" + _tbs.heroesInBattle[target].Name);
+                _tbs.heroesInBattle.RemoveAt(target);
+            }
+            EnemyInformation.Health -= CalculateDamageToSelf();
             TurnBasedCombatStateMachine.enemyDidCompleteTurn = true;    //Tells the state machine that the enemy completed its turn
         }
     }
@@ -80,21 +89,26 @@ public class BattleCalculations {
     //Player Ability Damage
     private float CalculatePlayerAbilityDamage()
     {
-        switch (_playerUsedAbility.AbilityType)
+        foreach (BaseCharacter character in _tbs.heroesInBattle)
         {
-            case BaseAbility.AbilityTypes.PHYSICAL:
-               return _totalAbilityPowerDamage = (_party.characters[0].Strength * _playerUsedAbility.AbilityDamageStatModifier) + _playerUsedAbility.AbilityBaseDamage;               
-            case BaseAbility.AbilityTypes.MAGICAL:
-                return _totalAbilityPowerDamage = (_party.characters[0].Intellect * _playerUsedAbility.AbilityDamageStatModifier) + _playerUsedAbility.AbilityBaseDamage;                
-            case BaseAbility.AbilityTypes.HYBRID:
-               return _totalAbilityPowerDamage = (_party.characters[0].Strength + _party.characters[0].Intellect / 1.5f * _playerUsedAbility.AbilityDamageStatModifier) + _playerUsedAbility.AbilityBaseDamage;
+            BaseCharacter partyMember = character;
+            switch (_playerUsedAbility.AbilityType)
+            {
+
+
+                case BaseAbility.AbilityTypes.PHYSICAL:
+                    return _totalAbilityPowerDamage = (partyMember.Strength * _playerUsedAbility.AbilityDamageStatModifier) + _playerUsedAbility.AbilityBaseDamage;
+                case BaseAbility.AbilityTypes.MAGICAL:
+                    return _totalAbilityPowerDamage = (partyMember.Intellect * _playerUsedAbility.AbilityDamageStatModifier) + _playerUsedAbility.AbilityBaseDamage;
+                case BaseAbility.AbilityTypes.HYBRID:
+                    return _totalAbilityPowerDamage = (partyMember.Strength + partyMember.Intellect / 1.5f * _playerUsedAbility.AbilityDamageStatModifier) + _playerUsedAbility.AbilityBaseDamage;
+            }
         }
         return _totalAbilityPowerDamage;
     }
     //Enemy Ability Damage
     private float CalculateEnemyAbilityDamage()
     {
-        //_abilityPower = _playerUsedAbility.AbilityPower;   //Retrieves power of ability
         switch (_enemyUsedAbility.AbilityType)
         {
             case BaseAbility.AbilityTypes.PHYSICAL:
@@ -171,7 +185,6 @@ public class BattleCalculations {
                 return false; // Ability did not critically hit
             }
         }
-
         return false;
     }
 

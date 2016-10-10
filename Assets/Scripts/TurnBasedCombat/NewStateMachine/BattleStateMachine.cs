@@ -5,7 +5,9 @@ using System.Collections.Generic;
 
 public class BattleStateMachine : MonoBehaviour 
 {
+    //Gets the party information
     private Party _party;
+    //Gets the battle scripts
     private IncreaseExperience _incrXP;
     private BattleStateStart _battleStateStartScript;
     private BattleCalculations _battleCalcScript;
@@ -25,12 +27,13 @@ public class BattleStateMachine : MonoBehaviour
         LOSE
     }
 
-    public BattleState currentState;
+    public static BattleState currentState;
 
-    public List<GameObject> _heroesToManage = new List<GameObject>();
-    public List<GameObject> _heroesInBattle = new List<GameObject>(); //all playable characters in battle
-    public List<GameObject> _enemiesInBattle = new List<GameObject>(); //All the enemies in battle
-    //public List<TurnHandler> _performerList = new List<TurnHandler>(); //List of characters performing an action during a turn
+    //Lists of everyone in battle and who is taking turn
+    public List<GameObject> heroesToManage = new List<GameObject>();
+    public List<GameObject> heroesInBattle = new List<GameObject>(); //all playable characters in battle
+    public List<GameObject> enemiesInBattle = new List<GameObject>(); //All the enemies in battle
+    public List<TurnInformation> performList = new List<TurnInformation>();
 
     void Awake()
     {
@@ -47,8 +50,8 @@ public class BattleStateMachine : MonoBehaviour
         _hasAddedXP = false;
         currentState = BattleState.START;
 
-        _enemiesInBattle.AddRange(GameObject.FindGameObjectsWithTag(Tags.ENEMY)); //Adds all enemies with the Enemy tag to the _enemiesInBattle list
-        _heroesInBattle.AddRange(GameObject.FindGameObjectsWithTag(Tags.HERO)); //Adds all heroes with the Hero tag to the _heroesInBattle list
+        enemiesInBattle.AddRange(GameObject.FindGameObjectsWithTag(Tags.ENEMY)); //Adds all enemies with the Enemy tag to the _enemiesInBattle list
+        heroesInBattle.AddRange(GameObject.FindGameObjectsWithTag(Tags.HERO)); //Adds all heroes with the Hero tag to the _heroesInBattle list
 	}
 	
 	// Update is called once per frame
@@ -59,18 +62,31 @@ public class BattleStateMachine : MonoBehaviour
             case(BattleState.START):
                 //Setup the battle and create enemies
                 _battleStateStartScript.PrepareBattle();
+                currentState = BattleState.IDLE;
                 break;
             case(BattleState.IDLE):
                 break;
             case(BattleState.CHOOSEACTION):
+                GameObject performer = GameObject.Find(performList[0].attacker);
+                if (performList[0].type == "Enemy")
+                {
+                    EnemyStateMachine esm = performer.GetComponent<EnemyStateMachine>();
+                    //esm
+                }
+                if (performList[0].type == "Hero")
+                {
+                    HeroStateMachine hsm = performer.GetComponent<HeroStateMachine>();
+                    hsm.enemyToAttack = performList[0].target;
+                    hsm.currentState = HeroStateMachine.HeroState.ACTION;
+                }
                 break;
             case(BattleState.PERFORMACTION):
-                if (_heroesInBattle.Count == 0)
+                if (heroesInBattle.Count == 0)
                 {
                     currentState = BattleState.LOSE;
                 }
 
-                if(_enemiesInBattle.Count == 0)
+                if(enemiesInBattle.Count == 0)
                 {
                     currentState = BattleState.WIN;
                 }
@@ -81,7 +97,6 @@ public class BattleStateMachine : MonoBehaviour
                     _incrXP.AddExperience();
                     _hasAddedXP = true;
                     SceneManager.LoadScene(PlayerInformation.PlayerMapScene);
-
                 }
                 break;
             case(BattleState.LOSE):
